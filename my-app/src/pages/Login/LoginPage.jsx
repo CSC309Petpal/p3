@@ -59,12 +59,16 @@ const LoginPage = () => {
         if (data && data.access) {
             localStorage.setItem("token", data.access);
             localStorage.setItem("refresh", data.refresh);
+            localStorage.setItem("user_type", data.user_type);
             setToken(data.access);
-            navigate("/admin/locations");
+            if(data.user_type==1){
+                navigate("/seeker-detail");
+            }else{
+                navigate("/shelter-detail");
+            }
         } else if (data && data.detail) {
             // Clear the token state
             setToken("");
-
             // Display an error message for failed login
             pwd_not.innerHTML = data.detail;
         }
