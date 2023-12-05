@@ -116,9 +116,8 @@ const RegisterShelterPage = () => {
         });
     }
 
-
     const handleSignUpClick = () => {
-        navigate('/register-seeker');
+        navigate('/register-shelter');
       };
 
     return (
@@ -135,8 +134,8 @@ const RegisterShelterPage = () => {
     
                 <div className="col-md-6">
                     <form className="justify-content-center">
-                        <h1 className="text-center">Sign Up (Shelter)</h1>
-                        <h5 className="text-center">Sign up for Seeker? <button onClick={handleSignUpClick}> Go Seeker!</button></h5>
+                        <h1 className="text-center">Sign Up (Seeker)</h1>
+                        <h5 className="text-center">Sign up for Shelter? <button onClick={handleSignUpClick} className=''> Go Shelter!</button></h5>
                         
                         {/* ... other parts of your component ... */}
                         
