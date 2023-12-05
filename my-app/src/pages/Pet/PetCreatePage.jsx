@@ -33,7 +33,7 @@ const PetCreationForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${BACKENDHOST}/pet/crete`, petData,
+            const response = await axios.post(`${BACKENDHOST}pets/`, petData,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
