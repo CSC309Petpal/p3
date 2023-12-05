@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { BACKENDHOST } from "./config";
 
 
-import LoginInput from "./LoginInput";
+import LoginInput from "../../components/input/LoginInput";
 
 const LoginPage = () => {
 
