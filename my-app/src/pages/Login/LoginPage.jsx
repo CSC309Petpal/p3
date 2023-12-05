@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//import { BACKENDHOST } from "./config";
+import { BACKENDHOST } from "./config";
 
 
 import LoginInput from "../../components/input/LoginInput";
@@ -55,18 +55,19 @@ const LoginPage = () => {
         .then(data => {
     
             console.log(data);
-            
-            if (data.access){
-                localStorage.setItem("token", data.access);
-                localStorage.setItem("refresh", data.refresh);
-                setToken(data.access);
-                navigate("/admin/locations");
-            }
 
-            // if no user found
-            if (data.detail){
-                pwd_not.innerHTML = "Username or password is incorrect";
-            }
+        if (data && data.access) {
+            localStorage.setItem("token", data.access);
+            localStorage.setItem("refresh", data.refresh);
+            setToken(data.access);
+            navigate("/admin/locations");
+        } else if (data && data.detail) {
+            // Clear the token state
+            setToken("");
+
+            // Display an error message for failed login
+            pwd_not.innerHTML = data.detail;
+        }
         });
     }
 
