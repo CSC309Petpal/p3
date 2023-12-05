@@ -5,8 +5,8 @@ from . import views
 app_name="blog"
 
 urlpatterns = [
-    # path("creation/<int:pet_id>/", views.ApplicationCreationView.as_view(), name="creation"),
-    # path("list/", views.ApplicationListView.as_view(), name="list"),
-    # path('detail/<int:application_id>/', views.ApplicationDetailView.as_view(), name='application-detail'),
-    # path("update/<int:pk>/", views.ApplicationUpdateView.as_view(), name="application-update"),
+    path("creation/<int:shelter_id>/", views.BlogCreationView.as_view(), name="creation"),
+    path("list/<int:shelter_id>/", views.BlogListView.as_view(), name="list"),
+    path("detail/<int:comment_id>/",views.BlogRetrieveView.as_view(),name="blog_detail")
+    
 ]
