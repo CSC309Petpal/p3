@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKENDHOST } from "./config";
+//import { BACKENDHOST } from "./config";
 
 
 import LoginInput from "../../components/input/LoginInput";
