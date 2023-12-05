@@ -1,12 +1,15 @@
 from rest_framework import generics
 from .models import Blog,Shelter
-from .serializers import BlogSerializer,BlogListSerializer
+from .serializers import BlogSerializer,BlogListSerializer,BlogLikeSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from django.shortcuts import get_object_or_404
 from notifications.models import create_notification
 from django.urls import reverse_lazy
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
 
 class BlogPagination(PageNumberPagination):
     page_size = 10  # Set the number of items per page
@@ -49,3 +52,16 @@ class BlogRetrieveView(generics.RetrieveAPIView):
         blog = get_object_or_404(Blog, pk=blog_id)
         
         return blog
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def like_blog(request, blog_id):
+    blog = Blog.objects.get(pk=blog_id)
+
+    # Increment the likes count by 1
+    blog.likes += 1
+    blog.save()
+
+    serializer = BlogLikeSerializer(blog)
+    return Response(serializer.data, status=status.HTTP_200_OK)
