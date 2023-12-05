@@ -1,0 +1,40 @@
+.bg-pink {
+    background-color: #EBE5FC;
+}
+
+body, html {
+        height: 100%;
+        margin: 0%;
+    }
+.row.fullheight {
+    min-height: 100%;
+    align-items: center;
+}
+.fixed-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar{
+        margin-bottom: 10px;
+    }
+    img {
+        margin-bottom: 20px;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+    
+    .checker {
+        margin-bottom: 20px;
+    }
+    
+    .btn {
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+}
