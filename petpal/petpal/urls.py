@@ -28,5 +28,7 @@ urlpatterns = [
     path('comments/', include("comments.urls", namespace='comments')),
     path('applications/', include("applications.urls", namespace='applications')),
     path('followup/', include("followup.urls", namespace='followup')),
+    path('blog/', include("blog.urls", namespace='blog')),
+
 
 ]
