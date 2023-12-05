@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NotificationShelter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" >
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-pink">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">PetPal</a>
+            
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="ShelterManage.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="shelterManage.html#myPets">My pets</a>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Name: Jack Russell Network Canada</a></li>
+                            <li><a class="dropdown-item" href="#">Email: Jack.Russel@outlook.com</a></li>
+                            <li><a class="dropdown-item" href="shelter-profile_update.html">Edit</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle active" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">
+                            Notification (3)
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            <li><a class="dropdown-item" href="chat_shelter.html">K sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_shelter.html">X sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_shelter.html">p sends you a message</a></li>
+                            <li><a class="dropdown-item" href="NotificationShelter.html">More</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-outline-light" href="Landing.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="notification-board d-flex flex-column align-items-center">
+  <div class="notificaiton-text">
+    <h1 style="margin-top: 4rem; margin-bottom: 1rem;">Notification</h1>
+  </div>
+  <div class="card notification-card message-card">
+    <div class="card-body d-flex flex-row justify-content-center">
+          <div class="notification-img">
+              <img src="./pets/personal-icon-4.jpg" alt="Shelter" width="75px" height="75px">
+          </div>
+          <div class="message-content d-flex flex-column">
+              <p><b>Message From: </b> PetLover23</p>
+              <p class="text-muted">Blablablabaaaablbablablabalbla.</p>
+              <p class="text-muted notification-time"><small>10 mins ago</small></p>
+              <a href="chat_shelter.html" class="btn btn-primary">Go to conversation</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="card notification-card update-card">
+    <div class="card-body d-flex flex-row justify-content-center">
+      <div class="notification-img">
+          <img src="./pets/petdetail1.jpg" alt="pet" height="75px">
+      </div>
+      <div class="message-content d-flex flex-column">
+          <p><b>New Application</b></p>
+          <p class="text-muted">Recieved a newapplication for Huskey.</p>
+          <p class="text-muted notification-time"><small>11 mins ago</small></p>
+          <a href="chat_shelter.html" class="btn btn-primary">Check Application</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card notification-card listing-card">
+    <div class="card-body d-flex flex-row justify-content-center">
+      <div class="notification-img">
+          <img src="./pets/petdetail2.jpg" alt="pet" height="75px">
+      </div>
+      <div class="message-content d-flex flex-column">
+          <p><b>New Review</b></p>
+          <p class="text-muted">Got a new review from custumer PetLover15</p>
+          <p class="text-muted notification-time"><small>15 mins ago</small></p>
+          <a href="ShelterDetail-shelter.html" class="btn btn-primary">Check Review</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card notification-card message-card">
+    <div class="card-body d-flex flex-row justify-content-center">
+          <div class="notification-img">
+              <img src="./pets/personal-icon-4.jpg" alt="Shelter" width="75px" height="75px">
+          </div>
+          <div class="message-content d-flex flex-column">
+              <p><b>Message From: </b> PetLover23</p>
+              <p class="text-muted">Blablablabaaaablbablablabalbla.</p>
+              <p class="text-muted notification-time"><small>10 mins ago</small></p>
+              <a href="chat_shelter.html" class="btn btn-primary">Go to conversation</a>
+          </div>
+      </div>
+  </div>
+
+  <div class="card notification-card update-card">
+    <div class="card-body d-flex flex-row justify-content-center">
+      <div class="notification-img">
+          <img src="./pets/petdetail1.jpg" alt="pet" height="75px">
+      </div>
+      <div class="message-content d-flex flex-column">
+          <p><b>New Application</b></p>
+          <p class="text-muted">Recieved a newapplication for Huskey.</p>
+          <p class="text-muted notification-time"><small>11 mins ago</small></p>
+          <a href="chat_shelter.html" class="btn btn-primary">Check Application</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card notification-card listing-card">
+    <div class="card-body d-flex flex-row justify-content-center">
+      <div class="notification-img">
+          <img src="./pets/petdetail2.jpg" alt="pet" height="75px">
+      </div>
+      <div class="message-content d-flex flex-column">
+          <p><b>New Review</b></p>
+          <p class="text-muted">Got a new review from custumer</p>
+          <p class="text-muted notification-time"><small>15 mins ago</small></p>
+          <a href="ShelterDetail-shelter.html" class="btn btn-primary">Check Review</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+  <!-- Footer Content... -->
+  <div class="container">
+    <p>&copy; 2023 PetPal All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

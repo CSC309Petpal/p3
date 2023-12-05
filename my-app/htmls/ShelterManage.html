@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shelter Management</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .bg-pink {
+        background-color: #EBE5FC;
+    }
+
+    body, html {
+            height: 100%;
+            margin: 0%;
+        }
+    .row.fullheight {
+        min-height: 100%;
+        align-items: center;
+    }
+    .fixed-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+    .custom-card {
+        border: 2px dotted #000;
+        height: 200px;
+        width: 200px;
+        position: relative;
+    }
+    .plus-sign {
+        font-size: 48px;
+        font-weight: bold;
+    }
+
+    .message-box{
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        border-radius: 20px;
+        padding: 40px;
+    }
+    @media screen and (max-width: 768px) {
+        .navbar{
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    }
+        
+    .message-box {
+        width: auto;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-pink">
+
+    <!-- Navbar -->
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">PetPal</a>
+        
+        <!-- Navbar Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item me-3">
+                    <a class="nav-link active" aria-current="page" href="ShelterManage.html">Home</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="#myPets">My pets</a>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#">Name: Jack Russell Network Canada</a></li>
+                        <li><a class="dropdown-item" href="#">Email: Jack.Russel@outlook.com</a></li>
+                        <li><a class="dropdown-item" href="shelter-profile_update.html">Edit</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notification (3)
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        <li><a class="dropdown-item" href="chat_shelter.html">K sends you a message</a></li>
+                        <li><a class="dropdown-item" href="chat_shelter.html">X sends you a message</a></li>
+                        <li><a class="dropdown-item" href="chat_shelter.html">p sends you a message</a></li>
+                        <li><a class="dropdown-item" href="NotificationShelter.html">More</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a type="button" class="btn btn-outline-light" href="Landing.html">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 align-items-center">
+        <div class="container">
+            <div class="row mt-lg-4">
+                <h1 class="text-center">Basic Information</h1>
+                <hr class="my-4 border-primary">
+            </div>
+            <div class="row justify-content-center mt-lg-4">
+                <div class="col-md-3 d-flex justify-content-center flex-column align-items-center">
+                    <img src="logo.png" class="img-fluid mb-sm-3" alt="Responsive image" style="height: 200px; width: 200px; border-radius: 100px;">
+                    <div>
+                        <a href="shelter-profile_update.html" class="btn btn-primary btn-lg bg-dark">Update Profile</a>
+                    </div>
+                    
+
+                </div>
+                <div class="col-md-8 d-flex justify-content-center">
+                    <table class="table border border-light table-bordered text-center border-dark">
+                        <tr>
+                            <th>Shelter Name</th>
+                            <td>Jack Russell Network Canada</td>
+                        <tr>
+                            <th>Email</th>
+                            <td>Jack.Russel@outlook.com</td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td>+1 647-689-0134</td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td>75 St. Street</td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>Toronto</td>
+                        </tr>
+                        <tr>
+                            <th>Province</th>
+                            <td>Ontario</td>
+                        </tr>
+                        <tr>
+                            <th>Postal Code</th>
+                            <td>M5S 2E6</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>Canada</td>
+                        </tr>
+                        <tr>
+                            <th>Mission Statement</th>
+                            <td>Our mission is to help homeless pets find their forever homes.</td>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-lg-4" id="myPets">
+                <h2 class="text-center">My Pets</h2>
+                <hr class="my-4 border-primary">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <a href="pet_create.html" style="color: #000; text-decoration: none;">
+                        <div class="card custom-card d-flex align-items-center justify-content-center"style="height: 100%; width: 100%;">
+                            <span class="plus-sign">+</span>
+                        </div>
+                    </a>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="pets/petdetail1.jpg" class="card-img-top fixed-img" alt="Pet 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Huskey</h5>
+                            <p class="card-text">Status: Pending</p>
+                            <a href="pet_update.html" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="pets/pet3.jpg" class="card-img-top fixed-img" alt="Pet 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Bella</h5>
+                            <p class="card-text">Status: Available</p>
+                            <a href="pet_update.html" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-lg-4">
+                <!-- Card 2 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="pets/pet4.jpg" class="card-img-top fixed-img" alt="Pet 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Henry</h5>
+                            <p class="card-text">Status: Pending</p>
+                            <a href="pet_update.html" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row mt-lg-4">
+                <h2 class="text-center">Current Applications</h2>
+                <hr class="my-4 border-primary">
+            </div>
+            <div class="row d-flex flex-column">
+                <span class="message-box d-flex align-items-center mb-lg-4">
+                    <img src="pets/pet2.jpg"  alt="Pet 2" style="height: 70px; width: 70px; border-radius: 35px;">
+                    <p class="ms-3">Brenedn: I really want to adopt Max! He is so cute and I think he will be a great addition to my family.</p>
+                    <a href="chat_shelter.html" class="btn btn-primary ms-auto me-3">View</a>
+                </span>
+                <span class="message-box d-flex align-items-center mb-lg-4">
+                    <img src="pets/pet2.jpg"  alt="Pet 2" style="height: 70px; width: 70px; border-radius: 35px;">
+                    <p class="ms-3">Brenedn: I really want to adopt Max! He is so cute and I think he will be a great addition to my family.</p>
+                    <a href="chat_shelter.html" class="btn btn-primary ms-auto me-3">View</a>
+                </span>
+                <span class="message-box d-flex align-items-center mb-lg-4">
+                    <img src="pets/pet2.jpg"  alt="Pet 2" style="height: 70px; width: 70px; border-radius: 35px;">
+                    <p class="ms-3">Iris: I reallt want to adopt Helen! She is so cute and I think she will be a great addition to my family.</p>
+                    <a href="chat_shelter.html" class="btn btn-primary ms-auto me-3">View</a>
+                </span>
+                
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-lg-5">
+        <!-- Footer Content... -->
+        <div class="container">
+            <p>&copy; 2023 PetPal All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

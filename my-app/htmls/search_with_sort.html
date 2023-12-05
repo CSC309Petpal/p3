@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .bg-pink {
+        background-color: #EBE5FC;
+    }
+
+    .row.fullheight {
+        min-height: 100%;
+        align-items: center;
+    }
+
+    .fixed-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    body, html {
+        margin: 0;
+        height: 100%;
+    }
+
+
+    @media screen and (max-width: 768px) {
+        .navbar{
+            margin-bottom: 10px;
+        }
+        .row{
+            margin-bottom: 20px;
+        }
+        .card{
+            margin-bottom: 20px;
+        }
+    }
+        
+    
+    
+    </style>
+</head>
+<body class="bg-pink d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="search.html">PetPal</a>
+            
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-3">
+                        <a class="nav-link active" aria-current="page" href="search.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="application.html">My applications</a>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Name: Brandon</a></li>
+                            <li><a class="dropdown-item" href="#">Email: brandon@outlook.com</a></li>
+                            <li><a class="dropdown-item" href="user-profile_update.html">Edit</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Notification (3)
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            <li><a class="dropdown-item" href="chat_seeker.html">K sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_seeker.html">X sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_seeker.html">p sends you a message</a></li>
+                            <li><a class="dropdown-item" href="NotificationUser.html">More</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-outline-light" href="Landing.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="container mt-lg-5 mb-xl-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="container">
+                <div class="row">
+                    <div class="bg-light p-sm-3 text-center" style="height: auto; border-color: black; border-radius: 10px;">
+                        <h4 class="mb-sm-3 bg-dark p-sm-1" style="color: white; border-radius: 10px">Sort by</h4>
+                        <div class="form-check mb-sm-1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              name
+                            </label>
+                          </div>
+                          <div class="form-check mb-sm-1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              species
+                            </label>
+                          </div>
+                          <div class="form-check mb-sm-1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                            <label class="form-check-label" for="flexRadioDefault3">
+                              age (from low to high)
+                            </label>
+                          </div>
+                          <div class="form-check mb-sm-1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                            <label class="form-check-label" for="flexRadioDefault4">
+                              age (from high to low)
+                            </label>
+                          </div>
+                          <div class="form-check mb-sm-1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5">
+                            <label class="form-check-label" for="flexRadioDefault5">
+                              weight 
+                              (from low to high)
+                            </label>
+                          </div>
+                          <div class="form-check mb-sm-1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6">
+                            <label class="form-check-label" for="flexRadioDefault6">
+                              weight (from high to low)
+                            </label>
+                          </div>
+                    </div>
+                </div>
+                <div class="row mt-lg-4">
+                    <div class="bg-light p-sm-3 text-center" style="height: auto; border-color: black; border-radius: 10px;">
+                        <h4 class="mb-sm-3 bg-dark text-center p-sm-1" style="color: white; border-radius: 10px">Filter</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheck1" checked>
+                            <label class="form-check-label" for="flexCheck1">
+                              Dog
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexcheck2">
+                            <label class="form-check-label" for="flexCheck2">
+                              Cat
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheck3">
+                            <label class="form-check-label" for="flexCheck3">
+                              Rabbit
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheck4">
+                            <label class="form-check-label" for="flexCheck4">
+                              Hamster
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChihuahua">
+                            <label class="form-check-label" for="flexCheckChihuahua">
+                                Chihuahua
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckBulldog">
+                            <label class="form-check-label" for="flexCheckBulldog">
+                                Bulldog
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckPoodle">
+                            <label class="form-check-label" for="flexCheckPoodle">
+                                Poodle
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSiamese">
+                            <label class="form-check-label" for="flexCheckSiamese">
+                                Siamese Cat
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckPersian">
+                            <label class="form-check-label" for="flexCheckPersian">
+                                Persian Cat
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckMaineCoon">
+                            <label class="form-check-label" for="flexCheckMaineCoon">
+                                Maine Coon Cat
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckBengal">
+                            <label class="form-check-label" for="flexCheckBengal">
+                                Bengal Cat
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckSphynx">
+                            <label class="form-check-label" for="flexCheckSphynx">
+                                Sphynx Cat
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAge0-4">
+                            <label class="form-check-label" for="flexCheckAge0-4">
+                                Age: 0-4
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAge5-8">
+                            <label class="form-check-label" for="flexCheckAge5-8">
+                                Age: 5-8
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckAge9-12">
+                            <label class="form-check-label" for="flexCheckAge9-12">
+                                Age: 9-12
+                            </label>
+                        </div>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+                <div class="row mt-lg-4 d-flex justify-content-center align-items-center">
+                    <a type="submit" class="btn btn-primary bg-dark" href="search_with_sort.html" style="width: 60%; border-radius: 20px;">Apply</a>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="col-md-9">
+            <div class="row justify-content-end">
+                <div>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Pet's name/species/breed" aria-label="pet's name" aria-describedby="button-addon2" style="height: 60px;">
+                            <button class="btn btn-outline-secondary bg-dark" type="button" id="button-addon2">Search!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="pets/pet3.jpg" class="card-img-top fixed-img" alt="Pet 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Helen</h5>
+                            <p class="card-text">Super cute</p>
+                            <a href="PetDetail.html" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="pets/pet1.jpg" class="card-img-top fixed-img" alt="Pet 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Max</h5>
+                            <p class="card-text">Very playful</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="pets/pet2.jpg" class="card-img-top fixed-img" alt="Pet 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Bella</h5>
+                            <p class="card-text">Loves cuddles</p>
+                            <a href="#" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    
+</div>
+
+<footer class="mt-auto text-center py-3 bg-dark text-white">
+    <div class="container">
+        <p>&copy; 2023 PetPal All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adoption Application</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .bg-pink {
+        background-color: #EBE5FC;
+    }
+
+    body, html {
+            height: 100%;
+            margin: 0%;
+        }
+    .row.fullheight {
+        min-height: 100%;
+        align-items: center;
+    }
+    @media screen and (max-width: 768px) {
+        .navbar{
+            margin-bottom: 10px;
+        }
+        .row{
+            margin-bottom: 20px;
+        }
+    }
+    </style>
+</head>
+
+<body class="bg-pink d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="search.html">PetPal</a>
+            
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="search.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="application.html">My applications</a>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Name: Brandon</a></li>
+                            <li><a class="dropdown-item" href="#">Email: brandon@outlook.com</a></li>
+                            <li><a class="dropdown-item" href="user-profile_update.html">Edit</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Notification (3)
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            <li><a class="dropdown-item" href="chat_seeker.html">K sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_seeker.html">X sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_seeker.html">p sends you a message</a></li>
+                            <li><a class="dropdown-item" href="NotificationUser.html">More</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-outline-light" href="Landing.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 mb-auto">
+    
+    
+        <div class="row mb-2">
+            <!-- Application Section -->
+            <div class="col-md-4">
+                <div class="col mb-5">
+                    <span class="h3"> Adopting for</span>
+                </div>
+
+                <div class="mb-3">
+                    
+                    <img src="pets/petdetail1.jpg" alt="Pet you are applying right now" class="img-fluid mx-auto d-block ">
+                </div>
+            
+            </div>
+            
+            <!-- Form Section -->
+            <div class="col-md-7 ms-auto">
+                <div class = "col md-auto mb-3">
+                    <span class="h3"> Applicant's information: </span>
+                </div>
+
+                <form id ="adoption_form">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="userName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="userEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="experience" class="form-label">Prior Experience</label>
+                        <textarea class="form-control" id="experience" rows="3" placeholder="Describe your prior experience with pets" required></textarea>
+                    </div>
+                   
+                    <button type="submit" class="btn btn-light" id = "button" >Submit</button>
+
+        
+                </form>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    
+
+    <!-- Footer -->
+    <footer class="mt-auto text-center py-3 bg-dark text-white">
+        <div class="container">
+            <p>&copy; 2023 PetPal All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <!-- Script for redirecting to applied detail page -->
+<script>
+    document.getElementById("adoption_form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        // Redirect after form submission.
+        if(this.checkValidity()){
+            setTimeout(function() {
+        window.location.href = "PetDetail-applied.html";
+    }, 500);  // A delay to ensure the form submits successfully before redirection.
+
+        
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="d-flex flex-column min-vh-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update Pet</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .hero-bg {
+            background-color: #EBE5FC;
+        }
+        .col-xl-4{
+            background-color: #EBE5FC;
+        }
+        .card{
+            background-color: #EBE5FC;
+        }
+        .flex-column{
+            background-color: #EBE5FC;
+        }
+        .img-account-profile {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto;
+            overflow: hidden; 
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            width: 400px;
+            height: 300px;
+            }
+        @media screen and (max-width: 768px) {
+        .navbar{
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    }
+
+    </style>
+</head>
+<body class="d-flex flex-column flex-grow-1">
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">PetPal</a>
+        
+        <!-- Navbar Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="ShelterManage.html">Home</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="shelterManage.html#myPets">My pets</a>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#">Name: Jack Russell Network Canada</a></li>
+                        <li><a class="dropdown-item" href="#">Email: Jack.Russel@outlook.com</a></li>
+                        <li><a class="dropdown-item" href="shelter-profile_update.html">Edit</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notification (3)
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        <li><a class="dropdown-item" href="chat_shelter.html">K sends you a message</a></li>
+                        <li><a class="dropdown-item" href="chat_shelter.html">X sends you a message</a></li>
+                        <li><a class="dropdown-item" href="chat_shelter.html">p sends you a message</a></li>
+                        <li><a class="dropdown-item" href="ShelterManage.html">More</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a type="button" class="btn btn-outline-light" href="Landing.html">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Pet Picture</div>
+                <div class="card-body text-center">
+                    <!-- pet picture image-->
+                    <div class="img-account-profile">
+                    <img src="pets/petdetail1.jpg" class="d-block mx-auto" alt="img-1">
+                    </div>
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <div class="input-container">
+                        <input type="file" required name="attachments">
+                    </div>
+                    <button class="btn btn-primary" type="button">Upload new image</button>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Pet Imformation</div>
+                <div class="card-body">
+                    <form>
+                        <!-- Form Group (petname)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputPetname">name (how pet name will appear to other users on the site)</label>
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter pet name" value="Huskey">
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (gender)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputGender">Gender</label>
+                                <input class="form-control" id="inputGender" type="text" placeholder="Pet's gender"value="female">
+                            </div>
+                            <!-- Form Group (characteristics)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="input">characteristics</label>
+                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter pet's characteristics" value="Affectionate, Friendly, Protective">
+                            </div>
+                            
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (breed)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBreed">Breed</label>
+                                <input class="form-control" id="inputBreed" type="text" placeholder="Pet's breed" value=Huskey>
+                            </div>
+                            <!-- Form Group (size)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="input">size</label>
+                                <input class="form-control" id="inputFirstName" type="number" placeholder="Enter pet'size (in inch)" value="20">
+                            </div>
+                            
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                               <!-- Form Group (organization name)-->
+                               <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Organization Name</label>
+                                <input class="form-control" id="inputOrgName" type="text" placeholder="Enter the organization name" value="Jack Russell Network Canada">
+                            </div>
+                        
+                            <!-- Form location-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter location" value="location">
+                            </div>
+                        </div>
+                        
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (Age)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputAge">Age</label>
+                                <input class="form-control" id="inputAge" type="number" name="Age" placeholder="Enter Age" value="2">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFee">Adoption Fee</label>
+                                <input class="form-control" id="inputFee" type="number" name="Fee" placeholder="Enter ADOPTION FEE in $" value="600">
+                            </div>
+                            
+                        </div>
+                         <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="status">Status</label>
+                                <select class="form-select" id= "status" aria-label="Select status">
+                                  <option selected value="available">available</option>
+                                  <option value="adopted">adopted</option>
+                                  <option value="pending">pending</option>
+                                  <option value="withdrawn">withdrawn</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="house_trained">House Trained</label>
+                                <select class="form-select" id= "house_trained" aria-label="house_trained">
+                                  <option selected value="yes">yes</option>
+                                  <option value="no">no</option>
+                                </select>
+                               
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (Age)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputMedical">Medical History</label>
+                                <input class="form-control" id="inputMedical" type="text" name="medical" placeholder="medical history" value="None">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="behavior">Behavior</label>
+                                <input class="form-control" id="behavior" type="text" name="behavior" placeholder="behavior"value="She loves her humans very much and is very cuddling and affectionate with them.">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputGood">Good In A Home With</label>
+                                <input class="form-control" id="inputGood" type="text" name="Good" placeholder="GOOD IN A HOME WITH" value="Children, other animals. farm animals.">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputSpecial">Special</label>
+                                <input class="form-control" id="inputSpecial" type="text" name="special" placeholder="special" value="Vaccinations up to date, spayed / neutered." >
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" rows="5"> Huskey is a 2 year old terrier/hound mix weighing 27 lbs. She loves her humans very much and is very cuddling and affectionate with them. She came from a place in the country where barking was not a problem and she got along well with the other farm animals. Her foster mom has been working very hard on curbing her barking and has seen some definite improvement. Mila wants to protect her family and will let you know if there is an intruder just as she was raised to do on the farm. She loves the outdoors and is very content outside on her own. Huskey will require an experienced owner and home without children under the age of 7.</textarea>
+                              </div>
+                            
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button">Update Pet</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="mt-auto text-center py-3 bg-dark text-white">
+    <div class="container">
+        <p>&copy; 2023 PetPal All rights reserved.</p>
+    </div>
+</footer>
+</div>

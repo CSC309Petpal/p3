@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat and Application Info</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .bg-pink {
+        background-color: #EBE5FC;
+    }
+
+    body, html {
+            height: 100%;
+            margin: 0%;
+        }
+    .row.fullheight {
+        min-height: 100%;
+        align-items: center;
+    }
+    .fixed-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+    .custom-card {
+        border: 2px dotted #000;
+        height: 200px;
+        width: 200px;
+        position: relative;
+    }
+    .plus-sign {
+        font-size: 48px;
+        font-weight: bold;
+    }
+
+    .message-box{
+        width: 100%;
+        height: 100px;
+        background-color: white;
+        border-radius: 20px;
+        padding: 40px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .navbar{
+            margin-bottom: 10px;
+        }
+        img {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+    }
+
+    
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-pink">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="search.html">PetPal</a>
+            
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="search.html">Home</a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="application.html">My Applications</a>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#">Name: Brandon</a></li>
+                            <li><a class="dropdown-item" href="#">Email: brandon@outlook.com</a></li>
+                            <li><a class="dropdown-item" href="user-profile_update.html">Edit</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Notification (3)
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            <li><a class="dropdown-item" href="chat_seeker.html">K sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_seeker.html">X sends you a message</a></li>
+                            <li><a class="dropdown-item" href="chat_seeker.html">p sends you a message</a></li>
+                            <li><a class="dropdown-item" href="NotificationUser.html">More</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-light">Log out</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 align-items-center">
+        <div class="container">
+            <div class="row mt-lg-4">
+                <h1 class="text-center">application information</h1>
+                <h5 class="text-center"><b>Application Status:</b> Pending</h5>
+                <hr class="my-4 border-primary">
+            </div>
+            <div class="row justify-content-center mt-lg-4">
+                <div class="col-md-3 d-flex justify-content-center flex-column align-items-center">
+                    <img src="logo.png" class="img-fluid mb-sm-3" alt="Responsive image" style="height: 200px; width: 200px; border-radius: 100px;">
+                    
+
+                </div>
+                <div class="col-md-8 d-flex justify-content-center">
+                    <table class="table border border-light table-bordered text-center border-dark">
+                        <tr>
+                            <th>Seeker Name</th>
+                            <td>Brandon</td>
+                        <tr>
+                            <th>Email</th>
+                            <td>brandon@outlook.com</td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td>+1 647-689-0134</td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td>75 St. Street</td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>Toronto</td>
+                        </tr>
+                        <tr>
+                            <th>Province</th>
+                            <td>Ontario</td>
+                        </tr>
+                        <tr>
+                            <th>Postal Code</th>
+                            <td>M5S 2E6</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>Canada</td>
+                        </tr>
+                        <tr>
+                            <th>Previous Experience</th>
+                            <td>I have raised a dog before.</td>
+                        </tr>
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-lg-4">
+                <h1 class="text-center">Shelter Information</h1>
+                <hr class="my-4 border-primary">
+            </div>
+            <div class="row justify-content-center mt-lg-4">
+                <div class="col-md-3 d-flex justify-content-center flex-column align-items-center">
+                    <img src="pets/pet7.jpg" class="img-fluid mb-sm-3" alt="Responsive image" style="height: 200px; width: 200px; border-radius: 100px;">
+                    
+
+                </div>
+                <div class="col-md-8 d-flex justify-content-center">
+                    <table class="table border border-light table-bordered text-center border-dark">
+                        <tr>
+                            <th>Shelter Name</th>
+                            <td>Jack Russell Network Canada</td>
+                        <tr>
+                            <th>Email</th>
+                            <td>shelter@outlook.com</td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td>+1 647-689-0134</td>
+                        </tr>
+                        <tr>
+                            <th>Location</th>
+                            <td>75 St. Street</td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td>Toronto</td>
+                        </tr>
+                        <tr>
+                            <th>Province</th>
+                            <td>Ontario</td>
+                        </tr>
+                        <tr>
+                            <th>Postal Code</th>
+                            <td>M5S 2E6</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>Canada</td>
+                        </tr>
+                        <tr>
+                            <th>Mission Statement</th>
+                            <td>Our mission is to help homeless pets find their forever homes.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-lg-4">
+                <h1 class="text-center">Chat</h1>
+                <hr class="my-4 border-primary">
+            </div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <div class="message-box" style="height: auto;">
+                        <p>Seeker: Hi, I am Brenden.</p>
+                        <p>Shelter: Hello, I am Leo</p>
+                        <p>Seeker: I am interested in adopting a pet. I would like to know more about the pet.</p>
+                        <p>Shelter: Cool</p>
+
+                    </div>
+                </div>
+                <div class="input-group">
+                    <textarea id="messageInput" class="form-control border-dark" placeholder="Type your message..."></textarea>
+                    <button id="sendButton" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-lg-5">
+        <!-- Footer Content... -->
+        <div class="container">
+            <p>&copy; 2023 PetPal All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

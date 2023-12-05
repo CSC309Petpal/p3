@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" class="d-flex flex-column min-vh-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shelter Profile Update</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .hero-bg {
+            background-color: #EBE5FC;
+        }
+        .col-xl-4{
+            background-color: #EBE5FC;
+        }
+        .card{
+            background-color: #EBE5FC;
+        }
+        .flex-column{
+            background-color: #EBE5FC;
+        }
+        .img-account-profile {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto;
+            overflow: hidden; 
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media screen and (max-width: 768px) {
+        .navbar{
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    }
+
+    </style>
+</head>
+<body class="d-flex flex-column flex-grow-1">
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">PetPal</a>
+        
+        <!-- Navbar Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="ShelterManage.html">Home</a>
+                </li>
+                <li class="nav-item me-3">
+                    <a class="nav-link" href="shelterManage.html#myPets">My pets</a>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle active" aria-current="page" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#">Name: Jack Russell Network Canada</a></li>
+                        <li><a class="dropdown-item" href="#">Email: Jack.Russel@outlook.com</a></li>
+                        <li><a class="dropdown-item" href="shelter-profile_update.html">Edit</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notification (3)
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        <li><a class="dropdown-item" href="chat_shelter.html">K sends you a message</a></li>
+                        <li><a class="dropdown-item" href="chat_shelter.html">X sends you a message</a></li>
+                        <li><a class="dropdown-item" href="chat_shelter.html">p sends you a message</a></li>
+                        <li><a class="dropdown-item" href="NotificationShelter.html">More</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a type="button" class="btn btn-outline-light" href="Landing.html">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2" src="pets/jackRussel.jpg" alt="">
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <div class="input-container">
+                        <input type="file" required name="attachments">
+                    </div>
+                    <button class="btn btn-primary" type="button">Upload new image</button>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form>
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Sheltername (how shelter's name will appear to other users on the site)</label>
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your sheltername" value="Jack Russell Network Canada">
+                        </div>
+                        
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                        
+                            <!-- Form location-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="Toronto, ON">
+                            </div>
+                        </div>
+                        
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Phone Number</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="123-456-789">
+                            </div>
+                            <!-- Form Group (email address)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputEmailAddress">Email Address</label>
+                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter email address" value=jack.russell@outlook.com>
+                            </div>
+                            
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (goal)-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                <label for="goal">Shelter's Goal</label>
+                                <textarea class="form-control" id="goal" rows="5"> Jack Russell Network Canada ("JRNC") provides temporary shelter, and veterinary care for stray, abandoned, abused, injured, neglected and or surrendered JRTs, JRT crosses, similar terriers and dogs in danger of being euthanized. Our mission is to find these dogs forever homes.</textarea>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (goal)-->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                <label for="Policy">Adoption Policy</label>
+                                <textarea class="form-control" id="Policy" rows="20">Welcome!
+
+By adopting, you will effectively be saving 3 dogs' lives. Adopting a dog from JRNC means an open space for a new one at a JRNC foster home; and fostering a new dog means that there will be a new space available for a dog at an affiliate shelter.
+
+Although Jack Russell is in our name, many of the dogs JRNC rescues are small mixed breed dogs. The dogs JRNC rescue often come from puppy mill seizures or high-kill shelters that euthanize dogs who are not quickly adopted.
+
+Adoption Fees: Unfixed Puppy (3-6 months) $1100 w/ $250 refundable alteration fee
+Fixed Puppies (\< 1 year): $850
+Adult dogs (1-9 years): $600
+Senior dogs (10+ years): $350
+
+All dogs available for adoption are spayed/neutered if they have reached appropriate age and have all up-to-date vaccinations. If a puppy has not reached the appropriate age, the adopter must provide proof of spay/neuter to fully complete adoption.
+
+It is the mission of the Jack Russell Network Canada, Inc. ("Jack Russell Network Canada", "JRNC") to provide temporary shelter, veterinary medical care and other care for stray, abandoned, abused, injured, neglected and surrendered Jack Russell Terriers (JRTs, JRT crosses and similar terriers) in need of human assistance and care, for finding appropriate new homes for the dogs, and to promote the well-being of Jack Russell Terriers in general and to encourage the spaying and neutering, as well as the identification and registration of Jack Russell Terriers and of other domestic pets in general.
+
+a. Dogs may be adopted by persons over the age of 18 years, are resident in any Province of Canada, who have completed a satisfactory telephone interview, received positive veterinarian and reference checks and have had a home visit with a positive recommendation;
+
+b. Dogs may be adopted by individuals or families living in owner occupied homes including condominiums and rented homes including apartments subject to the approval of their landlord;
+
+c. Dogs may be adopted by families with children 4 years and older. Exceptions may be made where the adopter has children under the age of 4, has previously owned terriers, understands their temperament and is experienced in their handling and the terrier has been exposed to small children in the past;
+
+d. That, to the satisfaction of the dog’s foster and the Home Visitor, the Applicant has considered the commitment required to care for a dog for its entire life, which could exceed 15 years;
+
+e. That the Applicant has considered:
+i. That the financial commitment necessary to properly feed, house and provide adequate veterinary care for a pet can be expensive;
+ii. The possibilities of emergency veterinary costs arising and has a plan in place to deal with such situations and that they realise that, as dogs age, their veterinary care requirements may grow, and the costs may increase accordingly;
+
+f. Has a current veterinarian, a history with a veterinarian or have access that can be verified;
+
+g. That to the satisfaction of the Home Visitor,
+i. Everyone in the home is interested and excited about adopting rescue dogs including all children (if any);
+ii. Children (if any) must be present at the meet & greet and must be seen to interact with dogs in the home, i.e. pet the dog, give the dog treats. If the dog shows signs of being scared or of aggression during the interaction the family is probably not a good fit as a foster family. If the children are not present, a second meet & greet must be scheduled;
+iii. The Applicant can demonstrate that he/she is knowledgeable about terriers and understand their temperament and personality;
+iv. The Applicant has enough free time each day to devote to feeding, exercising and interacting with a dog;
+v. the Applicant has the patience necessary to train and rehabilitate a rescued dog and that they understand that the transition for these dogs into new homes can take time and that they may have to house train the dog; vi. the home environment is right for a terrier;
+
+h. that the Applicant is willing and able to keep JRNC updated on the dog’s progress by sharing pictures, videos and information via email or social media</textarea>
+                              </div>
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="mt-auto text-center py-3 bg-dark text-white">
+    <div class="container">
+        <p>&copy; 2023 PetPal All rights reserved.</p>
+    </div>
+</footer>
+</div>
