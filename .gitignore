@@ -1,0 +1,10 @@
+venv/
+petpal/petpal/__pycache__/
+petpal/accounts/__pycache__/
+petpal/accounts/migrations/__pycache__/
+petpal/db.sqlite3
+petpal/pets/__pycache__/
+petpal/pets/migrations/__pycache__/
+petpal/notifications/__pycache__/
+petpal/notifications/migrations/__pycache__/
+**/__pycache__/
