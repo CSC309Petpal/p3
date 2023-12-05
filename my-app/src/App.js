@@ -5,16 +5,28 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header/header';
 import Login from './pages/Login/LoginPage';
+
 import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
+
+import SeekerDetail from './pages/Accounts/SeekerDetail';
+import ShelterDetail from './pages/Accounts/ShelterDetail';
+import PetCreationForm from './pages/Pet/PetCreatePage';
+
 function App() {
   return (
     <BrowserRouter>
       
       <Routes>
         <Route path="/login" element={<Login />} />
+
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
+
+
+        <Route path="/seeker-detail" element={<SeekerDetail />} />
+        <Route path="/shelter-detail" element={<ShelterDetail />} />
+        <Route path="/pet/create" element={< PetCreationForm/>} />
 
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
