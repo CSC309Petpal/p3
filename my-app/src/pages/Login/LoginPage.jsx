@@ -46,7 +46,7 @@ const LoginPage = () => {
         data.append("username", username);
         data.append("password", password);
     
-        fetch(`${BACKENDHOST}/api/token/`, {
+        fetch(`${BACKENDHOST}api/token/`, {
             method: "POST",
             body: data,
         })
