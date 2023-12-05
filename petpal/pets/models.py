@@ -31,7 +31,7 @@ class Pet(models.Model):
     size = models.CharField(max_length=50, choices=SIZE_CHOICES)
     color = models.CharField(max_length=50)
     gender = models.CharField(max_length=50, choices=GENDER_CHOICES)
-    image = models.ImageField(upload_to='pictures/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True, default=None)
 
     class Meta:
         ordering = ['shelter', 'status', 'breed', 'age']

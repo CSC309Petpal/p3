@@ -1,22 +1,20 @@
 from .permissions import IsSuperUser
 from .models import Notification
-from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, RetrieveAPIView
+from rest_framework import viewsets
 from .serializers import NotificationSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import OrderingFilter
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg.utils import swagger_auto_schema
 
-class NotificationCreateAPIView(CreateAPIView):
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    permission_classes = [IsSuperUser]
 
 class NotificationPagination(PageNumberPagination):
-    page_size = 10  # Set the number of items per page
+    page_size = 3  # Set the number of items per page
 
-class NotificationListAPIView(ListAPIView):
+class NotificationViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [OrderingFilter, DjangoFilterBackend]
@@ -24,30 +22,30 @@ class NotificationListAPIView(ListAPIView):
     filterset_fields = ['read']
     pagination_class = NotificationPagination
 
+    def perform_create(self, serializer):
+        if not self.request.user.is_superuser:
+            raise PermissionDenied("Only superusers can create notifications.")
+        serializer.save()
+    
     def get_queryset(self):
-        user = self.request.user
-        return Notification.objects.filter(receiver=user)
-    
-class NotificationDeleteAPIView(DestroyAPIView):
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    permission_classes = [IsAuthenticated]
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            return Notification.objects.filter(receiver=user)
+        else:
+            return Notification.objects.none()
+        
+    def update(self, request, *args, **kwargs):
+        raise PermissionDenied("Notification can't be updated")
 
-    def delete(self, request, *args, **kwargs):
-        notification = self.get_object()
-        if notification.receiver != request.user:
+    def perform_destroy(self, instance):
+        if instance.receiver != self.request.user:
             raise PermissionDenied("You do not have permission to delete this notification.")
-        return super().delete(request, *args, **kwargs)
-    
-class NotificationRetreiveAPIView(RetrieveAPIView):
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-    permission_classes = [IsAuthenticated]
+        super().perform_destroy(instance)
 
     def retrieve(self, request, *args, **kwargs):
-        notification = self.get_object()
-        if notification.receiver != request.user:
-            raise PermissionDenied("You do not have permission to delete this notification.")
-        notification.read = True
-        notification.save()
+        instance = self.get_object()
+        if instance.receiver != request.user:
+            raise PermissionDenied("You do not have permission to view this notification.")
+        instance.read = True
+        instance.save()
         return super().retrieve(request, *args, **kwargs)

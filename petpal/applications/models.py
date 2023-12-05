@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import Seeker
 from pets.models import Pet
+from django.utils import timezone 
 # Create your models here.
 class Application(models.Model) :
     # Choices for application status
@@ -24,4 +25,10 @@ class Application(models.Model) :
       return f"{self.seeker} Application for {self.pet} under shelter {self.shelter}"
 
     
+def update_application_updation_time(application_id):
+   
+    application = Application.objects.get(pk=application_id)
 
+    # Update the updation_time to the current time
+    application.updation_time = timezone.now()
+    application.save()

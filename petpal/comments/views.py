@@ -24,7 +24,7 @@ class CommentsCreationView(generics.CreateAPIView):
         content = serializer.validated_data['content']
       
         obj=serializer.save(sender=self.request.user, shelter=to_shelter)
-        followup_url = reverse_lazy('comments:comment_detail', args=[obj.id])
+        followup_url = self.request.build_absolute_uri(reverse_lazy('comments:comment_detail', args=[obj.id]))
         create_notification(self.request.user, to_shelter.user, followup_url, 'New Review')
         
 
@@ -49,3 +49,26 @@ class CommentsRetrieveView(generics.RetrieveAPIView):
         comment = get_object_or_404(Comments, pk=comment_id)
         
         return comment
+    
+class CommentsListCreateView(generics.ListCreateAPIView):
+    serializer_class = CommentsSerializer
+    permission_classes = [IsAuthenticated]
+    pagination_class = CommentsPagination
+
+    def get_queryset(self):
+        shelter_id = self.kwargs.get('shelter_id')
+        # Filter comments based on the shelter_id
+        return Comments.objects.filter(shelter_id=shelter_id)
+
+    def perform_create(self, serializer):
+        shelter_id = self.kwargs.get('shelter_id')
+        to_shelter = get_object_or_404(Shelter, pk=shelter_id)
+        content = serializer.validated_data['content']
+      
+        obj = serializer.save(sender=self.request.user, shelter=to_shelter)
+        followup_url = self.request.build_absolute_uri(reverse_lazy('comments:comment_detail', args=[obj.id]))
+        create_notification(self.request.user, to_shelter.user, followup_url, 'New Review')
+
+    def post(self, request, *args, **kwargs):
+        # Use the create method for POST requests
+        return self.create(request, *args, **kwargs)
