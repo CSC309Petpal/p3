@@ -14,55 +14,105 @@ from rest_framework.exceptions import PermissionDenied
 from notifications.models import create_notification
 from django.urls import reverse
 from django.urls import reverse_lazy
+from applications.models import update_application_updation_time
 
 
 class FollowupPagination(PageNumberPagination):
     page_size = 10  # Set the number of items per page
 
-class FollowupCreationView(generics.CreateAPIView):
+# class FollowupCreationView(generics.CreateAPIView):
+#     queryset = Followup.objects.all()
+#     serializer_class = FollowupSerializer
+#     permission_classes = [IsRelated,IsAuthenticated]
+
+#     def get_application(self):
+#         application_id = self.kwargs.get('application_id')
+        
+#         app= get_object_or_404(Application, pk=application_id)
+#         if app.shelter.user!=self.request.user and app.seeker.user!=self.request.user:
+#             raise PermissionDenied("You do not have permission to create follow-up for this application.")
+            
+#         return app
+    
+#     def perform_create(self, serializer):
+       
+#         app_id = self.kwargs.get('application_id')
+#         to_app = get_object_or_404(Application, pk=app_id) 
+#         if to_app.shelter.user!=self.request.user and to_app.seeker.user!=self.request.user:
+#             raise PermissionDenied("You do not have permission to create follow-up for this application.")
+#         obj=serializer.save(sender=self.request.user, application=to_app)
+
+#         followup_url = reverse_lazy('followup:followup_detail', args=[obj.id])
+        
+#         if self.request.user.user_type==1:
+#             create_notification(self.request.user, to_app.shelter.user, followup_url, 'message')
+#         if self.request.user.user_type==2:
+#             create_notification(self.request.user, to_app.seeker.user, followup_url, 'message')
+
+# class FollowupListView(generics.ListAPIView):
+    
+#     model = Followup
+#     serializer_class = FollowupListSerializer
+#     pagination_class = FollowupPagination
+#     permission_classes = [IsRelated,IsAuthenticated]
+#     def get_queryset(self):
+#         app_id = self.kwargs.get('application_id')
+#         app= get_object_or_404(Application, pk=app_id)
+#         if app.shelter.user!=self.request.user and app.seeker.user!=self.request.user:
+#             raise PermissionDenied("You do not have permission to check follow-up for this application.")
+
+#         # Filter comments based on the shelter_id
+#         queryset = Followup.objects.filter(application_id=app_id)
+#         return queryset
+
+
+class FollowupCreateListView(generics.ListCreateAPIView):
     queryset = Followup.objects.all()
-    serializer_class = FollowupSerializer
+    pagination_class = FollowupPagination
     permission_classes = [IsRelated,IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return FollowupSerializer
+        elif self.request.method == 'GET':
+            return FollowupListSerializer
 
     def get_application(self):
         application_id = self.kwargs.get('application_id')
-        
-        app= get_object_or_404(Application, pk=application_id)
-        if app.shelter.user!=self.request.user and app.seeker.user!=self.request.user:
-            raise PermissionDenied("You do not have permission to create follow-up for this application.")
-            
+        app = get_object_or_404(Application, pk=application_id)
+
+        if app.shelter.user != self.request.user and app.seeker.user != self.request.user:
+            raise PermissionDenied("You do not have permission to interact with follow-ups for this application.")
+
         return app
-    
+
     def perform_create(self, serializer):
-       
         app_id = self.kwargs.get('application_id')
-        to_app = get_object_or_404(Application, pk=app_id) 
-        if to_app.shelter.user!=self.request.user and to_app.seeker.user!=self.request.user:
+        to_app = get_object_or_404(Application, pk=app_id)
+
+        if to_app.shelter.user != self.request.user and to_app.seeker.user != self.request.user:
             raise PermissionDenied("You do not have permission to create follow-up for this application.")
-        obj=serializer.save(sender=self.request.user, application=to_app)
 
-        followup_url = reverse_lazy('followup:followup_detail', args=[obj.id])
-        
-        if self.request.user.user_type==1:
-            create_notification(self.request.user, to_app.shelter.user, followup_url, 'message')
-        if self.request.user.user_type==2:
-            create_notification(self.request.user, to_app.seeker.user, followup_url, 'message')
+        obj = serializer.save(sender=self.request.user, application=to_app)
+        followup_url = self.request.build_absolute_uri(reverse_lazy('followup:followup_detail', args=[obj.id]))
 
-class FollowupListView(generics.ListAPIView):
-    
-    model = Followup
-    serializer_class = FollowupListSerializer
-    pagination_class = FollowupPagination
-    permission_classes = [IsRelated,IsAuthenticated]
+        if self.request.user.user_type == 1:
+            create_notification(self.request.user, to_app.shelter.user, followup_url, 'message',followup_url)
+            update_application_updation_time(app_id)
+        elif self.request.user.user_type == 2:
+            create_notification(self.request.user, to_app.seeker.user, followup_url, 'message',followup_url)
+            update_application_updation_time(app_id)
+
     def get_queryset(self):
         app_id = self.kwargs.get('application_id')
-        app= get_object_or_404(Application, pk=app_id)
-        if app.shelter.user!=self.request.user and app.seeker.user!=self.request.user:
+        app = get_object_or_404(Application, pk=app_id)
+
+        if app.shelter.user != self.request.user and app.seeker.user != self.request.user:
             raise PermissionDenied("You do not have permission to check follow-up for this application.")
 
-        # Filter comments based on the shelter_id
         queryset = Followup.objects.filter(application_id=app_id)
         return queryset
+
 
 class FollowupRetrieveView(generics.RetrieveAPIView):
     serializer_class = FollowupListSerializer

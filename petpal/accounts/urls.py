@@ -5,9 +5,9 @@ from . import views
 app_name="accounts"
 
 urlpatterns = [
-    path("creation/", views.UserCreateAPIView.as_view(), name="creation"),
-    path("update/", views.UserUpdateAPIView.as_view(), name="update"),
-    path('shelters/list/', views.ShelterListView.as_view(), name='shelter-list'),
-    path('shelters/detail/<int:pk>', views.ShelterDetailView.as_view(), name='shelter-list'),
-    path('seeker/detail/<int:seeker_id>', views.SeekerDetailProfileView.as_view(), name='seeker-detail')
+    path('shelter/<int:pk>/', views.ShelterRetrieveUpdateDestroyView.as_view(), name='shelter-detail'),
+    path('seeker/<int:pk>/', views.SeekerRetrieveUpdateDestroyView.as_view(), name='seeker-detail'),
+    path('shelter/', views.ShelterListCreateAPIView.as_view(), name='shelter-create'),
+    path('seeker/', views.SeekerCreateAPIView.as_view(), name='seeker-create'),
+
 ]

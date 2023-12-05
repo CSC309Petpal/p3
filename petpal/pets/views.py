@@ -6,37 +6,13 @@ from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
-
-class PetCreationView(generics.ListCreateAPIView):
-    queryset = Pet.objects.all()
-    serializer_class = PetSerializer
-    permission_classes = [IsShelter]
-
-    def perform_create(self, serializer):
-        # Assuming the profile of the user is linked to the shelter
-
-        serializer.save(shelter=self.request.user.shelter)
-
-
-class PetListView(generics.ListAPIView):
-    queryset = Pet.objects.all()
-    serializer_class = PetSerializer
-
-class PetUpdateView(generics.RetrieveUpdateAPIView):
-    queryset = Pet.objects.all()
-    serializer_class = PetSerializer
-    permission_classes = [IsShelter, IsOwner]
-
-    def perform_update(self, serializer):
-        # Assuming the profile of the user is linked to the shelter
-        serializer.save(shelter=self.request.user.shelter)
+from django.http import Http404
 
 class PetPagination(PageNumberPagination):
-    page_size = 10  # Set the number of items per page
+    page_size = 4  # Set the number of items per page
 
     
-class PetSearchView(generics.ListAPIView):
-    queryset = Pet.objects.all()
+class PetListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = PetSerializer
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     filterset_fields = ['shelter', 'status', 'breed', 'age', 'size', 'color', 'gender']
@@ -44,23 +20,40 @@ class PetSearchView(generics.ListAPIView):
     pagination_class = PetPagination
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        # Set default status filter if not provided
+        # Implement any custom filtering logic here
+        queryset = Pet.objects.all()
         if 'status' not in self.request.query_params:
             queryset = queryset.filter(status='available')
         return queryset
     
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsShelter]
+        return [permission() for permission in permission_classes]
 
-class PetDeleteView(generics.DestroyAPIView):
+    def perform_create(self, serializer):
+        # Assuming the profile of the user is linked to the shelter
+        user = self.request.user
+
+        if not hasattr(user, 'shelter'):
+            raise Http404("User does not have a linked shelter.")
+        serializer.save(shelter=self.request.user.shelter)
+    
+
+class PetRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
-    permission_classes = [IsShelter, IsOwner]
-
-
-class PetDetailView(generics.RetrieveAPIView):
-    queryset = Pet.objects.all()
-    serializer_class = PetSerializer
-    permission_classes = [AllowAny]
     lookup_field = 'pk'
     lookup_url_kwarg = 'pk'
 
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.request.method == 'GET':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsShelter, IsOwner]
+        return [permission() for permission in permission_classes]

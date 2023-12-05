@@ -5,7 +5,7 @@ from . import views
 app_name="followup"
 
 urlpatterns = [
-    path("creation/<int:application_id>/", views.FollowupCreationView.as_view(), name="followup_creation"),
-    path("list/<int:application_id>/", views.FollowupListView.as_view(), name="followup_list"),
-    path("detail/<int:followup_id>/",views.FollowupRetrieveView.as_view(),name="followup_detail")
+    path("to-app/<int:application_id>/", views.FollowupCreateListView.as_view(), name="followup_to_app"),
+    # path("list/<int:application_id>/", views.FollowupListView.as_view(), name="followup_list"),
+    path("<int:followup_id>/",views.FollowupRetrieveView.as_view(),name="followup_detail")
 ]

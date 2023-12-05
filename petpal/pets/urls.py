@@ -8,12 +8,8 @@ from . import views
 app_name="pets"
 
 urlpatterns = [
-    path("creation/", views.PetCreationView.as_view(), name="pet_creation"),
-    path("list/", views.PetListView.as_view(), name="pet_list"),
-    path("update/<int:pk>/", views.PetUpdateView.as_view(), name="pet_update"),
-    path("search/", views.PetSearchView.as_view(), name="pet_search"),
-    path("delete/<int:pk>/", views.PetDeleteView.as_view(), name="pet_delete"),
-    path("detail/<int:pk>/", views.PetDetailView.as_view(), name="pet_detail"),
+    path("", views.PetListCreateAPIView.as_view(), name="pet_list_create"),
+    path("<int:pk>/", views.PetRetrieveUpdateDestroyView.as_view(), name="pet_retrieve_update_destroy")
 
 ]
 

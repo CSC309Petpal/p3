@@ -51,10 +51,11 @@ class CustomUser(AbstractUser, PermissionsMixin):
       (2, 'shelter'),
     )
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['password', 'user_type']
-    
+    REQUIRED_FIELDS = ['password', 'user_type', 'email']
+    email = models.EmailField(validators=[validate_email])
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
     location = models.CharField(max_length=255, blank=True)
+    avatar = models.ImageField(upload_to='avatar/', blank=True, null=True, default=None)
     objects = CustomUserManager()
     def __str__(self):
         return str(self.pk) + "\n " + self.username
@@ -75,7 +76,6 @@ class Seeker(models.Model):
 # Shelter profile model
 class Shelter(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name='shelter')
-    list_of_pets = models.TextField(blank=True)  # assuming this is a text field; change as needed
 
     def __str__(self):
         return 'ID: '+str(self.pk) + " Username:" +self.user.username

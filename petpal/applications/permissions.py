@@ -72,9 +72,13 @@ class IsSeekerOrShelterToUpdateApplication(permissions.BasePermission):
             return False
         else:
             user_type = request.user.user_type
+
             if user_type == ApplicationConstants.SEEKER:
+                if request.user.seeker == None:
+                    return False
                 return SeekerHaveApplication().has_object_permission(request,view,obj)
             else:
-               
+                if request.user.shelter == None:
+                    return False
                 return ShelterHaveApplication().has_object_permission(request,view,obj)
                 

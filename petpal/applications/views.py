@@ -9,7 +9,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAuthenticated
 from .constants import ApplicationConstants
+from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from notifications.models import create_notification
+
 
 class ApplicationCreationView(generics.ListCreateAPIView):
     queryset = Application.objects.all()
@@ -29,8 +34,10 @@ class ApplicationCreationView(generics.ListCreateAPIView):
         shelter = pet.shelter
         if pet.status != 'available':
             raise PermissionDenied({'pet_status': 'Can only create applications for a pet listing that is "available".'})
-        serializer.save(seeker=self.request.user.seeker, pet=pet, shelter= shelter)
-
+        obj = serializer.save(seeker=self.request.user.seeker, pet=pet, shelter= shelter)
+        app_url = self.request.build_absolute_uri(reverse_lazy('applications:application-get-update', args=[obj.id]))
+        create_notification(self.request.user, obj.shelter.user, "new app", 'message',app_url)
+            
 
 
 class ApplicationUpdateView(generics.RetrieveUpdateAPIView):
@@ -48,19 +55,27 @@ class ApplicationUpdateView(generics.RetrieveUpdateAPIView):
         # Shelter logic
         if user.user_type == ApplicationConstants.SHELTER:
             if current_status == ApplicationConstants.PENDING and new_status in [ApplicationConstants.ACCEPTED, ApplicationConstants.DENIED]:
-                serializer.save()
+                obj=serializer.save()
             else:
                 raise PermissionDenied('You can only update status from pending to accepted or denied.')
 
         # Pet Seeker logic
         elif user.user_type == ApplicationConstants.SEEKER:
             if current_status in [ApplicationConstants.PENDING, ApplicationConstants.ACCEPTED] and new_status == ApplicationConstants.WITHDRAWN:
-                serializer.save()
+               obj= serializer.save()
             else:
                 raise PermissionDenied('You can only update status from pending or accepted to withdrawn.')
 
         else:
             raise PermissionDenied('You do not have permission to update this application.')
+        app_url = self.request.build_absolute_uri(reverse_lazy('applications:application-get-update', args=[obj.id]))
+        
+        
+        if self.request.user.user_type == 1:
+            create_notification(self.request.user, obj.shelter.user, "app state change", 'message',app_url)
+        elif self.request.user.user_type == 2:
+            create_notification(self.request.user, obj.seeker.user, "app state change", 'message',app_url)
+        
 
         
 
@@ -100,3 +115,47 @@ class ApplicationDetailView(generics.RetrieveAPIView):
     lookup_field = 'pk'
     lookup_url_kwarg = 'application_id'
 
+
+
+class ApplicationRetrieveUpdateView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsSeekerOrShelterToUpdateApplication]
+
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ApplicationSerializer
+        else:
+            return ApplicationUpdateSerializer
+
+    def get_object(self):
+        
+            application = get_object_or_404(Application, pk=self.kwargs.get('pk'))
+                        
+            return application
+
+    def perform_update(self, serializer):
+        application = self.get_object()
+
+        user = self.request.user
+        current_status = application.status
+        new_status = serializer.validated_data.get('status', None)
+
+        # Shelter logic
+        if user.user_type == ApplicationConstants.SHELTER:
+            if current_status == ApplicationConstants.PENDING and new_status in [ApplicationConstants.ACCEPTED, ApplicationConstants.DENIED]:
+                serializer.save()
+            else:
+                raise PermissionDenied('You can only update status from pending to accepted or denied.')
+
+        # Pet Seeker logic
+        elif user.user_type == ApplicationConstants.SEEKER:
+            if current_status in [ApplicationConstants.PENDING, ApplicationConstants.ACCEPTED] and new_status == ApplicationConstants.WITHDRAWN:
+                serializer.save()
+            else:
+                raise PermissionDenied('You can only update status from pending or accepted to withdrawn.')
+
+        else:
+            raise PermissionDenied('You do not have permission to update this application.')
+            
+    
+    
