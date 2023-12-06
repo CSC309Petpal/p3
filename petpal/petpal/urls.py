@@ -42,8 +42,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         refresh = self.get_token(self.user)
         data['refresh'] = str(refresh)
         data['access'] = str(refresh.access_token)
-        
         data['user_type'] = self.user.user_type
+        if self.user.user_type == 2:
+            data['shelter_id'] = self.user.shelter.id
+            data['seeker_id'] = None
+        else:
+            data['shelter_id'] = None
+            data['seeker_id'] = self.user.seeker.id
+        
         return data
 
 class MyTokenObtainPairView(TokenObtainPairView):

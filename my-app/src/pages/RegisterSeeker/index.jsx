@@ -5,6 +5,7 @@ import { BACKENDHOST } from "../Login/config";
 import logo from "../../assets/logo.png";
 import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import LoginInput from "../../components/input/LoginInput";

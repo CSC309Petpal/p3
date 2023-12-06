@@ -1,5 +1,8 @@
+import React , { useEffect }from 'react';
+import axios from 'axios';
 
-import React from 'react';
+import { BACKENDHOST } from "./config";
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,10 +13,33 @@ import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
 
 import SeekerDetail from './pages/Accounts/SeekerDetail';
-import ShelterDetail from './pages/Accounts/ShelterDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
 
+import ShelterComponent from './pages/ShelterManage';
+
+import NotificationBoard from './components/Notification/notificationBoard';
+
 function App() {
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = {
+          refresh: localStorage.getItem('refresh'),
+        };
+        const response = await axios.post(`${BACKENDHOST}api/token/refresh/`, data);
+
+        localStorage.setItem('token', response.data.access);
+
+        console.log('token refreshed')
+      } catch (error) {
+        console.error(error);
+        console.log('token refresh failed')
+        // Handle token refresh failure, e.g. redirect to login page
+      }
+    }, 4 * 60 * 1000);
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, []);
+
   return (
     <BrowserRouter>
       
@@ -25,8 +51,10 @@ function App() {
 
       
         <Route path="/seeker-detail" element={<SeekerDetail />} />
-        <Route path="/shelter-detail" element={<ShelterDetail />} />
+        <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
+
+        <Route path="/notifications" element={< NotificationBoard/>} />
 
         {/* Add more routes as needed */}
         {/* Optional: Default route */}

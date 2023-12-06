@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKENDHOST } from "./config";
-
-
+import StartHeader from "../../components/StartHeader/startHeader";
+import Footer from "../../components/Footer/footer";
 import LoginInput from "../../components/input/LoginInput";
 
 const LoginPage = () => {
@@ -62,9 +62,13 @@ const LoginPage = () => {
             localStorage.setItem("user_type", data.user_type);
             setToken(data.access);
             if(data.user_type==1){
+                localStorage.setItem("seeker_id", data.seeker_id);
                 navigate("/seeker-detail");
             }else{
-                navigate("/shelter-detail");
+                localStorage.setItem("shelter_id", data.shelter_id);
+                let shelter_id = localStorage.getItem("shelter_id");
+                navigate(`/shelter/${shelter_id}`);
+
             }
         } else if (data && data.detail) {
             // Clear the token state
@@ -85,6 +89,7 @@ const LoginPage = () => {
 
     return (
         <>
+        <StartHeader/>
 
             <div className="container">
                 <div className="row" style={{height: 4 + "rem"}}>
@@ -139,6 +144,7 @@ const LoginPage = () => {
             </div>
 
             </div>
+            <Footer/>
         </>
     );
 }
