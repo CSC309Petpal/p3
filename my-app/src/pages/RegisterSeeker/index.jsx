@@ -1,108 +1,99 @@
-import './style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import StartHeader from "../../components/StartHeader/startHeader";
-import { useState} from "react";
+import React from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKENDHOST } from "../Login/config";
 import logo from "../../assets/logo.png";
-import LoginInput from "../../components/input/LoginInput";
+import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
 
-const RegisterShelterPage = () => {
+
+import LoginInput from "../../components/input/LoginInput";
+
+const RegisterShelterPage= () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [password_check, setPasswordCheck] = useState("");
+    const [password2, setPassword2] = useState("");
     const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
-  
     const navigate = useNavigate();
 
-    const Register = (username, password, password_check, address, email, navigate) => {
+    const Register = (username, password, password2, address, email, navigate) => {
         // check if the username and password is valid
         var bad = false;
-        const usernameError = document.getElementById("usernameError");
-        const pwdError = document.getElementById("PasswordError");
-        const pwdCheckError = document.getElementById("PasswordCheckError");
-        const addressError = document.getElementById("AddressError");
-        const emailError = document.getElementById("EmailError");
+        const username_not = document.getElementById("Username_notification");
+        const pwd_not = document.getElementById("Password_notification");
+        const pwd2_not = document.getElementById("PasswordConfirm_notification");
+        const address_not = document.getElementById("Address_notification");
+        const email_not = document.getElementById("Email_notification");
+
 
         if (username === "") {
-            usernameError.innerHTML = "Please enter your username";
+            username_not.innerHTML = "Please enter your username";
             bad = true;
         }
         else (
-            usernameError.innerHTML = ""
+            username_not.innerHTML = ""
         )
-
-        // check the password is valid using regex
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        if (!passwordRegex.test(password)) {
-            pwdError.innerHTML = "Password is not valid";
+        // check the password is longer than 8 characters
+        if (password.length < 8) {
+            pwd_not.innerHTML = "Password must be at least 8 characters";
             bad = true;
         }
         else (
-            pwdError.innerHTML = ""
+            pwd_not.innerHTML = ""
         )
-
-
-        if (password === "") {
-            pwdError.innerHTML = "Please enter your password";
+        
+        if (password2 === "") {
+            pwd2_not.innerHTML = "Please enter your password";
             bad = true;
         }
         else (
-            pwdError.innerHTML = ""
+            pwd2_not.innerHTML = ""
         )
-
-        if (password_check === "") {
-            pwdCheckError.innerHTML = "Please enter your password";
-            bad = true;
-        }
-        else (
-            pwdCheckError.innerHTML = ""
-        )   
 
         if (address === "") {
-            addressError.innerHTML = "Please enter your address";
+            address_not.innerHTML = "Please enter your address";
             bad = true;
         }
         else (
-            addressError.innerHTML = ""
+            address_not.innerHTML = ""
+        )
+            
+        if (email === "") {
+            email_not.innerHTML = "Please enter your email";
+            bad = true;
+        }
+        else (
+            email_not.innerHTML = ""
         )
 
-        if (email === "") {
-            emailError.innerHTML = "Please enter your email";
+        if (password !== password2) {
+            pwd2_not.innerHTML = "Password does not match";
             bad = true;
+            return;
         }
-        else (
-            emailError.innerHTML = ""
-        )
+
 
         if (bad) {
             return;
         }
-
-        if (password !== password_check) {
-            pwdCheckError.innerHTML = "Password does not match";
-            return;
-        }
         
-        usernameError.innerHTML = "";
-        pwdError.innerHTML = "";
-        pwdCheckError.innerHTML = "";
-        addressError.innerHTML = "";
-        emailError.innerHTML = "";
+        username_not.innerHTML = "";
+        pwd_not.innerHTML = "";
+        pwd2_not.innerHTML = "";
+        address_not.innerHTML = "";
+        email_not.innerHTML = "";
 
 
         var data = new FormData();
         data.append("username", username);
         data.append("password", password);
-        data.append("password_check", password_check);
-        data.append("address", address);
+        data.append("password_confirm", password2);
+        data.append("location", address);
         data.append("email", email);
-
     
-        fetch(`${BACKENDHOST}api/token/`, {
+        fetch(`${BACKENDHOST}accounts/seeker/`, {
             method: "POST",
             body: data,
         })
@@ -111,8 +102,15 @@ const RegisterShelterPage = () => {
         .then(data => {
     
             console.log(data);
-            // navigate to the login page
             navigate("/login");
+
+        if (data && data.access) {
+            navigate("/login");
+        } else if (data && data.detail) {
+
+            // Display an error message for failed login
+            pwd_not.innerHTML = data.detail;
+        }
         });
     }
 
@@ -120,90 +118,105 @@ const RegisterShelterPage = () => {
         navigate('/register-shelter');
       };
 
+    // if there is a token, nav to admin/locations
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate("/admin/locations");
+    //     }
+    // }
+    // );
+
     return (
         <>
-        <StartHeader />
-        <main className="flex-grow-1 d-flex align-items-center" style={{ marginTop: '40px', marginBottom: '40px'}}>
-        <div className="container">
+            <StartHeader />
+
+            <div className="container">
+                <div className="row" style={{height: 4 + "rem"}}>
+                    
+                </div>
+
+            </div>
+
+            <div className="container-fluid">
+
             <div className="row">
-                <div className="col-md-4 mx-auto mt-sm-5">
-                    <img src={logo} className="img-fluid mb-sm-3" alt="Responsive image" style={{ borderRadius: '20px' }} />
+                <div className="col"></div>
+                <div className="col-3">
+                <img src={logo} className="img-fluid mb-sm-3" alt="Responsive image" style={{ borderRadius: '20px' }} />
                     <h1 className="text-center text-dark p-sm-3" style={{ fontSize: 'xx-large', borderRadius: '20px' }}>Welcome to PetPal</h1>
                     <h5 className="text-center text-dark p-sm-3">Find your furry match on PetPal, where forever homes begin!</h5>
-                </div>
-    
-                <div className="col-md-6">
-                    <form className="justify-content-center">
-                        <h1 className="text-center">Sign Up (Seeker)</h1>
-                        <h5 className="text-center">Sign up for Shelter? <button onClick={handleSignUpClick} className=''> Go Shelter!</button></h5>
-                        
-                        {/* ... other parts of your component ... */}
-                        
-                        <div className="mb-3">
-                            <p id = "usernameError" className="text-danger"></p>
-                            <LoginInput input_lable_value="username"
-                                        input_value={username}
-                                        update={setUsername}
-                                        placeholder_value="" 
-                                        type_value="text" 
-                                        is_required={true} />
-                        </div>
 
-                        <div className="mb-3">
-                            <p id="EmailError" className="text-danger"></p>
-                            <LoginInput input_lable_value="email" 
-                                        input_value={email}
-                                        update={setEmail} 
+                    <h5 className="text-center">Sign up for Shelter? <button onClick={handleSignUpClick} className=''> Go Shelter!</button></h5>
+
+                </div>
+
+                <div className="col-5">
+                    <div className="card p-5" >
+                            <h1 className="text-center">Sign Up (Seeker)</h1>
+                            <form>
+                                <div className="mb-3">
+                                        <LoginInput input_lable_value="Username" 
+                                        input_value={username} 
+                                        update={setUsername} 
                                         placeholder_value="" 
                                         type_value="text" 
                                         is_required={true} />
-                        </div>
-                        <div className="mb-3">
-                            <p id = "PasswordError" className="text-danger"></p>
-                            <LoginInput input_lable_value="password"
-                                        input_value={password}
-                                        update={setPassword}
+                                </div>
+                                <div className="mb-3">
+                                        <LoginInput input_lable_value="Password" 
+                                        input_value={password} 
+                                        update={setPassword} 
                                         placeholder_value="" 
                                         type_value="password" 
                                         is_required={true} />
-                        </div>
-                        <div className="mb-3">
-                            <p id = "PasswordCheckError" className="text-danger"></p>
-                            <LoginInput input_lable_value="Enter password again"
-                                        input_value={password_check}
-                                        update={setPasswordCheck} 
+                                </div>
+                                <div className="mb-3">
+                                        <LoginInput input_lable_value="PasswordConfirm" 
+                                        input_value={password2} 
+                                        update={setPassword2} 
                                         placeholder_value="" 
-                                        type_value="password"
+                                        type_value="text" 
                                         is_required={true} />
-                        </div>
-                        <div className="mb-3">
-                            <p id = "AddressError" className="text-danger"></p>
-                            <LoginInput input_lable_value="address"
+                                </div>
+                                <div className="mb-3">
+                                        <LoginInput input_lable_value="Address"
                                         input_value={address}
                                         update={setAddress}
                                         placeholder_value="" 
                                         type_value="text" 
                                         is_required={true} />
-                        </div>
+                                </div>
+                                <div className="mb-3">
+                                        <LoginInput input_lable_value="Email"
+                                        input_value={email}
+                                        update={setEmail}
+                                        placeholder_value="" 
+                                        type_value="text" 
+                                        is_required={true} />
+                                </div>
+                                <div className="mb-3">
+                                    <button type="button" className="btn btn-secondary" style={{marginLeft: 0 + "px"}}
+                                    onClick={() => {
+                                        Register(username, password, password2, address, email, navigate);
+                                    }}
+                                    >
+                                        Register
+                                    </button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
 
-                        {/* ... other parts of your component ... */}
+                <div className="col">
 
-                        
-                        <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck1" required />
-                            <label className="form-check-label" htmlFor="exampleCheck1">I've agreed to join the PetPal.</label>
-                        </div>
-                        <button type="submit" className="btn btn-primary bg-dark" href="signup_shelter_fail.html" onClick={() => {
-                                        Register(username, password, password_check, address, email, navigate);
-                                    }}>Submit</button>
-                        
-                    </form>
                 </div>
             </div>
-        </div>
-    </main>
-    <Footer />
-    </>
+            <div className="row" style={{height: 4 + "rem"}}>
+                </div>
+
+            </div>
+            <Footer />
+        </>
     );
 }
 
