@@ -8,7 +8,7 @@ const LoginInput = (props) => {
         if (is_required){
             return (<label className="mb-4 row" htmlFor={input_lable_value}>
                 
-                <label className="col-sm-4 col-form-label">{input_lable_value}</label>
+                <label className="col-sm-6 col-form-label">{input_lable_value}</label>
                 <div className="col-sm-11">
                     <input id={id} className="form-control" type={type_value} placeholder={placeholder_value} value={input_value} onChange={(e) => update(e.target.value)} required/>
                 </div>
