@@ -64,7 +64,7 @@ const LoginPage = () => {
             if(data.user_type==1){
                 navigate("/seeker-detail");
             }else{
-                navigate("/shelter-detail");
+                navigate("/seeker-detail");
             }
         } else if (data && data.detail) {
             // Clear the token state

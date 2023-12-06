@@ -11,7 +11,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 
 class NotificationPagination(PageNumberPagination):
-    page_size = 3  # Set the number of items per page
+    page_size = 5  # Set the number of items per page
 
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
