@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const RegisterHeader = () => {
     return (
-        <footer class="bg-dark text-white text-center py-3">
+        <footer class="bg-dark text-white text-center py-3 mt-5">
             <div class="container">
                 <p>&copy; 2023 PetPal All rights reserved.</p>
             </div>

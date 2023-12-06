@@ -10,9 +10,8 @@ import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
 
 import SeekerDetail from './pages/Accounts/SeekerDetail';
-import ShelterDetail from './pages/Accounts/ShelterDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
-
+import ShelterComponent from './pages/ShelterManage';
 function App() {
   return (
     <BrowserRouter>
@@ -25,7 +24,7 @@ function App() {
 
 
         <Route path="/seeker-detail" element={<SeekerDetail />} />
-        <Route path="/shelter-detail" element={<ShelterDetail />} />
+        <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
 
         {/* Add more routes as needed */}
