@@ -77,7 +77,14 @@ const PetCreationForm = () => {
 
                     <div className="form-group">
                         <label>Pet size</label>
-                        <input name="size" type="text" onChange={handleChange} placeholder="size" />
+                        <select name="size" onChange={handleChange} placeholder="size" >
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="extra_large">Extra large</option>
+
+                        
+                        </select>
                     </div>
 
                     <div className="form-group">
@@ -86,7 +93,13 @@ const PetCreationForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Pet gender</label>
-                        <input name="gender" type="text" onChange={handleChange} placeholder="gender" />
+                        <select name="gender"  onChange={handleChange} placeholder="gender" >
+                        <option value="unknown">Unknown</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        
+                        </select>
+
                     </div>
                     <div className="form-group">
                         <label>Image:</label>
