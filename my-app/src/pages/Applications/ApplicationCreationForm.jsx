@@ -1,6 +1,8 @@
 
-function ApplicationCreationForm(){
-  return (<div className="container mt-5 mb-auto">
+function ApplicationCreationForm(props){
+  return (
+  
+  <div className="container mt-5 mb-auto">
       
   <div className="row mb-2">
       {/* Application Section*/}
@@ -22,7 +24,7 @@ function ApplicationCreationForm(){
               <span className="h3"> Applicant's information: </span>
           </div>
 
-          <form id ="adoption_form">
+          <form id ="adoption_form" onSubmit={props.function}>
               <div className="mb-3">
                   <label for="userName" className="form-label">Name</label>
                   <input type="text" className="form-control" id="userName" placeholder="Enter your name" required/>
