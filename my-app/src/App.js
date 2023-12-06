@@ -23,7 +23,7 @@ function App() {
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
 
-
+      
         <Route path="/seeker-detail" element={<SeekerDetail />} />
         <Route path="/shelter-detail" element={<ShelterDetail />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
