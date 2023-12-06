@@ -123,8 +123,9 @@ const RegisterShelterPage = () => {
 
     return (
         <>
+        <div>
         <StartHeader />
-        <main className="flex-grow-1 d-flex align-items-center" style={{ marginTop: '40px', marginBottom: '40px'}}>
+        <main className="flex-grow-1 d-flex align-items-center" style={containerStyle}>
         <div className="container">
             <div className="row">
                 <div className="col-md-4 mx-auto mt-sm-5">
@@ -140,7 +141,7 @@ const RegisterShelterPage = () => {
                         
                         {/* ... other parts of your component ... */}
                         
-                        <div className="mb-3">
+                        <div className="mb-1">
                             <p id = "usernameError" className="text-danger"></p>
                             <LoginInput input_lable_value="username"
                                         input_value={username}
@@ -150,7 +151,7 @@ const RegisterShelterPage = () => {
                                         is_required={true} />
                         </div>
 
-                        <div className="mb-3">
+                        <div className="mb-1">
                             <p id="EmailError" className="text-danger"></p>
                             <LoginInput input_lable_value="email" 
                                         input_value={email}
@@ -159,7 +160,7 @@ const RegisterShelterPage = () => {
                                         type_value="text" 
                                         is_required={true} />
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-1">
                             <p id = "PasswordError" className="text-danger"></p>
                             <LoginInput input_lable_value="password"
                                         input_value={password}
@@ -168,7 +169,7 @@ const RegisterShelterPage = () => {
                                         type_value="password" 
                                         is_required={true} />
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-1">
                             <p id = "PasswordCheckError" className="text-danger"></p>
                             <LoginInput input_lable_value="Enter password again"
                                         input_value={password_check}
@@ -177,7 +178,7 @@ const RegisterShelterPage = () => {
                                         type_value="password"
                                         is_required={true} />
                         </div>
-                        <div className="mb-3">
+                        <div className="mb-1">
                             <p id = "AddressError" className="text-danger"></p>
                             <LoginInput input_lable_value="address"
                                         input_value={address}
@@ -190,7 +191,7 @@ const RegisterShelterPage = () => {
                         {/* ... other parts of your component ... */}
 
                         
-                        <div className="mb-3 form-check">
+                        <div className="mb-1 form-check">
                             <input type="checkbox" className="form-check-input" id="exampleCheck1" required />
                             <label className="form-check-label" htmlFor="exampleCheck1">I've agreed to join the PetPal.</label>
                         </div>
@@ -204,8 +205,18 @@ const RegisterShelterPage = () => {
         </div>
     </main>
     <Footer />
+    </div>
     </>
     );
 }
+const containerStyle = {
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    marginLeft: "5cm",
+    marginRight: "5cm",
+    padding: "1cm",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    overflowY: "auto",
+};
 
 export default RegisterShelterPage;
