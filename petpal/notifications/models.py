@@ -11,6 +11,7 @@ class Notification(models.Model):
         ('new_application', 'New Application'),
     )
     sender = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, related_name="sent_notifications", null=True)
+    sender_name = models.CharField(max_length=255, blank=True, null=True)
     receiver = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='received_notifications')
     message = models.TextField(blank=True)
     type = models.CharField(max_length=50, default='message', choices=MESSAGE_TYPE)
@@ -26,6 +27,6 @@ class Notification(models.Model):
             return str(self.pk) + " " + self.sender.username + " to " + self.receiver.username + " Type: " + self.type
 
 def create_notification(sender, receiver, message, type, url1='', url2=''):
-    notification = Notification(sender=sender, receiver=receiver, message=message, type=type, url1=url1, url2=url2)
+    notification = Notification(sender=sender, sender_name = sender.username, receiver=receiver, message=message, type=type, url1=url1, url2=url2)
     notification.save()
     return notification

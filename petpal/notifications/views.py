@@ -8,6 +8,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.exceptions import PermissionDenied
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg.utils import swagger_auto_schema
+from accounts.models import CustomUser
 
 
 class NotificationPagination(PageNumberPagination):
@@ -25,7 +26,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         if not self.request.user.is_superuser:
             raise PermissionDenied("Only superusers can create notifications.")
-        serializer.save()
+        sender = CustomUser.objects.get(id=serializer.validated_data['sender'].id)
+        serializer.save(sender_name=sender.username)
     
     def get_queryset(self):
         if self.request.user.is_authenticated:
