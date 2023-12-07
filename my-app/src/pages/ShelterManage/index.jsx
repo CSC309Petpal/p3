@@ -30,7 +30,7 @@ function ShelterComponent() {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`);
+        const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
           if (data.avatar === null) {
