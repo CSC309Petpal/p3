@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
+import Comments from '../Comment/CommentList';
 
 function ShelterComponent() {
   const shelterId = localStorage.getItem('shelter_id');
+
   const [shelterInfo, setShelterInfo] = useState(null); // State to store shelter information
   
   const navigate = useNavigate();
@@ -104,9 +106,9 @@ function ShelterComponent() {
         </div>
       </div>
 
-      <div class="row mt-lg-4" id="myPets">
-                <h2 class="text-center">My Pets</h2>
-                <hr class="my-4 border-primary"/>
+      <div className="row mt-lg-4" id="myPets">
+                <h2 className="text-center">My Pets</h2>
+                <hr className="my-4 border-primary"/>
         </div>
 
       <div className="row justify-content-left">
@@ -130,6 +132,10 @@ function ShelterComponent() {
             </div>
           </div>
         ))}
+      </div>
+      <div>
+        {/* comment list */}
+        <Comments shelterId={shelterId} />
       </div>
     </div>
     <div className="container m-5">
