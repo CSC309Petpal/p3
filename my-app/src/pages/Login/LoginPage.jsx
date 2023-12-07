@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKENDHOST } from "./config";
+import { BACKENDHOST } from "../../config";
 import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
 import LoginInput from "../../components/input/LoginInput";
@@ -12,7 +12,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [token, setToken] = useState("");
     const navigate = useNavigate();
-
+    console.log(`${ BACKENDHOST }`);
     const Login = (username, password, navigate) => {
         // check if the username and password is valid
         var bad = false;

@@ -7,10 +7,16 @@ import Form from './ApplicationCreationForm'
 
 async function fetchData(event, pet_id) {
   
-  
+  const token = localStorage.getItem("token")
   event.preventDefault();
   try {
-    const response = await fetch(`${BACKENDHOST}/applications/to-pet/${pet_id}/`);
+    const response = await fetch(`${BACKENDHOST}/applications/to-pet/${pet_id}/`, {
+      method:"POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Assuming it's a Bearer token
+      }
+    });
 
     // Check if the status code is 403 Forbidden
     if (response.status === 403) {

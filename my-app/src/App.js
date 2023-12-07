@@ -49,7 +49,7 @@ function App() {
 
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
-        <Route path="/application-create" element={<ApplicationCreateForm/>}/>
+        <Route path="/application-create/:pet_id" element={<ApplicationCreateForm/>}/>
       
         <Route path="/seeker-detail" element={<SeekerDetail />} />
         <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
