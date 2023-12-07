@@ -121,38 +121,7 @@ const nextPage = () => {
   );
 };
 
-// const LocationRepo = () => {
-//   const [locationName, setLocationName] = useState("");
 
-//   return (
-//     <div>
-//       <div style={containerStyle}>
-//         <div className="card mb-3">
-//           <div className="card-body">
-//             <h5 className="card-title">Add new location</h5>
-//             <div className="d-flex justify-content-between align-items-center">
-//               <span className={`todo-title mr-3`} name="add new">
-//                 <div className="mr-2">new location name:</div>
-//                 <input name='Location Name' id='locationName' value={locationName} type='text' onChange={(e) => setLocationName(e.target.value)} />
-//                 <div>
-//                   <label className="is-block mb-2 ml-2" style={{ fontSize: "15px" }} id="notification"> </label>
-//                 </div>
-//               </span>
-
-//               <div className="column block has-text-centered">
-//                 <button className="btn btn-secondary ml-1 is-link" type="register" value="Create new location" id="propertyLocation" onClick={() => location_info(locationName)} readOnly>
-//                   Create new location
-//                 </button>
-//               </div>
-
-//             </div>
-//           </div>
-//         </div>
-//         <Locations />
-//       </div>
-//     </div>
-//   );
-// };
 
 
 export default Comments;
