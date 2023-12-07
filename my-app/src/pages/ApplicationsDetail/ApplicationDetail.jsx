@@ -10,13 +10,15 @@ function Application() {
   const { application_id } = useParams();
   const navigate = useNavigate();
   console.log(applicationInfo);
+  const token = localStorage.getItem('token')
   useEffect(() => {
     async function fetchApplicationInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/pets/${application_id}/`, {
+        const response = await fetch(`${BACKENDHOST}applications/${application_id}/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`,
           },
         });
         if (!response.ok) {
@@ -32,7 +34,7 @@ function Application() {
     }
 
     fetchApplicationInfo();
-  }, [application_id, navigate]); // Dependency array to re-run the effect when application_id changes
+  }, [application_id, navigate, token]); // Dependency array to re-run the effect when application_id changes
 
   if (!applicationInfo) {
     return <div>Loading...</div>; // Or any other loading state representation
@@ -41,9 +43,12 @@ function Application() {
   
   return (
     <main className="flex-grow-1 align-items-center">
-      <div className="container">
+      
+      <div className="container ms-6">
+      <h1 className="mb-4">Application Detail</h1>
         {applicationInfo&&Object.entries(applicationInfo).map(([key, value])=>{
-          return (<p key={key}> {key}: {value}</p>)
+          let capitalied_key = key.charAt(0).toUpperCase() + key.slice(1);
+          return (<p key={capitalied_key}> {capitalied_key}: {value}</p>)
         })}
         {/* Application Information and other content here */}
         {/* Use applicationInfo to render the data */}

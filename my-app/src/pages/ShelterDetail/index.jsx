@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
+import Comments from '../Comment/CommentList';
 
 function ShelterComponent() {
   const shelterId = localStorage.getItem('shelter_id');
@@ -27,7 +28,7 @@ function ShelterComponent() {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`);
+        const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
           if (data.avatar === null) {
@@ -120,6 +121,10 @@ function ShelterComponent() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="row justify-content-center">
+        {/* comment list */}
+        <Comments shelterId={shelterId} />
       </div>
     </div>
     <div className="container m-5">
