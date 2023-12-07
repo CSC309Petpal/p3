@@ -91,11 +91,13 @@ const nextPage = () => {
   }, [page]);
 
   return (
-    <div>
+    <div className="row justify-content-center">
       <p>{errorMessage}</p>
+      <div className="row justify-content-left">
       {
         comments.map((comment) => (
-          <div key={comment.comment_id} className="card mb-3">
+          <div className="col-md-3">
+          <div key={comment.comment_id} className="card">
             <div className="card-body">
               <h5 className="card-title">{comment.sender}</h5>
 
@@ -107,10 +109,14 @@ const nextPage = () => {
               </div>
             </div>
           </div>
+          </div>
         ))}
+        </div >
+        <div className="d-flex justify-content-center align-items-center">
         <button className="btn btn-primary" onClick={prevPage} disabled={page === 1}>Previous</button>
-      <span>Page {page} of {pages}</span>
-      <button className="btn btn-primary" onClick={nextPage} disabled={page === pages}>Next</button>
+        <span>Page {page} of {pages}</span>
+        <button className="btn btn-primary" onClick={nextPage} disabled={page === pages}>Next</button>
+    </div >
     </div>
   );
 };

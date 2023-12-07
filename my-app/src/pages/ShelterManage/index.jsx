@@ -133,7 +133,7 @@ function ShelterComponent() {
           </div>
         ))}
       </div>
-      <div>
+      <div className="row justify-content-center">
         {/* comment list */}
         <Comments shelterId={shelterId} />
       </div>
