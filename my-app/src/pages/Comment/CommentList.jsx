@@ -40,7 +40,7 @@ const Comments = (shelterId) => {
       }
   
       const data = await response.json();
-      const location_id = data.location_id;
+
   
       notification.innerHTML = "&check; Comment created successfully";
       notification.style.color = "green";
@@ -141,14 +141,11 @@ const nextPage = () => {
           <div className="col-md-4" key={comment.comment_id}>
             <div className="card">
               <div className="card-body" >
-                <h5 className="card-title">{comment.sender}</h5>
+                <h5 className="card-title">SenderId: {comment.sender}</h5>
                 <div className="d-flex justify-content-between align-items-center">
                   <span className={`mr-2`}>{comment.content}</span>
                   <div>
-                    <label
-                      className="is-block mb-2 ml-2"
-                      style={{ fontSize: "15px" }}
-                    ></label>
+                  <span className={`mr-2`}>{comment.created}</span>
                   </div>
                 </div>
               </div>
