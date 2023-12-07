@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { BACKENDHOST } from "./config";
 
 const PetCreationForm = () => {
     const [petData, setPetData] = useState({
         name: '',
-        status: '',
+        status: 'available',
         breed: '',
         age: '',
-        size: '',
+        size: 'small',
         color: '',
-        gender: '',
+        gender: 'unknown',
         image: null,
         
     });
     const [submissionStatus, setSubmissionStatus] = useState('idle'); // State for tracking submission status
+   
 
     const handleChange = (e) => {
         setPetData({
@@ -58,8 +59,8 @@ const PetCreationForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Status:</label>
-                        <select name="status" value={petData.status} onChange={handleChange}>
-                        <option value="available">Available</option>
+                        <select name="status" value={petData.status} onChange={handleChange} placeholder="available">
+                        <option value="available" selected>Available</option>
                         <option value="adopted">Adopted</option>
                         <option value="foster">Foster</option>
                         </select>
@@ -77,8 +78,8 @@ const PetCreationForm = () => {
 
                     <div className="form-group">
                         <label>Pet size</label>
-                        <select name="size" onChange={handleChange} placeholder="size" >
-                        <option value="small">Small</option>
+                        <select name="size" onChange={handleChange} placeholder="small" >
+                        <option value="small" selected>Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
                         <option value="extra_large">Extra large</option>
@@ -93,8 +94,8 @@ const PetCreationForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Pet gender</label>
-                        <select name="gender"  onChange={handleChange} placeholder="gender" >
-                        <option value="unknown">Unknown</option>
+                        <select name="gender"  onChange={handleChange} placeholder="unknown" >
+                        <option value="unknown" selected>Unknown</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         
