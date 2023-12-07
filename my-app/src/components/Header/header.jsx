@@ -101,7 +101,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-lg-auto">
                         {/* Home Link */}
-                        <Link className="nav-link me-lg-3" to="/shelter/${shelter_id}">Home</Link>
+                        <Link className="nav-link me-lg-3" to="/shelterHome">Home</Link>
 
                         {/* Profile Dropdown */}
                         <li className="nav-item dropdown me-lg-3">
@@ -112,7 +112,7 @@ const Header = () => {
                             <li><span className="dropdown-item">User Type: Shelter</span></li>
                                 <li><span className="dropdown-item">Name: {userData.name}</span></li>
                                 <li><span className="dropdown-item">Email: {userData.email}</span></li>
-                                <li><Link className="dropdown-item" to={`/shelter/update/${shelterId}`}>Edit</Link></li>
+                                <li><Link className="dropdown-item" to={`/shelter/update`}>Edit</Link></li>
                             </ul>
                         </li>
 
