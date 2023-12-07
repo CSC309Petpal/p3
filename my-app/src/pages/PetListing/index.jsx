@@ -27,7 +27,7 @@ function PetListing() {
       {pets.map((pet, index) => (
         <div key={index} className="col-md-4">
           <div className="card">
-            <img src={pet.imageUrl} className="card-img-top fixed-img" alt={`Pet ${index + 1}`} />
+            <img src={pet.image} className="card-img-top fixed-img" alt={`Pet ${index + 1}`} />
             <div className="card-body">
               <h5 className="card-title">{pet.name}</h5>
               <p className="card-text">{pet.status}</p>
