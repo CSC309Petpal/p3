@@ -116,7 +116,7 @@ function ShelterComponent() {
               <div className="card-body">
                 <h5 className="card-title">{pet.name}</h5>
                 <p className="card-text">Status: {pet.status}</p>
-                <button onClick={() => handleDetailClick(pet.id)} className="btn btn-primary">Update</button>
+                <button onClick={() => handleDetailClick(pet.id)} className="btn btn-primary">Detail</button>
               </div>
             </div>
           </div>
