@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import ShelterHeader from "../../components/ShelterHeader/shelterHeader";
 import Footer from "../../components/Footer/footer";
+import Header from "../../components/Header/header";
 
 function ShelterComponent() {
-  const { shelterId } = useParams(); // Retrieve the shelter_id from URL
+  const shelterId = localStorage.getItem('shelter_id');
   const [shelterInfo, setShelterInfo] = useState(null); // State to store shelter information
   
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function ShelterComponent() {
   }
 
   const handleUserUpdate = () => {
-    navigate(`/shelter/update/${shelterId}`);
+    navigate(`/shelter/update`);
   }
 
   useEffect(() => {
@@ -32,11 +33,15 @@ function ShelterComponent() {
         const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
+          if (data.avatar === null) {
+            data.avatar = logo;
+          }
 
 
 
           setShelterInfo(data); // Update the state with shelter information
           // check if the avatar is a file or a url
+          console.log(data.avatar);
           if (shelterInfo.avatar === null) {
             setShelterInfo({ ...shelterInfo, avatar: logo });
           }
@@ -62,7 +67,7 @@ function ShelterComponent() {
 
   return (
     <>
-    <ShelterHeader />
+    <Header />
     <div className="container">
       <div className="row mt-lg-4">
         <h1 className="text-center">Basic Information</h1>

@@ -18,6 +18,7 @@ import PetCreationForm from './pages/Pet/PetCreatePage';
 
 import ShelterComponent from './pages/ShelterManage';
 import ShelterUpdateForm from './pages/ShelterUpdate';
+import SeekerUpdateForm from './pages/SeekerUpdate';
 
 import NotificationBoard from './components/Notification/notificationBoard';
 import PetListing from './pages/PetListing';
@@ -60,7 +61,8 @@ function App() {
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
 
-        <Route path="/shelter/update/:shelterId" element={<ShelterUpdateForm />} />
+        <Route path="/shelter/update" element={<ShelterUpdateForm />} />
+        <Route path="/seeker/update/:seekerId" element={<SeekerUpdateForm />} />
 
 
 
@@ -68,7 +70,7 @@ function App() {
       
 
         <Route path="/seeker-detail" element={<SeekerDetail />} />
-        <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
+        <Route path="/shelterHome" element={<ShelterComponent />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
         <Route path="/pet" element={<PetListing />} />
         <Route path="/pet/update/:petId" element={<PetUpdateForm />} />
