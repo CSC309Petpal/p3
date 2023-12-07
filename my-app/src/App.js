@@ -22,13 +22,15 @@ import ShelterComponent from './pages/ShelterManage';
 import ShelterUpdateForm from './pages/ShelterUpdate';
 import SeekerUpdateForm from './pages/SeekerUpdate';
 
-import NotificationBoard from './components/Notification/notificationBoard';
+// import NotificationBoard from './components/Notification/notificationBoard';
+import NotificationPage from './pages/Notification/NotificationPage';
 import PetListing from './pages/PetListing';
 import PetUpdateForm from './pages/PetUpdate';
 import SeekerDetail from './pages/SeekerDetail';
 
 
 import Landing from './pages/Landing/landing';
+
 
 
 function App() {
@@ -83,7 +85,7 @@ function App() {
         <Route path="/pet/update/:petId" element={<PetUpdateForm />} />
 
 
-        <Route path="/notifications" element={< NotificationBoard/>} />
+        <Route path="/notifications" element={< NotificationPage/>} />
         <Route path="/*" element={<NotFound/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
