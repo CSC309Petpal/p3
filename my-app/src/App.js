@@ -17,8 +17,15 @@ import SeekerDetail from './pages/Accounts/SeekerDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
 
 import ShelterComponent from './pages/ShelterManage';
+import ShelterUpdateForm from './pages/ShelterUpdate';
 
 import NotificationBoard from './components/Notification/notificationBoard';
+import PetListing from './pages/PetListing';
+import PetUpdateForm from './pages/PetUpdate';
+
+
+import Landing from './pages/Landing/landing';
+
 
 function App() {
   useEffect(() => {
@@ -45,15 +52,27 @@ function App() {
     <BrowserRouter>
       
       <Routes>
+
+        <Route path="/landing" element={<Landing />} />
+        
         <Route path="/login" element={<Login />} />
 
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
-        <Route path="/application-create/:pet_id" element={<ApplicationCreateForm/>}/>
+
+        <Route path="/shelter/update/:shelterId" element={<ShelterUpdateForm />} />
+
+
+
+        <Route path="/application-create" element={<ApplicationCreateForm/>}/>
       
+
         <Route path="/seeker-detail" element={<SeekerDetail />} />
         <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
+        <Route path="/pet" element={<PetListing />} />
+        <Route path="/pet/update/:petId" element={<PetUpdateForm />} />
+
 
         <Route path="/notifications" element={< NotificationBoard/>} />
         <Route path="*" element={<NotFound/>}/>
