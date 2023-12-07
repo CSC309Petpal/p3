@@ -3,50 +3,58 @@ import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import { BACKENDHOST } from "./config";
 
-// const comment_info = async (comment_name) => {
-//   var commentData = new FormData();
-//   var notification = document.getElementById('notification');
 
-//   if (comment_content === "") {
-//     notification.innerHTML = "Please fill in the field";
-//     notification.style.color = "red";
-//     return;
-//   }
 
-//   notification.innerHTML = "";
 
-//   locationData.append('content', comment_content);
-//   try {
-//     const response = await fetch(`${BACKENDHOST}comment/to-shelter//`, {
-//       method: 'POST',
-//       body: locationData,
-//       headers: {
-//         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-//       },
-//     });
 
-//     if (!response.ok) {
-//       // Handle non-2xx responses
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
 
-//     const data = await response.json();
-//     const location_id = data.location_id;
-
-//     notification.innerHTML = "&check; Property created successfully";
-//     notification.style.color = "green";
-//   } catch (error) {
-//     console.error(error);
-//     notification.innerHTML = "Error creating location";
-//     notification.style.color = "red";
-//   }
-// };
 
 const Comments = (shelterId) => {
   const [comments, setComments] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(1);
+  const [content, setContent] = useState('');
+  const create = async (content,shelterId) => {
+    var CommentData = new FormData();
+    var notification = document.getElementById('notification');
+    if (content === "") {
+      notification.innerHTML = "Please fill in the field";
+      notification.style.color = "red";
+      return;
+    }
+    notification.innerHTML = "";
+    CommentData.append("content",content)
+    try {
+      const response = await fetch(`${BACKENDHOST}comments/to-shelter/${shelterId.shelterId}/`, {
+        method: 'POST',
+        body: CommentData,
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+  
+      if (!response.ok) {
+        // Handle non-2xx responses
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      const location_id = data.location_id;
+  
+      notification.innerHTML = "&check; Comment created successfully";
+      notification.style.color = "green";
+      refreshList();
+  
+    } catch (error) {
+      console.error(error);
+      notification.innerHTML = "Error creating comment";
+      notification.style.color = "red";
+    }
+    
+  };
+
+
 
   const prevPage = () => {
     if (page > 1) {
@@ -94,33 +102,80 @@ const nextPage = () => {
     <div className="row justify-content-center">
       <p>{errorMessage}</p>
       <div className="row justify-content-left">
-      {
-        comments.map((comment) => (
-          <div className="col-md-3">
-          <div key={comment.comment_id} className="card">
+        <div className="col-md-4">
+          <div className="card">
             <div className="card-body">
-              <h5 className="card-title">{comment.sender}</h5>
-
+              <h5 className="card-title">Add new Comment</h5>
               <div className="d-flex justify-content-between align-items-center">
                 <span className={`mr-2`}>
-                  {comment.content}
+                  <input
+                    name="comment content"
+                    id="content"
+                    value={content}
+                    type="text"
+                    onChange={(e) => setContent(e.target.value)}
+                  />
                 </span>
-                
+                <div>
+                  <label
+                    className="is-block mb-2 ml-2"
+                    style={{ fontSize: "15px" }}
+                    id="notification"
+                  ></label>
+                </div>
+                <button
+                  className="btn btn-secondary ml-1 is-link"
+                  type="register"
+                  value="Create new comment"
+                  id="propertyLocation"
+                  onClick={() => create(content, shelterId)}
+                  readOnly
+                >
+                  comment
+                </button>
               </div>
             </div>
           </div>
+        </div>
+        {comments.map((comment) => (
+          <div className="col-md-4" key={comment.comment_id}>
+            <div className="card">
+              <div className="card-body" style={{ height: "100%" }}>
+                <h5 className="card-title">{comment.sender}</h5>
+                <div className="d-flex justify-content-between align-items-center">
+                  <span className={`mr-2`}>{comment.content}</span>
+                  <div>
+                    <label
+                      className="is-block mb-2 ml-2"
+                      style={{ fontSize: "15px" }}
+                    ></label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
-        </div >
-        <div className="d-flex justify-content-center align-items-center">
-        <button className="btn btn-primary" onClick={prevPage} disabled={page === 1}>Previous</button>
+      </div>
+      <div className="d-flex justify-content-center align-items-center">
+        <button
+          className="btn btn-primary"
+          onClick={prevPage}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
         <span>Page {page} of {pages}</span>
-        <button className="btn btn-primary" onClick={nextPage} disabled={page === pages}>Next</button>
-    </div >
+        <button
+          className="btn btn-primary"
+          onClick={nextPage}
+          disabled={page === pages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
-
 
 
 
