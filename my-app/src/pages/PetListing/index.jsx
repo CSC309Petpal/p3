@@ -1,47 +1,44 @@
-// PetListingPage.js
 import React, { useState, useEffect } from 'react';
-import Footer from '../../components/Footer/footer';
-import PetCards from '../../components/PetCards/petCards';
-import SidePanel from '../../components/SidePanel/sidePanel';
-import StartHeader from '../../components/StartHeader/startHeader';
-import { BACKENDHOST } from '../Login/config';
+import { BACKENDHOST } from '../../config';
+import { useNavigate } from 'react-router-dom';
 
 function PetListing() {
-  const [sortOption, setSortOption] = useState('');
+
+  const navigate = useNavigate();
+
+    const handleDetail = (id) => {
+      navigate(`/pet/${id}`);
+    }
   const [pets, setPets] = useState([]);
 
   useEffect(() => {
-    // Fetch pets based on the sort option
-    const fetchPets = async () => {
-      try {
-        const response = await fetch(`${BACKENDHOST}/pets?ordering=${sortOption}`);
-        const data = await response.json();
-        setPets(data.results); // Assuming the response is the array of pets
-      } catch (error) {
-        console.error('Error fetching pets:', error);
-      }
-    };
+    // Replace 'your-api-endpoint' with the actual endpoint
+    fetch(`${BACKENDHOST}/pets`)
+      .then(response => response.json())
+      .then(data => setPets(data.results))
+      .catch(error => console.error('Error fetching pets:', error));
+  }, []);
 
-    fetchPets();
-  }, [sortOption]);
+  console.log(pets);
 
   return (
-    <>
-    <div className="bg-pink d-flex flex-column min-vh-100">
-      <StartHeader />
-      <div className="container mt-lg-5 mb-xl-5">
-        <div className="row">
-          <div className="col-md-3">
-          <SidePanel setSortOption={setSortOption} />
+
+    <div className="row">
+      {pets.map((pet, index) => (
+        <div key={index} className="col-md-4">
+          <div className="card">
+            <img src={pet.imageUrl} className="card-img-top fixed-img" alt={`Pet ${index + 1}`} />
+            <div className="card-body">
+              <h5 className="card-title">{pet.name}</h5>
+              <p className="card-text">{pet.status}</p>
+              {/* Replace 'PetDetail.html' with your routing logic or link */}
+              <button className="btn btn-primary" onClick={() => handleDetail(pet.id)}>View Details</button>
             </div>
-            <div className="col-md-9">
-          <PetCards pets={pets} />
           </div>
         </div>
-      </div>
+      ))}
     </div>
-    <Footer />
-    </>
+  
   );
 }
 

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { BACKENDHOST } from "../../config";
 import logo from '../../assets/avatar.jpg';
-import StartHeader from "../../components/StartHeader/startHeader";
 import { useNavigate } from "react-router-dom";
 import './style.css';
-import ShelterHeader from "../../components/ShelterHeader/shelterHeader";
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
 
@@ -59,7 +56,7 @@ function ShelterComponent() {
     }
 
     fetchShelterInfo(); // Call the function to fetch shelter information
-  }, [shelterId]); // Dependency array to re-fetch data if shelterId changes
+  }); // Dependency array to re-fetch data if shelterId changes
 
   if (!shelterInfo) {
     return <div>Loading...</div>; // Display loading message until data is fetched

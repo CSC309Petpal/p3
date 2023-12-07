@@ -6,7 +6,6 @@ import { BACKENDHOST } from "./config";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header/header';
 import Login from './pages/Login/LoginPage';
 import ApplicationCreateForm from './pages/Applications/ApplicationCreation';
 import RegisterShelter from './pages/RegisterShelter';
@@ -15,6 +14,7 @@ import NotFound from './pages/Error/NotFound';
 
 import SeekerDetail from './pages/Accounts/SeekerDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
+import PetDetail from './pages/PetDetail';
 
 import ShelterComponent from './pages/ShelterManage';
 import ShelterUpdateForm from './pages/ShelterUpdate';
@@ -73,6 +73,7 @@ function App() {
         <Route path="/shelterHome" element={<ShelterComponent />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
         <Route path="/pet" element={<PetListing />} />
+        <Route path="/pet/:petId" element={<PetDetail />} />
         <Route path="/pet/update/:petId" element={<PetUpdateForm />} />
 
 
