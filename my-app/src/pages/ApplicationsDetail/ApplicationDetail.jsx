@@ -10,13 +10,15 @@ function Application() {
   const { application_id } = useParams();
   const navigate = useNavigate();
   console.log(applicationInfo);
+  const token = localStorage.getItem('token')
   useEffect(() => {
     async function fetchApplicationInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/pets/${application_id}/`, {
+        const response = await fetch(`${BACKENDHOST}applications/${application_id}/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`,
           },
         });
         if (!response.ok) {
@@ -32,7 +34,7 @@ function Application() {
     }
 
     fetchApplicationInfo();
-  }, [application_id, navigate]); // Dependency array to re-run the effect when application_id changes
+  }, [application_id, navigate, token]); // Dependency array to re-run the effect when application_id changes
 
   if (!applicationInfo) {
     return <div>Loading...</div>; // Or any other loading state representation

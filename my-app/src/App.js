@@ -72,7 +72,7 @@ function App() {
 
 
 
-        <Route path="/application-create" element={<ApplicationCreateForm/>}/>
+        <Route path="/application-create/:pet_id" element={<ApplicationCreateForm/>}/>
         <Route path="/application-detail/:application_id" element={<ApplicationDetail/>}/>
 
         <Route path="/seeker/:seekerId" element={<SeekerDetail />} />

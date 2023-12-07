@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BACKENDHOST } from "../../config";
 import { Navigate, useParams } from 'react-router-dom';
 import Form from './ApplicationCreationForm'
-
+import Header from "../../components/Header/header";
+import Footer from "../../components/Footer/footer";
 
 
 async function fetchData(event, pet_id) {
@@ -57,10 +58,15 @@ function ApplicationCreation() {
   }
   
   return (
+    <>
+    <Header/>
     <div>
       {isLogined ? <Form function = {handleSubmit}/> : <p>Please log in to continue.</p>}
     </div>
-  );
+    <Footer/>
+    </>
+  )
+  ;
 }
 
 export default ApplicationCreation;
