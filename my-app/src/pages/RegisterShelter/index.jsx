@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BACKENDHOST } from "../Login/config";
+import { BACKENDHOST } from "../../config";
 import logo from "../../assets/logo.png";
 import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";

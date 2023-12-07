@@ -85,6 +85,30 @@ class SeekerUpdateSerializer(ModelSerializer):
     class Meta:
         model = Seeker
         fields = ['user', 'phone_number', 'birthday', 'preference']
+
+class SeekerDetailSerializer(ModelSerializer):
+    username = serializers.SerializerMethodField()
+    email = serializers.SerializerMethodField()
+    avatar = serializers.SerializerMethodField()
+    location = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Seeker
+        fields = ['username', 'email', 'avatar', 'preference', 'id', 'location', 'user']
+
+    def get_username(self, obj):
+        return obj.user.username
+
+    def get_email(self, obj):
+        return obj.user.email
+
+    def get_avatar(self, obj):
+        # Assuming 'avatar' is a field in your User model
+        # Adjust the attribute access as per your User model's definition
+        return obj.user.avatar.url if obj.user.avatar else None
+    
+    def get_location(self, obj):
+        return obj.user.location
       
     
     
