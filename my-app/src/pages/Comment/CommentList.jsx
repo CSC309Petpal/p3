@@ -140,7 +140,7 @@ const nextPage = () => {
         {comments.map((comment) => (
           <div className="col-md-4" key={comment.comment_id}>
             <div className="card">
-              <div className="card-body" style={{ height: "100%" }}>
+              <div className="card-body" >
                 <h5 className="card-title">{comment.sender}</h5>
                 <div className="d-flex justify-content-between align-items-center">
                   <span className={`mr-2`}>{comment.content}</span>
