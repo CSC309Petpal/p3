@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 from django.http import Http404
 
 class PetPagination(PageNumberPagination):
-    page_size = 4  # Set the number of items per page
+    page_size = 6  # Set the number of items per page
 
     
 class PetListCreateAPIView(generics.ListCreateAPIView):
