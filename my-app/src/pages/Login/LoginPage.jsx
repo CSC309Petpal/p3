@@ -66,8 +66,7 @@ const LoginPage = () => {
                 navigate("/seeker-detail");
             }else{
                 localStorage.setItem("shelter_id", data.shelter_id);
-                let shelter_id = localStorage.getItem("shelter_id");
-                navigate(`/shelter/${shelter_id}`);
+                navigate(`/shelterHome`);
 
             }
         } else if (data && data.detail) {

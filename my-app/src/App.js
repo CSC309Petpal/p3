@@ -6,22 +6,26 @@ import { BACKENDHOST } from "./config";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header/header';
 import Login from './pages/Login/LoginPage';
 import ApplicationCreateForm from './pages/Applications/ApplicationCreation';
+import ApplicationDetail from "./pages/ApplicationsDetail/ApplicationDetail"
+
 import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
 import NotFound from './pages/Error/NotFound';
 
-import SeekerDetail from './pages/Accounts/SeekerDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
+import PetDetail from './pages/PetDetail';
+import ShelterDetail from './pages/ShelterDetail';
 
 import ShelterComponent from './pages/ShelterManage';
 import ShelterUpdateForm from './pages/ShelterUpdate';
+import SeekerUpdateForm from './pages/SeekerUpdate';
 
 import NotificationBoard from './components/Notification/notificationBoard';
 import PetListing from './pages/PetListing';
 import PetUpdateForm from './pages/PetUpdate';
+import SeekerDetail from './pages/SeekerDetail';
 
 
 import Landing from './pages/Landing/landing';
@@ -55,27 +59,32 @@ function App() {
 
         <Route path="/landing" element={<Landing />} />
         
+        
         <Route path="/login" element={<Login />} />
-
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
 
-        <Route path="/shelter/update/:shelterId" element={<ShelterUpdateForm />} />
+        <Route path="/shelter/update" element={<ShelterUpdateForm />} />
+        <Route path="/shelter/:shelterId" element={<ShelterDetail />} />
+
+        <Route path="/seeker/update/:seekerId" element={<SeekerUpdateForm />} />
+
 
 
 
         <Route path="/application-create" element={<ApplicationCreateForm/>}/>
-      
+        <Route path="/application-detail/:application_id" element={<ApplicationDetail/>}/>
 
-        <Route path="/seeker-detail" element={<SeekerDetail />} />
-        <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
+        <Route path="/seeker/:seekerId" element={<SeekerDetail />} />
+        <Route path="/shelterHome" element={<ShelterComponent />} />
         <Route path="/pet/create" element={< PetCreationForm/>} />
         <Route path="/pet" element={<PetListing />} />
+        <Route path="/pet/:petId" element={<PetDetail />} />
         <Route path="/pet/update/:petId" element={<PetUpdateForm />} />
 
 
         <Route path="/notifications" element={< NotificationBoard/>} />
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="/*" element={<NotFound/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
         <Route path="/" element={<Navigate to="/login" />} />

@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView, UpdateAPIView,ListAPIView,RetrieveAPIView, DestroyAPIView
 from .serializers import CustomUserSerializer, SeekerSerializer, ShelterSerializer,ShelterListSerializer
-from .serializers import CustomUserUpdateSerializer, SeekerUpdateSerializer, ShelterUpdateSerializer,CustomUserRegistrationSerializer
+from .serializers import CustomUserUpdateSerializer, SeekerUpdateSerializer, ShelterUpdateSerializer,CustomUserRegistrationSerializer, SeekerDetailSerializer
 from .models import CustomUser, Seeker, Shelter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -204,7 +204,9 @@ class SeekerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
-            return SeekerSerializer
+            return SeekerDetailSerializer
+        if self.request.method == 'PATCH':
+            return CustomUserUpdateSerializer
         else:
             return CustomUserUpdateSerializer
 

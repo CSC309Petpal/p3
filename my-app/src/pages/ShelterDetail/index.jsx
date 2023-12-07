@@ -5,11 +5,9 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
-import Comments from '../Comment/CommentList';
 
 function ShelterComponent() {
   const shelterId = localStorage.getItem('shelter_id');
-
   const [shelterInfo, setShelterInfo] = useState(null); // State to store shelter information
   
   const navigate = useNavigate();
@@ -17,8 +15,8 @@ function ShelterComponent() {
     navigate('/pet/create');
   };
 
-  const handleUpdateClick = (petId) => {
-    navigate(`/pet/update/${petId}`);
+  const handleDetailClick = (petId) => {
+    navigate(`/pets/${petId}`);
   }
 
   const handleUserUpdate = () => {
@@ -29,7 +27,7 @@ function ShelterComponent() {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`);
+        const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
           if (data.avatar === null) {
@@ -40,7 +38,6 @@ function ShelterComponent() {
 
           setShelterInfo(data); // Update the state with shelter information
           // check if the avatar is a file or a url
-          console.log(data.avatar);
           if (shelterInfo.avatar === null) {
             setShelterInfo({ ...shelterInfo, avatar: logo });
           }
@@ -58,7 +55,7 @@ function ShelterComponent() {
     }
 
     fetchShelterInfo(); // Call the function to fetch shelter information
-  },[]); // Dependency array to re-fetch data if shelterId changes
+  }, []); // Dependency array to re-fetch data if shelterId changes
 
   if (!shelterInfo) {
     return <div>Loading...</div>; // Display loading message until data is fetched
@@ -81,9 +78,6 @@ function ShelterComponent() {
             alt={logo}
             style={{ height: '200px', width: '200px', borderRadius: '100px' }} 
           />
-          <div>
-            <button onClick={handleUserUpdate} className="btn btn-primary btn-lg bg-dark">Update Profile</button>
-          </div>
         </div>
 
         <div className="col-md-8 d-flex justify-content-center">
@@ -106,18 +100,12 @@ function ShelterComponent() {
         </div>
       </div>
 
-      <div className="row mt-lg-4" id="myPets">
-                <h2 className="text-center">My Pets</h2>
-                <hr className="my-4 border-primary"/>
+      <div class="row mt-lg-4" id="myPets">
+                <h2 class="text-center">Pets</h2>
+                <hr class="my-4 border-primary"/>
         </div>
 
       <div className="row justify-content-left">
-        {/* Add Pet Card */}
-        <div className="col-md-3">
-            <div className="card custom-card d-flex align-items-center justify-content-center" style={{ height: '90%', width: '100%' }} onClick={handleAddClick}>
-                <span className="plus-sign">+</span>
-            </div>
-        </div>
 
         {/* Pet Cards */}
         {shelterInfo.pets.map(pet => (
@@ -127,15 +115,11 @@ function ShelterComponent() {
               <div className="card-body">
                 <h5 className="card-title">{pet.name}</h5>
                 <p className="card-text">Status: {pet.status}</p>
-                <button onClick={() => handleUpdateClick(pet.id)} className="btn btn-primary">Update</button>
+                <button onClick={() => handleDetailClick(pet.id)} className="btn btn-primary">Update</button>
               </div>
             </div>
           </div>
         ))}
-      </div>
-      <div className="row justify-content-center">
-        {/* comment list */}
-        <Comments shelterId={shelterId} />
       </div>
     </div>
     <div className="container m-5">

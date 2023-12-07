@@ -1,14 +1,15 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKENDHOST } from "../../config";
 import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
+import LoginInput from "../../components/input/LoginInput";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 
-const ShelterUpdateForm = () => {
+const SeekerUpdateform = () => {
   const [userInfo, setUserInfo] = useState({
     username: '',
     location: '',
@@ -18,23 +19,29 @@ const ShelterUpdateForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const token = localStorage.getItem('token');
-  const shelterId = localStorage.getItem('shelter_id');
 
   const navigate = useNavigate();
 
-  // const { shelterId } = useParams();
+  const { seekerId } = useParams();
 
   useEffect(() => {
     // Retrieve the petId from the URL
 
     // Fetch the current pet information
-    axios.get(`${BACKENDHOST}accounts/shelter/${shelterId}/`)
+    axios.get(`${BACKENDHOST}/accounts/seeker/${seekerId}/`,
+    {
+      method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+    }
+    )
       .then(response => {
         setUserInfo(response.data);
         setImagePreview(response.data.avatar);
       })
       .catch(error => console.error(error));
-  },[]);
+  }, [seekerId]);
 
   const handleChange = (event) => {
     if (event.target.name === 'avatar') {
@@ -85,7 +92,7 @@ const ShelterUpdateForm = () => {
     });
     
     // API request to update pet information
-    fetch(`${BACKENDHOST}accounts/shelter/${shelterId}/`, {
+    fetch(`${BACKENDHOST}/accounts/seeker/${seekerId}/`, {
         method: 'PATCH', // or 'POST', 'PUT', 'DELETE', etc.
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -103,8 +110,8 @@ const ShelterUpdateForm = () => {
       .then(data => {
         console.log(data);
         // Handle your successful response here
-        const shelter_id = localStorage.getItem('shelter_id');
-        navigate(`/shelterHome`);
+        const seeker_id = localStorage.getItem('seeker_id');
+        navigate(`/seeker/${seeker_id}`);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -115,7 +122,7 @@ const ShelterUpdateForm = () => {
 
     const handleDelete = () => {
         // API request to delete pet
-        fetch(`${BACKENDHOST}accounts/shelter/${shelterId}/`, {
+        fetch(`${BACKENDHOST}/accounts/seeker/${seekerId}/`, {
             method: 'DELETE', // or 'POST', 'PUT', 'DELETE', etc.
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -137,7 +144,7 @@ const ShelterUpdateForm = () => {
                     localStorage.removeItem('token');
                     localStorage.removeItem('refresh');
                     localStorage.removeItem('user_type');
-                    localStorage.removeItem('shelter_id');
+                    localStorage.removeItem('seeker_id');
                     // if the pet is deleted successfully, redirect to the home page
                     navigate('/landing');
                 }
@@ -180,7 +187,7 @@ const ShelterUpdateForm = () => {
                 type="file"
                 name="avatar"
                 onChange={handleChange}
-                className="form-control"
+                className="form"
               />
             </div>
             <div className="mb-3">
@@ -191,7 +198,7 @@ const ShelterUpdateForm = () => {
                     name="username"
                     value={userInfo.username}
                     onChange={handleChange}
-                    className="form-control"
+                    className="form"
                 />
             </div>
             <div className="mb-3">
@@ -202,7 +209,7 @@ const ShelterUpdateForm = () => {
                     name="email"
                     value={userInfo.email}
                     onChange={handleChange}
-                    className="form-control"
+                    className="form"
                 />
             </div>
             <div className="mb-3">
@@ -213,14 +220,14 @@ const ShelterUpdateForm = () => {
                     name="location"
                     value={userInfo.location}
                     onChange={handleChange}
-                    className="form-control"
+                    className="form"
                 />
             </div>
             {errorMessage && (
                 <p className="text-danger">{errorMessage}</p>
             )}
             <button type="submit" className="btn btn-primary">Update</button>
-            <button  onClick={handleDelete} className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete Shelter</button>
+            <button  onClick={handleDelete} className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete seeker</button>
         </form>
         
     </div>
@@ -239,4 +246,4 @@ const ShelterUpdateForm = () => {
   );
 };
 
-export default ShelterUpdateForm;
+export default SeekerUpdateform;
