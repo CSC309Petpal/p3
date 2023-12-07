@@ -129,8 +129,18 @@ function PetDetail() {
             </tbody>
           </table>
         </div>
+        
       </div>
 
+      <div className="row mt-lg-4">
+        <div className='col-md-5'>
+          </div>
+        <div className="col-md-3">
+        <button className="btn btn-primary" onClick={() => navigate(`/shelter/${petInfo.shelter}`)}>Check the Shelter</button>
+        </div>
+    
+      </div>
+      
  
 
       
