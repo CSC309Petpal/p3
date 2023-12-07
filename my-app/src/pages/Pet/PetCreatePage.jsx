@@ -23,13 +23,13 @@ const PetCreationForm = () => {
             [e.target.name]: e.target.value
         });
     };
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setPetData((prevData) => ({
-          ...prevData,
-          image: file,
-        }));
-      };
+    // const handleImageChange = (e) => {
+    //     const file = e.target.files[0];
+    //     setPetData((prevData) => ({
+    //       ...prevData,
+    //       image: file,
+    //     }));
+    //   };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,6 +40,7 @@ const PetCreationForm = () => {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 }
             });
+            console.log(petData);
             console.log(response.data);
             setSubmissionStatus('success'); // Set status to success on successful submission
         } catch (error) {
@@ -104,7 +105,7 @@ const PetCreationForm = () => {
                     </div>
                     <div className="form-group">
                         <label>Image:</label>
-                        <input type="file" accept="image/*" onChange={handleImageChange} />
+                        <input type="file" accept="image/*" onChange={handleChange} />
                     </div>
                     
 

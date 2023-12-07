@@ -18,22 +18,23 @@ const ShelterUpdateForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const token = localStorage.getItem('token');
+  const shelterId = localStorage.getItem('shelter_id');
 
   const navigate = useNavigate();
 
-  const { shelterId } = useParams();
+  // const { shelterId } = useParams();
 
   useEffect(() => {
     // Retrieve the petId from the URL
 
     // Fetch the current pet information
-    axios.get(`${BACKENDHOST}/accounts/shelter/${shelterId}/`)
+    axios.get(`${BACKENDHOST}accounts/shelter/${shelterId}/`)
       .then(response => {
         setUserInfo(response.data);
         setImagePreview(response.data.avatar);
       })
       .catch(error => console.error(error));
-  });
+  },[]);
 
   const handleChange = (event) => {
     if (event.target.name === 'avatar') {
@@ -84,7 +85,7 @@ const ShelterUpdateForm = () => {
     });
     
     // API request to update pet information
-    fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}/`, {
+    fetch(`${BACKENDHOST}accounts/shelter/${shelterId}/`, {
         method: 'PATCH', // or 'POST', 'PUT', 'DELETE', etc.
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -103,7 +104,7 @@ const ShelterUpdateForm = () => {
         console.log(data);
         // Handle your successful response here
         const shelter_id = localStorage.getItem('shelter_id');
-        navigate(`/shelter/${shelter_id}`);
+        navigate(`/shelterHome`);
       })
       .catch(error => {
         console.error('Error:', error);
@@ -114,7 +115,7 @@ const ShelterUpdateForm = () => {
 
     const handleDelete = () => {
         // API request to delete pet
-        fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}/`, {
+        fetch(`${BACKENDHOST}accounts/shelter/${shelterId}/`, {
             method: 'DELETE', // or 'POST', 'PUT', 'DELETE', etc.
             headers: {
               'Authorization': `Bearer ${token}`,

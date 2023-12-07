@@ -56,7 +56,7 @@ function ShelterComponent() {
     }
 
     fetchShelterInfo(); // Call the function to fetch shelter information
-  }); // Dependency array to re-fetch data if shelterId changes
+  },[]); // Dependency array to re-fetch data if shelterId changes
 
   if (!shelterInfo) {
     return <div>Loading...</div>; // Display loading message until data is fetched
