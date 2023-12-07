@@ -41,9 +41,12 @@ function Application() {
   
   return (
     <main className="flex-grow-1 align-items-center">
-      <div className="container">
+      
+      <div className="container ms-6">
+      <h1 className="mb-4">Application Detail</h1>
         {applicationInfo&&Object.entries(applicationInfo).map(([key, value])=>{
-          return (<p key={key}> {key}: {value}</p>)
+          let capitalied_key = key.charAt(0).toUpperCase() + key.slice(1);
+          return (<p key={capitalied_key}> {capitalied_key}: {value}</p>)
         })}
         {/* Application Information and other content here */}
         {/* Use applicationInfo to render the data */}
