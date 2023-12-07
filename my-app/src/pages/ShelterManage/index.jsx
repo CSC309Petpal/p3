@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { BACKENDHOST } from '../Login/config';
-import avatar from '../../assets/avatar.jpg';
+import logo from '../../assets/avatar.jpg';
 import StartHeader from "../../components/StartHeader/startHeader";
 import { useNavigate } from "react-router-dom";
 import './style.css';
@@ -11,10 +11,19 @@ import Footer from "../../components/Footer/footer";
 function ShelterComponent() {
   const { shelterId } = useParams(); // Retrieve the shelter_id from URL
   const [shelterInfo, setShelterInfo] = useState(null); // State to store shelter information
+  
   const navigate = useNavigate();
   const handleAddClick = () => {
     navigate('/pet/create');
   };
+
+  const handleUpdateClick = (petId) => {
+    navigate(`/pet/update/${petId}`);
+  }
+
+  const handleUserUpdate = () => {
+    navigate(`/shelter/update/${shelterId}`);
+  }
 
   useEffect(() => {
     // Define the function to fetch shelter information
@@ -23,6 +32,9 @@ function ShelterComponent() {
         const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
+
+
+
           setShelterInfo(data); // Update the state with shelter information
         } else {
           // Handle HTTP errors
@@ -53,13 +65,13 @@ function ShelterComponent() {
       <div className="row justify-content-center mt-lg-4">
         <div className="col-md-3 d-flex justify-content-center flex-column align-items-center">
           <img 
-            src={avatar}
+            src={shelterInfo.avatar}
             className="img-fluid mb-sm-3" 
-            alt="Shelter Logo" 
+            alt={logo}
             style={{ height: '200px', width: '200px', borderRadius: '100px' }} 
           />
           <div>
-            <a href="shelter-profile_update.html" className="btn btn-primary btn-lg bg-dark">Update Profile</a>
+            <button onClick={handleUserUpdate} className="btn btn-primary btn-lg bg-dark">Update Profile</button>
           </div>
         </div>
 
@@ -104,7 +116,7 @@ function ShelterComponent() {
               <div className="card-body">
                 <h5 className="card-title">{pet.name}</h5>
                 <p className="card-text">Status: {pet.status}</p>
-                <a href={`pet_update.html?petId=${pet.id}`} className="btn btn-primary">Edit</a>
+                <button onClick={() => handleUpdateClick(pet.id)} className="btn btn-primary">Update</button>
               </div>
             </div>
           </div>
