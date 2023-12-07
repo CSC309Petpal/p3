@@ -1,10 +1,9 @@
 import React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKENDHOST } from "../../config";
 import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
-import LoginInput from "../../components/input/LoginInput";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -34,7 +33,7 @@ const ShelterUpdateForm = () => {
         setImagePreview(response.data.avatar);
       })
       .catch(error => console.error(error));
-  }, [shelterId]);
+  });
 
   const handleChange = (event) => {
     if (event.target.name === 'avatar') {
