@@ -71,7 +71,7 @@ function App() {
 
 
         <Route path="/application-create" element={<ApplicationCreateForm/>}/>
-      
+
 
         <Route path="/seeker/:seekerId" element={<SeekerDetail />} />
         <Route path="/shelterHome" element={<ShelterComponent />} />
@@ -82,7 +82,7 @@ function App() {
 
 
         <Route path="/notifications" element={< NotificationBoard/>} />
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="/*" element={<NotFound/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
         <Route path="/" element={<Navigate to="/login" />} />

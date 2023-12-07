@@ -27,7 +27,7 @@ function ShelterComponent() {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`);
+        const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
           if (data.avatar === null) {
@@ -56,7 +56,7 @@ function ShelterComponent() {
     }
 
     fetchShelterInfo(); // Call the function to fetch shelter information
-  }); // Dependency array to re-fetch data if shelterId changes
+  },[]); // Dependency array to re-fetch data if shelterId changes
 
   if (!shelterInfo) {
     return <div>Loading...</div>; // Display loading message until data is fetched

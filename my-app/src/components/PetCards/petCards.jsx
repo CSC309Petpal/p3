@@ -8,7 +8,7 @@ function PetCards({ pets }) {
   // use the shelter_id to get the shelter name
   const getShelterName = async (shelter_id) => {
     try {
-      const response = await fetch(`${BACKENDHOST}/accounts/shelter/${shelter_id}`);
+      const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelter_id}`);
       const data = await response.json();
       return data.name;
     } catch (error) {
