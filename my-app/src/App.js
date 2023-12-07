@@ -8,9 +8,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header/header';
 import Login from './pages/Login/LoginPage';
-
+import ApplicationCreateForm from './pages/Applications/ApplicationCreation';
 import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
+import NotFound from './pages/Error/NotFound';
 
 import SeekerDetail from './pages/Accounts/SeekerDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
@@ -58,8 +59,13 @@ function App() {
 
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
+
         <Route path="/shelter/update/:shelterId" element={<ShelterUpdateForm />} />
 
+
+
+        <Route path="/application-create" element={<ApplicationCreateForm/>}/>
+      
 
         <Route path="/seeker-detail" element={<SeekerDetail />} />
         <Route path="/shelter/:shelterId" element={<ShelterComponent />} />
@@ -69,10 +75,11 @@ function App() {
 
 
         <Route path="/notifications" element={< NotificationBoard/>} />
-
+        <Route path="*" element={<NotFound/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
         <Route path="/" element={<Navigate to="/login" />} />
+      
       </Routes>
     </BrowserRouter>
     
