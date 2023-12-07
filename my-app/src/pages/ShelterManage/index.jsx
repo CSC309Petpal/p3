@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { BACKENDHOST } from '../Login/config';
+import { BACKENDHOST } from "../../config";
 import logo from '../../assets/avatar.jpg';
 import StartHeader from "../../components/StartHeader/startHeader";
 import { useNavigate } from "react-router-dom";
