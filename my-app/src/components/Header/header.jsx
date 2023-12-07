@@ -16,7 +16,7 @@ const Header = () => {
         
         if (user_type == '2') {
             // Replace with your API URL and add appropriate headers if needed
-            fetch(`${BACKENDHOST}/accounts/shelter/${shelterId}`,
+            fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`,
                 {
                     method: 'GET',
                     headers: {
@@ -35,7 +35,7 @@ const Header = () => {
                 .catch(error => console.error('Error:', error));
         } else if (user_type == '1') {
             // Replace with your API URL and add appropriate headers if needed
-            fetch(`${BACKENDHOST}/accounts/seeker/${seekerId}`,
+            fetch(`${BACKENDHOST}accounts/seeker/${seekerId}`,
             {
                 method: 'GET',
                 headers: {
