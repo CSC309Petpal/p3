@@ -20,6 +20,9 @@ class Notification(models.Model):
     url1 = models.URLField(default='')
     url2 = models.URLField(default='')
 
+    def sender_avatar(self):
+        return self.sender.avatar
+
     def __str__(self) -> str:
         if self.sender == None:
             return str(self.pk) + " System to " + self.receiver.username + " Type: " + self.type

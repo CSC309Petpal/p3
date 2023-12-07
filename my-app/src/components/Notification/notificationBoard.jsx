@@ -75,7 +75,7 @@ function NotificationBoard() {
             <div key={notification.id} className="card notification-card message-card">
                 <div className="card-body d-flex flex-row justify-content-center">
                     <div className="notification-img">
-                        <img src={testImage} alt="Shelter" width="75px" height="75px" />
+                        <img src={notification.sender_avatar} alt="Shelter" width="75px" height="75px" />
                     </div>
                     <div className="message-content d-flex flex-column">
                         <p><b>Message From: </b> {notification.sender_name}</p>
