@@ -11,6 +11,7 @@ import Login from './pages/Login/LoginPage';
 import ApplicationCreateForm from './pages/Applications/ApplicationCreation';
 import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
+import NotFound from './pages/Error/NotFound';
 
 import SeekerDetail from './pages/Accounts/SeekerDetail';
 import PetCreationForm from './pages/Pet/PetCreatePage';
@@ -55,10 +56,11 @@ function App() {
         <Route path="/pet/create" element={< PetCreationForm/>} />
 
         <Route path="/notifications" element={< NotificationBoard/>} />
-
+        <Route path="*" element={<NotFound/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
         <Route path="/" element={<Navigate to="/login" />} />
+      
       </Routes>
     </BrowserRouter>
     

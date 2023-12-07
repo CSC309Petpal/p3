@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BACKENDHOST } from "../../config";
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Form from './ApplicationCreationForm'
 
-async function fetchData(event) {
-  let pet_id = 1;
-  event.preventDefault()
+
+
+async function fetchData(event, pet_id) {
+  
+  
+  event.preventDefault();
   try {
     const response = await fetch(`${BACKENDHOST}/applications/to-pet/${pet_id}/`);
 
@@ -39,13 +42,17 @@ async function fetchData(event) {
 
 function ApplicationCreation() {
   // Assuming the login status should be based on the presence of a token
+  const{pet_id} = useParams();
   const token = localStorage.getItem('token');
   const isLogined = token !== null; // Check for null instead of undefined
   
+  const handleSubmit = (event) =>{
+    fetchData(event, pet_id);
+  }
   
   return (
     <div>
-      {isLogined ? <Form function = {fetchData}/> : <p>Please log in to continue.</p>}
+      {isLogined ? <Form function = {handleSubmit}/> : <p>Please log in to continue.</p>}
     </div>
   );
 }
