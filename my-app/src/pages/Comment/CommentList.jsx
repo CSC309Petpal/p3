@@ -5,7 +5,25 @@ import { BACKENDHOST } from "./config";
 
 
 
+function timeAgo(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const secondsPast = (now.getTime() - date.getTime()) / 1000;
 
+  if(secondsPast < 60) {
+    return parseInt(secondsPast) + ' seconds ago';
+  }
+  if(secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + ' minutes ago';
+  }
+  if(secondsPast <= 86400) {
+    return parseInt(secondsPast / 3600) + ' hours ago';
+  }
+  if(secondsPast > 86400) {
+    const day = parseInt(secondsPast / 86400);
+    return day + ' day' + (day !== 1 ? 's' : '') + ' ago';
+  }
+}
 
 
 
@@ -42,7 +60,7 @@ const Comments = (shelterId) => {
       const data = await response.json();
 
   
-      notification.innerHTML = "&check; Comment created successfully";
+      notification.innerHTML = "&check; ";
       notification.style.color = "green";
       refreshList();
   
@@ -143,9 +161,10 @@ const nextPage = () => {
               <div className="card-body" >
                 <h5 className="card-title">SenderId: {comment.sender}</h5>
                 <div className="d-flex justify-content-between align-items-center">
-                  <span className={`mr-2`}>{comment.content}</span>
+                <span className={`mr-2`} style={{ color: 'black' }}>{comment.content}</span>
+
                   <div>
-                  <span className={`mr-2`}>{comment.created}</span>
+                  <span style={{ color: 'black' }}>{timeAgo(comment.created)}</span>
                   </div>
                 </div>
               </div>
