@@ -25,6 +25,16 @@ function ShelterComponent() {
     navigate(`/shelter/update`);
   }
 
+  const handleCreateBlog = () => {
+    navigate(`/blog/create`);
+  }
+
+  const handleAllBlog = (id) => {
+    navigate(`/blog/shelter/${id}`);
+  }
+
+
+
   useEffect(() => {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
@@ -106,8 +116,21 @@ function ShelterComponent() {
         </div>
       </div>
 
+      <div className="row mt-lg-4 justify-content-center">
+        <h1 className="text-center col-12">My Blogs:</h1>
+        <hr className="my-4 col-12 border-primary" />
+        
+        <div className="col-auto">
+          <button className="btn btn-primary bg-dark me-2" onClick={handleCreateBlog}>Create Blog</button>
+        </div>
+        <div className="col-auto">
+          <button className="btn btn-primary bg-dark" onClick={() => handleAllBlog(shelterId)}>All Blogs</button>
+        </div>
+      </div>
+
+
       <div className="row mt-lg-4" id="myPets">
-                <h2 className="text-center">My Pets</h2>
+                <h1 className="text-center">My Pets</h1>
                 <hr className="my-4 border-primary"/>
         </div>
 

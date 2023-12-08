@@ -6,6 +6,7 @@ app_name="blog"
 
 urlpatterns = [
     path("", views.BlogListCreateAPIView.as_view(), name="blog_list_create"),
-    path("<int:pk>/", views.BlogRetrieveUpdateDestroyView.as_view(), name="blog_retrieve_update_destroy")
+    path("<int:pk>/", views.BlogRetrieveUpdateDestroyView.as_view(), name="blog_retrieve_update_destroy"),
+    path('shelter/<int:shelter_id>/', views.BlogListCreateAPIView.as_view(), name='shelter-blogs'),
     
 ]

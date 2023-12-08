@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 from django.http import Http404
 
 class BlogPagination(PageNumberPagination):
-    page_size = 6  # Set the number of items per page
+    page_size = 4  # Set the number of items per page
 
     
 class BlogListCreateAPIView(generics.ListCreateAPIView):
@@ -17,14 +17,19 @@ class BlogListCreateAPIView(generics.ListCreateAPIView):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = ['created']
     pagination_class = BlogPagination
+    queryset = Blog.objects.all()
 
     
-    def get_permissions(self):
-        if self.request.method == 'GET':
-            permission_classes = [AllowAny]
-        else:
-            permission_classes = [IsShelter]
-        return [permission() for permission in permission_classes]
+    def get_queryset(self):
+        # Retrieve the shelter ID from the URL
+        shelter_id = self.kwargs.get('shelter_id')
+        if shelter_id is not None:
+            # Filter the queryset by the shelter ID
+            return Blog.objects.filter(shelter__id=shelter_id)
+        
+        # If shelter_id is not in the URL, you can decide how to handle this.
+        # For example, raise a 404 error or return an empty queryset.
+        raise Http404("No shelter ID in URL.")
 
     def perform_create(self, serializer):
         # Assuming the profile of the user is linked to the shelter

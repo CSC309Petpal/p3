@@ -29,6 +29,9 @@ import NotificationPage from './pages/Notification/NotificationPage';
 import PetListing from './pages/PetListing';
 import PetUpdateForm from './pages/PetUpdate';
 import SeekerDetail from './pages/SeekerDetail';
+import BlogCreate from './pages/BlogCreate';
+import BlogDetail from './pages/BlogDetail';
+import BlogListing from './pages/BlogList';
 
 
 import Landing from './pages/Landing/landing';
@@ -74,11 +77,13 @@ function App() {
         <Route path="/seeker/update/:seekerId" element={<SeekerUpdateForm />} />
 
         <Route path="/shelters" element={<ShelterListing />} />
+        <Route path="/blog/shelter/:shelterId" element={<BlogListing />} />
 
 
         <Route path="/application-create/:pet_id" element={<ApplicationCreateForm/>}/>
         <Route path="/application-detail/:application_id" element={<ApplicationDetail/>}/>
         <Route path="/applications" element={<Apprepo/>}/>
+        <Route path="/blog/:blogId" element={<BlogDetail />} />
         
 
         <Route path="/seeker/:seekerId" element={<SeekerDetail />} />
@@ -87,6 +92,8 @@ function App() {
         <Route path="/pet" element={<PetListing />} />
         <Route path="/pet/:petId" element={<PetDetail />} />
         <Route path="/pet/update/:petId" element={<PetUpdateForm />} />
+
+        <Route path="/blog/create" element={<BlogCreate />} />
         
 
         <Route path="/notifications" element={< NotificationPage/>} />

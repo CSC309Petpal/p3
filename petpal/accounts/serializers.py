@@ -3,6 +3,7 @@ from .models import Seeker, Shelter, CustomUser
 from rest_framework import serializers
 from pets.serializers import PetSerializer
 from django.contrib.auth.password_validation import validate_password
+from blog.serializers import BlogSerializer
 
 
 
@@ -126,7 +127,8 @@ class ShelterListSerializer(ModelSerializer):
     location = CharField(source='user.location')
     pets = PetSerializer(many=True, read_only=True)
     avatar = serializers.ImageField(source='user.avatar')
+    blogs = BlogSerializer(many=True, read_only=True)
     class Meta:
         model = Shelter
-        fields = ( 'username', 'email', 'location', 'pets', 'avatar', 'id')
+        fields = ( 'username', 'email', 'location', 'pets', 'avatar', 'id', 'blogs')
 
