@@ -24,12 +24,6 @@ class Application(models.Model) :
     def __str__(self):
       return f"{self.seeker} Application for {self.pet} under shelter {self.shelter}"
     
-    def pet_name(self):
-            return self.pet.name
-    def shelte_rname(self):
-            return self.shelter.user.username
-    def seeker_name(self):
-            return self.seeker.user.username
 
     
 def update_application_updation_time(application_id):
