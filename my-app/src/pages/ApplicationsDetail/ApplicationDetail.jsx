@@ -9,6 +9,7 @@ function Application() {
   const { application_id } = useParams();
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     async function fetchApplicationInfo() {
@@ -41,6 +42,7 @@ function Application() {
 
   const updateApplicationStatus = async () => {
     try {
+      setErrorMessage(null);
       const response = await fetch(`${BACKENDHOST}applications/${application_id}/`, {
         method: 'PUT',
         headers: {
@@ -51,13 +53,13 @@ function Application() {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('The state change is not allowed');
       }
       const updatedData = await response.json();
       setApplicationInfo(updatedData);
     } catch (error) {
       console.error('Update error:', error);
-      navigate('/error');
+      setErrorMessage(error.message);
     }
   };
 
@@ -83,7 +85,9 @@ function Application() {
 
         {/* Update button */}
         <button onClick={updateApplicationStatus}>Update Status</button>
+        <h5>{errorMessage}</h5>
       </div>
+      
     </main>
   );
 }
