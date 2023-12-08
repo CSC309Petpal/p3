@@ -95,7 +95,7 @@ class ApplicationListView(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         # Customize the queryset based on the user
-        if user.is_authenticated and user.user_type == ApplicationConstants.SHELTER:
+        if user.user_type == ApplicationConstants.SHELTER:
             
             shelter = user.shelter
             if shelter != None:
@@ -104,8 +104,13 @@ class ApplicationListView(generics.ListAPIView):
             else:
                 return Application.objects.none()
         else:
-            # Handle unauthenticated users, e.g., return an empty queryset
-            return  Application.objects.none()
+            # seeker 
+            seeker = user.seeker 
+            if seeker != None:
+              return Application.objects.filter(seeker = seeker)
+            else:
+                return Application.objects.none()
+            
 
 
 class ApplicationDetailView(generics.RetrieveAPIView):

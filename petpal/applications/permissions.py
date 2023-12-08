@@ -56,6 +56,16 @@ class SeekerHaveApplication(permissions.BasePermission):
 
 
 class IsSeekerOrShelterToUpdateApplication(permissions.BasePermission):
+    
+    def has_permission(self, request, view):
+        # Check if the user is authenticated
+        is_authenticated = request.user and request.user.is_authenticated
+    
+        
+        # The permission check should return True only if both conditions are True
+        return is_authenticated 
+    
+    
     def has_object_permission(self, request, view, obj):
         # Check if the user is a seeker and has permission to update this application
         # shelter_permission = IsShelter()
