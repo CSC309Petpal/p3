@@ -1,0 +1,38 @@
+.header, .footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eaeaea;
+    border-top: 1px solid #eaeaea;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-control, .form-select {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-color: #ddd;
+  }
+  
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+  }
+  
