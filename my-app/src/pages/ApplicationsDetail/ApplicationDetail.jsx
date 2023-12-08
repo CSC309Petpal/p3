@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { BACKENDHOST } from '../../config';
+import Followups from '../../components/Followup/followup';
+import Footer from "../../components/Footer/footer";
+import Header from "../../components/Header/header";
 
 function Application() {
   const [applicationInfo, setApplicationInfo] = useState(null);
@@ -68,8 +71,11 @@ function Application() {
   }
 
   return (
-    <main className="flex-grow-1 align-items-center">
-      <div className="container ms-6">
+    <>
+    <Header />
+    <main className="flex-grow-1 align-items-center" style={containerStyle}>
+      <div className="container ms-6 justify-content-between,align-items-center">
+      
         <h1 className="mb-4">Application Detail</h1>
         {Object.entries(applicationInfo).map(([key, value]) => (
           <p key={key}> {key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
@@ -88,8 +94,23 @@ function Application() {
         <h5>{errorMessage}</h5>
       </div>
       
+        <Followups appId={application_id}/>
+      
+      
+      
     </main>
+    <Footer />
+    </>
   );
 }
+const containerStyle = {
+  backgroundColor: "rgba(255, 255, 255, 0.5)",
+  marginLeft: "5cm",
+  marginRight: "5cm",
+  padding: "1cm",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  overflowY: "auto",
+};
 
 export default Application;

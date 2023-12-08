@@ -5,17 +5,35 @@ import { BACKENDHOST } from "./config";
 
 
 
+function timeAgo(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const secondsPast = (now.getTime() - date.getTime()) / 1000;
+
+  if(secondsPast < 60) {
+    return parseInt(secondsPast) + ' seconds ago';
+  }
+  if(secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + ' minutes ago';
+  }
+  if(secondsPast <= 86400) {
+    return parseInt(secondsPast / 3600) + ' hours ago';
+  }
+  if(secondsPast > 86400) {
+    const day = parseInt(secondsPast / 86400);
+    return day + ' day' + (day !== 1 ? 's' : '') + ' ago';
+  }
+}
 
 
 
-
-const Followups = (applicationId) => {
+const Followups = (appId) => {
   const [followups, setFollowups] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(1);
   const [content, setContent] = useState('');
-  const create = async (content,applicationId) => {
+  const create = async (content,appId) => {
     var FollowupData = new FormData();
     var notification = document.getElementById('notification');
     if (content === "") {
@@ -26,7 +44,7 @@ const Followups = (applicationId) => {
     notification.innerHTML = "";
     FollowupData.append("content",content)
     try {
-      const response = await fetch(`${BACKENDHOST}followup/to-app/${applicationId.applicationId}/`, {
+      const response = await fetch(`${BACKENDHOST}followup/to-app/${appId.appId}/`, {
         method: 'POST',
         body: FollowupData,
         headers: {
@@ -42,13 +60,13 @@ const Followups = (applicationId) => {
       const data = await response.json();
 
   
-      notification.innerHTML = "&check; Followup created successfully";
+      notification.innerHTML = "&check; ";
       notification.style.color = "green";
       refreshList();
   
     } catch (error) {
       console.error(error);
-      notification.innerHTML = "Error creating Followup";
+      notification.innerHTML = "Error creating followup";
       notification.style.color = "red";
     }
     
@@ -69,17 +87,18 @@ const nextPage = () => {
 };
 
   const refreshList = () => {
-    console.log(applicationId);
+
 
     axios
-      .get(`${BACKENDHOST}followup/to-app/${applicationId.applicationId}/?page=${page}`, {
+      .get(`${BACKENDHOST}followup/to-app/${appId.appId}/?page=${page}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         }
       })
       .then((res) => {
         setFollowups(res.data.results);
-        setPages(Math.ceil(res.data.count/10));
+        
+        setPages(Math.ceil(res.data.count/5));
         setErrorMessage('');
       })
       .catch((err) => {
@@ -98,18 +117,20 @@ const nextPage = () => {
     refreshList();
   }, [page]);
 
+  console.log(followups);
+
   return (
     <div className="row justify-content-center">
       <p>{errorMessage}</p>
-      <div className="row justify-content-left">
-        <div className="col-md-4">
-          <div className="card">
+      <div className="row justify-content-center">
+        <div className="card mb-3">
+         
             <div className="card-body">
               <h5 className="card-title">Add new Followup</h5>
               <div className="d-flex justify-content-between align-items-center">
                 <span className={`mr-2`}>
                   <input
-                    name="Followup content"
+                    name="followup content"
                     id="content"
                     value={content}
                     type="text"
@@ -126,30 +147,31 @@ const nextPage = () => {
                 <button
                   className="btn btn-secondary ml-1 is-link"
                   type="register"
-                  value="Create new Followup"
+                  value="Create new followup"
                   id="propertyLocation"
-                  onClick={() => create(content, applicationId)}
+                  onClick={() => create(content, appId)}
                   readOnly
                 >
-                  follow up
+                  followup
                 </button>
               </div>
             </div>
-          </div>
+          
         </div>
         {followups.map((followup) => (
-          <div className="col-md-4" key={followup.followup_id}>
-            <div className="card">
+          <div className="card mb-3" key={followup.id}>
+            
               <div className="card-body" >
-                <h5 className="card-title">SenderId: {followup.sender}</h5>
+                <h5 className="card-title">Sender: {followup.senderusername}</h5>
                 <div className="d-flex justify-content-between align-items-center">
-                  <span className={`mr-2`}>{followup.content}</span>
+                <span className={`mr-2`} style={{ color: 'black' }}>{followup.content}</span>
+
                   <div>
-                  <span className={`mr-2`}>{followup.created}</span>
+                  <span style={{ color: 'black' }}>{timeAgo(followup.created)}</span>
                   </div>
                 </div>
               </div>
-            </div>
+          
           </div>
         ))}
       </div>
