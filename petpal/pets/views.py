@@ -16,7 +16,7 @@ class PetListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = PetSerializer
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     filterset_fields = ['shelter', 'status', 'breed', 'age', 'size', 'color', 'gender']
-    ordering_fields = ['name', 'age']
+    ordering_fields = ['name', 'age', 'size']
     pagination_class = PetPagination
 
     def get_queryset(self):

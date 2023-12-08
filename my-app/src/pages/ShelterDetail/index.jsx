@@ -17,7 +17,7 @@ function ShelterComponent() {
   };
 
   const handleDetailClick = (petId) => {
-    navigate(`/pets/${petId}`);
+    navigate(`/pet/${petId}`);
   }
 
   const handleUserUpdate = () => {
