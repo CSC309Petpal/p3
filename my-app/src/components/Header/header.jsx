@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BACKENDHOST } from '../../pages/Login/config';
 //import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
@@ -11,6 +12,7 @@ const Header = () => {
     const seekerId = localStorage.getItem('seeker_id');
     const user_type = localStorage.getItem('user_type');
     const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     useEffect(() => {
         
@@ -54,6 +56,8 @@ const Header = () => {
                     });
                 })
                 .catch(error => console.error('Error:', error));
+        } else {
+            navigate('/');
         }
 
         
@@ -92,7 +96,14 @@ const Header = () => {
                         {/* Log Out Link */}
                         <Link className="nav-link me-lg-3" to="/shelters">Shelters</Link>
                         <Link className="nav-link me-lg-3" to="/applications">Applications</Link>
-                        <Link className="nav-link" to="/logout">Log Out</Link>
+                        <p className="nav-link me-lg-3" onClick={() => {
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('shelter_id');
+                            localStorage.removeItem('seeker_id');
+                            localStorage.removeItem('user_type');
+                            window.location.href = '/';
+                        }
+                        }>Log Out</p>
                     </div>
                 </div>
             </div>
@@ -130,7 +141,14 @@ const Header = () => {
                         <Link className="nav-link me-lg-3" to="/applications">Applications</Link>
 
                         {/* Log Out Link */}
-                        <Link className="nav-link" to="/logout">Log Out</Link>
+                        <p className="nav-link btn btn-link me-lg-3" onClick={() => {
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('shelter_id');
+                            localStorage.removeItem('seeker_id');
+                            localStorage.removeItem('user_type');
+                            window.location.href = '/';
+                        }
+                        }>Log Out</p>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ import Apprepo from './pages/appListing/appListing';
 import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
 import NotFound from './pages/Error/NotFound';
+import NoAccessPage from './pages/Error/NoAccess';
 
 import PetCreationForm from './pages/Pet/PetCreatePage';
 import PetDetail from './pages/PetDetail';
@@ -98,6 +99,7 @@ function App() {
 
         <Route path="/notifications" element={< NotificationPage/>} />
         <Route path="/*" element={<NotFound/>}/>
+        <Route path="/noaccess" element={<NoAccessPage/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
         <Route path="/" element={<Navigate to="/login" />} />
