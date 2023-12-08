@@ -87,7 +87,7 @@ const nextPage = () => {
 };
 
   const refreshList = () => {
-    console.log(shelterId);
+
 
     axios
       .get(`${BACKENDHOST}comments/to-shelter/${shelterId.shelterId}/?page=${page}`, {
@@ -97,7 +97,7 @@ const nextPage = () => {
       })
       .then((res) => {
         setComments(res.data.results);
-        setPages(Math.ceil(res.data.count/10));
+        setPages(Math.ceil(res.data.count/5));
         setErrorMessage('');
       })
       .catch((err) => {

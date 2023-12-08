@@ -9,7 +9,7 @@ from notifications.models import create_notification
 from django.urls import reverse_lazy
 
 class CommentsPagination(PageNumberPagination):
-    page_size = 10  # Set the number of items per page
+    page_size = 5  # Set the number of items per page
 
 class CommentsCreationView(generics.CreateAPIView):
 
