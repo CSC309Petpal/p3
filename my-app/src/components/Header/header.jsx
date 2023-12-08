@@ -4,6 +4,7 @@ import { BACKENDHOST } from '../../pages/Login/config';
 //import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useNavigate } from 'react-router-dom';
+import StartHeader from '../StartHeader/startHeader';
 
 
 const Header = () => {
@@ -153,6 +154,10 @@ const Header = () => {
                 </div>
             </div>
         </nav>
+        );
+    }else{
+        return (
+            <StartHeader />
         );
     }
 
