@@ -175,8 +175,11 @@ const PetListing = () => {
                           <input type="radio" value="adopted" name="status" id="statusAdopted" />
                           <label htmlFor="statusAdopted">Adopted</label><br/>
 
-                          <input type="radio" value="foster" name="status" id="statusFoster" />
-                          <label htmlFor="statusFoster">Foster</label><br/>
+                          <input type="radio" value="pending" name="status" id="statusPending" />
+                          <label htmlFor="statusPending">Pending</label><br/>
+
+                          <input type="radio" value="withdrawn" name="status" id="statusWithdrawn" />
+                          <label htmlFor="statusWithdrawn">Withdrawn</label><br/>
 
                       </div>
                       </div>

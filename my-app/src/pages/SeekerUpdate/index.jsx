@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/footer";
 import LoginInput from "../../components/input/LoginInput";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Header from "../../components/Header/header";
 
 
 const SeekerUpdateform = () => {
@@ -18,14 +19,15 @@ const SeekerUpdateform = () => {
   });
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [changedFields, setChangedFields] = useState({});
   const token = localStorage.getItem('token');
 
   const navigate = useNavigate();
 
-  const { seekerId } = useParams();
+  // get the seekerID from the local storage
+  const seekerId = localStorage.getItem('seeker_id');
 
   useEffect(() => {
-    // Retrieve the petId from the URL
 
     // Fetch the current pet information
     axios.get(`${BACKENDHOST}/accounts/seeker/${seekerId}/`,
@@ -41,10 +43,11 @@ const SeekerUpdateform = () => {
         setImagePreview(response.data.avatar);
       })
       .catch(error => console.error(error));
-  }, [seekerId]);
+  }, []);
 
   const handleChange = (event) => {
-    if (event.target.name === 'avatar') {
+    const { name, value } = event.target;
+    if (name === 'avatar') {
         const file = event.target.files[0];
         if (file) {
             // Check if the file is an image
@@ -61,7 +64,8 @@ const SeekerUpdateform = () => {
             reader.readAsDataURL(file);
         }
     }
-    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
+    setUserInfo({ ...userInfo, [name]: value });
+    setChangedFields({ ...changedFields, [name]: value });
   };
 
   
@@ -78,16 +82,16 @@ const SeekerUpdateform = () => {
     }
 
     // Append all petInfo fields to formData
-    Object.keys(userInfo).forEach(key => {
+    Object.keys(changedFields).forEach(key => {
     if (key === 'avatar') {
         // If the key is 'image' and it's a File object, append the file
-        if (userInfo[key] instanceof File) {
+        if (changedFields[key] instanceof File) {
             formData.append(key, userInfo[key]);
         }
     } else {
         // If the key is not 'image' and the value is not an empty string,
         // append the key-value pair to the formData
-        formData.append(key, userInfo[key]);
+        formData.append(key, changedFields[key]);
     }
     });
     
@@ -105,7 +109,7 @@ const SeekerUpdateform = () => {
           // If the response is not OK, throw an error
           throw new Error(`HTTP error: ${response.status}`);
         }
-        return response.json();
+        // return response.json();
       })
       .then(data => {
         console.log(data);
@@ -114,6 +118,7 @@ const SeekerUpdateform = () => {
         navigate(`/seeker/${seeker_id}`);
       })
       .catch(error => {
+        console.log(formData);
         console.error('Error:', error);
         // Set the error message
         setErrorMessage("Your username is already taken.")
@@ -155,7 +160,7 @@ const SeekerUpdateform = () => {
 
   return (
     <>
-<StartHeader/>
+<Header/>
 
     <div className="container">
         <div className="row" style={{height: 4 + "rem"}}>
@@ -174,61 +179,77 @@ const SeekerUpdateform = () => {
 
         <div className="col-md-5">
     <div className="card p-5">
-        <form onSubmit={handleSubmit} className="form-group">
-            {/* <img src={petInfo.image} alt={petInfo.name} className="img-fluid mb-3" /> */}
-            
-            {imagePreview && (
-                        <img src={imagePreview} alt="User" className="img-fluid mb-3" />
-                    )}
-                    <div className="mb-3">
-              <label htmlFor="image" className="form-label">Avatar</label>
-              <input
-                id="avatar"
-                type="file"
-                name="avatar"
-                onChange={handleChange}
-                className="form"
-              />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="name" className="form-label">Username</label>
-                <input
-                    id="username"
-                    type="text"
-                    name="username"
-                    value={userInfo.username}
-                    onChange={handleChange}
-                    className="form"
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="age" className="form-label">Email</label>
-                <input
-                    id="email"
-                    type="text"
-                    name="email"
-                    value={userInfo.email}
-                    onChange={handleChange}
-                    className="form"
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="gender" className="form-label">Location</label>
-                <input
-                    id="location"
-                    type="text"
-                    name="location"
-                    value={userInfo.location}
-                    onChange={handleChange}
-                    className="form"
-                />
-            </div>
-            {errorMessage && (
-                <p className="text-danger">{errorMessage}</p>
-            )}
-            <button type="submit" className="btn btn-primary">Update</button>
-            <button  onClick={handleDelete} className="btn btn-danger" style={{ marginLeft: '10px' }}>Delete seeker</button>
-        </form>
+    <form onSubmit={handleSubmit} className="form-group">
+    {/* Image Preview */}
+    {imagePreview && (
+        <div className="text-center mb-3">
+            <img src={imagePreview} alt="Preview" className="img-fluid rounded" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+        </div>
+    )}
+
+    {/* Avatar Input */}
+    <div className="mb-3">
+        <label htmlFor="avatar" className="form-label">Avatar</label>
+        <input
+            id="avatar"
+            type="file"
+            name="avatar"
+            onChange={handleChange}
+            className="form-control"
+        />
+    </div>
+
+    {/* Username Input */}
+    <div className="mb-3">
+        <label htmlFor="username" className="form-label">Username</label>
+        <input
+            id="username"
+            type="text"
+            name="username"
+            value={userInfo.username}
+            onChange={handleChange}
+            className="form-control"
+        />
+    </div>
+
+    {/* Email Input */}
+    <div className="mb-3">
+        <label htmlFor="email" className="form-label">Email</label>
+        <input
+            id="email"
+            type="text"
+            name="email"
+            value={userInfo.email}
+            onChange={handleChange}
+            className="form-control"
+        />
+    </div>
+
+    {/* Location Input */}
+    <div className="mb-3">
+        <label htmlFor="location" className="form-label">Location</label>
+        <input
+            id="location"
+            type="text"
+            name="location"
+            value={userInfo.location}
+            onChange={handleChange}
+            className="form-control"
+        />
+    </div>
+
+    {/* Error Message */}
+    {errorMessage && (
+        <p className="text-danger">{errorMessage}</p>
+    )}
+
+    {/* Form Buttons */}
+    <div className="text-center">
+        <button type="submit" className="btn btn-primary me-2">Update</button>
+        <button onClick={handleDelete} className="btn btn-danger">Delete seeker</button>
+    </div>
+</form>
+
         
     </div>
 </div>

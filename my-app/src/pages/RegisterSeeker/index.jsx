@@ -17,9 +17,11 @@ const RegisterShelterPage= () => {
     const [password2, setPassword2] = useState("");
     const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
+    const [preference, setPreference] = useState("");
+    
     const navigate = useNavigate();
 
-    const Register = (username, password, password2, address, email, navigate) => {
+    const Register = (username, password, password2, address, email, preference, navigate) => {
         // check if the username and password is valid
         var bad = false;
         const username_not = document.getElementById("Username_notification");
@@ -27,6 +29,8 @@ const RegisterShelterPage= () => {
         const pwd2_not = document.getElementById("PasswordConfirm_notification");
         const address_not = document.getElementById("Address_notification");
         const email_not = document.getElementById("Email_notification");
+        const preference_not = document.getElementById("Preference_notification");
+
 
 
         if (username === "") {
@@ -69,14 +73,22 @@ const RegisterShelterPage= () => {
             email_not.innerHTML = ""
         )
 
-        if (password !== password2) {
-            pwd2_not.innerHTML = "Password does not match";
+        if (preference === "") {
+            preference_not.innerHTML = "Please enter your preference";
             bad = true;
+        }
+        else (
+            preference_not.innerHTML = ""
+        )
+        
+
+        if (bad) {
             return;
         }
 
-
-        if (bad) {
+        if (password !== password2) {
+            pwd2_not.innerHTML = "Password does not match";
+            bad = true;
             return;
         }
         
@@ -85,6 +97,7 @@ const RegisterShelterPage= () => {
         pwd2_not.innerHTML = "";
         address_not.innerHTML = "";
         email_not.innerHTML = "";
+        preference_not.innerHTML = "";
 
 
         var data = new FormData();
@@ -93,6 +106,7 @@ const RegisterShelterPage= () => {
         data.append("password_confirm", password2);
         data.append("location", address);
         data.append("email", email);
+        data.append("preference", preference);
     
         fetch(`${BACKENDHOST}accounts/seeker/`, {
             method: "POST",
@@ -191,6 +205,14 @@ const RegisterShelterPage= () => {
                                         <LoginInput input_lable_value="Email"
                                         input_value={email}
                                         update={setEmail}
+                                        placeholder_value="" 
+                                        type_value="text" 
+                                        is_required={true} />
+                                </div>
+                                <div className="mb-3">
+                                        <LoginInput input_lable_value="Preference"
+                                        input_value={preference}
+                                        update={setPreference}
                                         placeholder_value="" 
                                         type_value="text" 
                                         is_required={true} />
