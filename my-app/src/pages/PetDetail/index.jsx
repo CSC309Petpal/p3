@@ -90,7 +90,7 @@ function PetDetail() {
             style={{ height: '200px', width: '200px', borderRadius: '100px' }} 
           />
         </div>
-
+        
         <div className="col-md-8 d-flex justify-content-center">
           <table className="table border border-light table-bordered text-center border-dark">
             <tbody>
