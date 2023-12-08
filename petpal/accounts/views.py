@@ -233,7 +233,10 @@ class SeekerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
             return seeker  
         
     def update(self, request, *args, **kwargs):
-        user_data = request.data
+        user_data = request.data.copy()
+        checking_value = user_data.get('checking', '').lower()  # Get the 'checking' value and convert to lowercase
+        if checking_value in ['true', 'false']:  # Check if the value is a valid boolean string
+            user_data['checking'] = checking_value == 'true'  # Convert to boolean
         user_serializer = self.get_serializer(self.get_object(), data=user_data, partial=True)
         user_serializer.is_valid(raise_exception=True)
         self.perform_update(user_serializer)

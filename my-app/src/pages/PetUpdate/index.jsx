@@ -20,6 +20,7 @@ const PetUpdateForm = () => {
     size: '',
     color: '',
     status: '',
+    checking: '',
   });
   const [imagePreview, setImagePreview] = useState(null);
   const token = localStorage.getItem('token');
@@ -58,7 +59,12 @@ const PetUpdateForm = () => {
             reader.readAsDataURL(file);
         }
     }
-    setPetInfo({ ...petInfo, [event.target.name]: event.target.value });
+
+    if (event.target.name === 'checking') {
+        setPetInfo({ ...petInfo, [event.target.name]: event.target.value === 'true' });
+    }else{
+        setPetInfo({ ...petInfo, [event.target.name]: event.target.value });
+    }
   };
 
   
@@ -212,6 +218,14 @@ const PetUpdateForm = () => {
                     <option value="adopted">Adopted</option>
                     <option value="pending">Pending</option>
                     <option value="withdrawn">Withdrawn</option>
+                </select>
+            </div>
+
+            <div className="mb-3">
+                    <label htmlFor="Checking" className="form-label">Preference</label>
+                    <select name="checking" onChange={handleChange} className="form-select" value={petInfo.checking.toString()}>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                 </select>
             </div>
 
