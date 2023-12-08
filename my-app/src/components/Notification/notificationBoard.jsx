@@ -106,8 +106,8 @@ function NotificationBoard() {
         <div className="notificaiton-text">
             <h1>Notification</h1>
         </div>
-        <div className="filters d-flex flex-row justify-content-center">
-          <select value={read} onChange={handleReadChange} className='form-select form-select-sml mb-3' >
+        <div className="filters d-flex">
+          <select value={read} onChange={handleReadChange} className='form-select form-select-sm' >
             <option value="">All</option>
             <option value="true">Read</option>
             <option value="false">Unread</option>
@@ -127,11 +127,11 @@ function NotificationBoard() {
                         <p><b>Message From: </b> {notification.sender_name}</p>
                         <p className="text-muted">{notification.message}.</p>
                         <p className="text-muted notification-time"><small>{timeAgo(notification.creation_time)}</small></p>
-                        {notification.type === 'message' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={markAsRead(notification.id)}>Go to conversation</Link>}
-                        {notification.type === 'status_update' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={markAsRead(notification.id)}>Go to Application</Link>}
-                        {notification.type === 'new_pet_listings' && <Link to={`/pet/${notification.pet}`} className="btn btn-primary" onClick={markAsRead(notification.id)}>Go to Pet Listing</Link>}
-                        {notification.type === 'new_review' && <Link to={`/shelter/${notification.receiver}#Comments`} className="btn btn-primary" onClick={markAsRead(notification.id)}>Go to Reviews</Link>}
-                        {notification.type === 'new_application' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={markAsRead(notification.id)}>Go to Application</Link>}
+                        {notification.type === 'message' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to conversation</Link>}
+                        {notification.type === 'status_update' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Application</Link>}
+                        {notification.type === 'new_pet_listings' && <Link to={`/pet/${notification.pet}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Pet Listing</Link>}
+                        {notification.type === 'new_review' && <Link to={`/shelter/${notification.receiver}#Comments`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Reviews</Link>}
+                        {notification.type === 'new_application' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Application</Link>}
                     </div>
                 </div>
             </div> 

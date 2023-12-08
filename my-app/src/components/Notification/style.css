@@ -134,6 +134,10 @@ span{
     margin: 2rem;
 }
 
+.form-select{
+    margin: 20px;
+}
+
 @media screen and (max-width: 600px) {
     .flex-col-lt480{
         display: flex;
