@@ -17,7 +17,7 @@ function PetDetail() {
     // Define the function to fetch pet information
     async function fetchPetInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/pets/${petId}/`, {
+        const response = await fetch(`${BACKENDHOST}pets/${petId}/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function PetDetail() {
     }
 
     fetchPetInfo(); // Call the function to fetch pet information
-  }); // Dependency array to re-fetch data if petId changes
+  },[]); // Dependency array to re-fetch data if petId changes
 
   if (!petInfo) {
     return <div>Loading...</div>; // Display loading message until data is fetched
