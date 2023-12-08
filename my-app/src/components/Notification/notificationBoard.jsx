@@ -71,6 +71,31 @@ function NotificationBoard() {
       setPage(1);
     };
 
+  const deleteNotification = (notification_id) => {
+    fetch(`${BACKENDHOST}notifications/${notification_id}/`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }else{
+        setNotifications(prevNotifications => ({
+          ...prevNotifications,
+          results: prevNotifications.results.filter(notification => notification.id !== notification_id)
+        }));
+        if (notifications.results.length === 1) {
+          window.location.reload();
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
+
   useEffect(() => {
     let url = `${BACKENDHOST}notifications?page=${page}`;
     if (ordering) {
@@ -133,7 +158,7 @@ function NotificationBoard() {
                         {notification.type === 'new_pet_listings' && <Link to={`/pet/${notification.pet}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Pet Listing</Link>}
                         {notification.type === 'new_review' && <Link to={`/shelter/${notification.receiver}#Comments`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Reviews</Link>}
                         {notification.type === 'new_application' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Application</Link>}
-                        <button className="btn btn-danger">Delete</button>
+                        <button className="btn btn-danger" onClick={() => deleteNotification(notification.id)}>Delete</button>
                     </div>
                 </div>
             </div> 

@@ -18,6 +18,7 @@ import PetCreationForm from './pages/Pet/PetCreatePage';
 import PetDetail from './pages/PetDetail';
 import ShelterDetail from './pages/ShelterDetail';
 
+import ShelterListing from './pages/ShelterListing';
 import ShelterComponent from './pages/ShelterManage';
 import ShelterUpdateForm from './pages/ShelterUpdate';
 import SeekerUpdateForm from './pages/SeekerUpdate';
@@ -71,7 +72,7 @@ function App() {
 
         <Route path="/seeker/update/:seekerId" element={<SeekerUpdateForm />} />
 
-
+        <Route path="/shelters" element={<ShelterListing />} />
 
 
         <Route path="/application-create/:pet_id" element={<ApplicationCreateForm/>}/>
