@@ -97,10 +97,10 @@ class FollowupCreateListView(generics.ListCreateAPIView):
         followup_url = self.request.build_absolute_uri(reverse_lazy('followup:followup_detail', args=[obj.id]))
 
         if self.request.user.user_type == 1:
-            create_notification(self.request.user, to_app.shelter.user, followup_url, 'message',followup_url)
+            create_notification(self.request.user, to_app.shelter.user, followup_url, 'message',followup_url, application=to_app)
             update_application_updation_time(app_id)
         elif self.request.user.user_type == 2:
-            create_notification(self.request.user, to_app.seeker.user, followup_url, 'message',followup_url)
+            create_notification(self.request.user, to_app.seeker.user, followup_url, 'message',followup_url, application=to_app)
             update_application_updation_time(app_id)
 
     def get_queryset(self):
