@@ -261,7 +261,8 @@ const PetCreationForm = () => {
                     <select name="status" value={petInfo.status} onChange={handleChange} placeholder="available" className="form-select">
                     <option value="available" selected>Available</option>
                     <option value="adopted">Adopted</option>
-                    <option value="foster">Foster</option>
+                    <option value="pending">Pending</option>
+                    <option value="withdrawn">Withdrawn</option>
                 </select>
             </div>
 

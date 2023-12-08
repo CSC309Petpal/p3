@@ -15,6 +15,8 @@ class Pet(models.Model):
         ('available', 'Available'),
         ('adopted', 'Adopted'),
         ('foster', 'Foster'),
+        ('pending', 'Pending'),
+        ('withdrawn', 'Withdrawn'),
     )
 
     # Choices for pet gender

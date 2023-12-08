@@ -7,6 +7,7 @@ import Footer from "../../components/Footer/footer";
 import LoginInput from "../../components/input/LoginInput";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Header from "../../components/Header/header";
 
 
 const PetUpdateForm = () => {
@@ -18,6 +19,7 @@ const PetUpdateForm = () => {
     breed: '',
     size: '',
     color: '',
+    status: '',
   });
   const [imagePreview, setImagePreview] = useState(null);
   const token = localStorage.getItem('token');
@@ -138,7 +140,7 @@ const PetUpdateForm = () => {
 
   return (
     <>
-<StartHeader/>
+<Header/>
 
     <div className="container">
         <div className="row" style={{height: 4 + "rem"}}>
@@ -202,6 +204,17 @@ const PetUpdateForm = () => {
                     <option value="unknown">Unknown</option>
                 </select>
             </div>
+
+            <div className="mb-3">
+                    <label htmlFor="Status" className="form-label">Status</label>
+                    <select name="status" onChange={handleChange} className="form-select" value={petInfo.status}>
+                    <option value="available">Available</option>
+                    <option value="adopted">Adopted</option>
+                    <option value="pending">Pending</option>
+                    <option value="withdrawn">Withdrawn</option>
+                </select>
+            </div>
+
             <div className="mb-3">
                 <label htmlFor="breed" className="form-label">Breed</label>
                 <input
