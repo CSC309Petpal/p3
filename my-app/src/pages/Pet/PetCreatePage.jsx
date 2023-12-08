@@ -247,7 +247,7 @@ const PetCreationForm = () => {
 
             <div className="mb-3">
                 <label htmlFor="gender" className="form-label">Gender</label>
-                <select name="gender" onChange={handleChange} placeholder="unknown"  className="form-select" value={petInfo.size}>
+                <select name="gender" onChange={handleChange} placeholder="unknown"  className="form-select" value={petInfo.gender}>
                          <option value="male" selected>Male</option>
                          <option value="female">Female</option>
                          <option value="unknown">Unknown</option>

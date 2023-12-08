@@ -30,7 +30,7 @@ const PetUpdateForm = () => {
     // Retrieve the petId from the URL
 
     // Fetch the current pet information
-    axios.get(`${BACKENDHOST}/pets/${petId}/`)
+    axios.get(`${BACKENDHOST}pets/${petId}/`)
       .then(response => {
         setPetInfo(response.data);
         setImagePreview(response.data.image);
@@ -80,7 +80,7 @@ const PetUpdateForm = () => {
     });
     
     // API request to update pet information
-    fetch(`${BACKENDHOST}/pets/${petId}/`, {
+    fetch(`${BACKENDHOST}pets/${petId}/`, {
         method: 'PATCH', // or 'POST', 'PUT', 'DELETE', etc.
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -98,7 +98,7 @@ const PetUpdateForm = () => {
             } else {
                 const shelter_id = localStorage.getItem('shelter_id');
                 // if the pet is updated successfully, redirect to the pet detail page
-                navigate(`/shelter/${shelter_id}`);
+                navigate(`/shelterHome`);
             }
         });
   };
@@ -112,14 +112,13 @@ const PetUpdateForm = () => {
 
     const handleDelete = () => {
         // API request to delete pet
-        fetch(`${BACKENDHOST}/pets/${petId}/`, {
-            method: 'DELETE', // or 'POST', 'PUT', 'DELETE', etc.
+        fetch(`${BACKENDHOST}pets/${petId}/`, {
+            method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
-              // other headers...
             },
           })
-          .then(response => response.json())
+          .then(response => response.data)
             .then(data => console.log(data))
             .catch(error => {
                 console.error('Error:', error);
@@ -130,9 +129,7 @@ const PetUpdateForm = () => {
                 if (response && response.detail) {
                     alert(response.detail);
                 } else {
-                    const shelter_id = localStorage.getItem('shelter_id');
-                    // if the pet is deleted successfully, redirect to the shelter detail page
-                    navigate(`/shelter/${shelter_id}`);
+                    navigate(`/shelterHome`);
                 }
             });
     }
@@ -199,14 +196,11 @@ const PetUpdateForm = () => {
             </div>
             <div className="mb-3">
                 <label htmlFor="gender" className="form-label">Gender</label>
-                <input
-                    id="gender"
-                    type="text"
-                    name="gender"
-                    value={petInfo.gender}
-                    onChange={handleChange}
-                    className="form-control"
-                />
+                <select name="gender" onChange={handleChange} placeholder="unknown"  className="form-select" value={petInfo.gender}>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="unknown">Unknown</option>
+                </select>
             </div>
             <div className="mb-3">
                 <label htmlFor="breed" className="form-label">Breed</label>

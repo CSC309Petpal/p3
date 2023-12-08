@@ -128,5 +128,5 @@ class ShelterListSerializer(ModelSerializer):
     avatar = serializers.ImageField(source='user.avatar')
     class Meta:
         model = Shelter
-        fields = ( 'username', 'email', 'location', 'pets', 'avatar')
+        fields = ( 'username', 'email', 'location', 'pets', 'avatar', 'id')
 

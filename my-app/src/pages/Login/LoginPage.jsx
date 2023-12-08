@@ -63,7 +63,7 @@ const LoginPage = () => {
             setToken(data.access);
             if(data.user_type==1){
                 localStorage.setItem("seeker_id", data.seeker_id);
-                navigate("/seeker-detail");
+                navigate("/pet");
             }else{
                 localStorage.setItem("shelter_id", data.shelter_id);
                 navigate(`/shelterHome`);

@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { BACKENDHOST } from '../../config';
-// import logo from 'path_to_logo'; // Uncomment and set the path to your logo image if needed
-
 
 function Application() {
-  const [applicationInfo, setApplicationInfo] = useState(null); // State to store application information
+  const [applicationInfo, setApplicationInfo] = useState(null);
+  const [newStatus, setNewStatus] = useState(''); // State for the new status
   const { application_id } = useParams();
   const navigate = useNavigate();
-  console.log(applicationInfo);
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
     async function fetchApplicationInfo() {
       try {
@@ -36,22 +35,54 @@ function Application() {
     fetchApplicationInfo();
   }, [application_id, navigate, token]); // Dependency array to re-run the effect when application_id changes
 
+  const handleStatusChange = (e) => {
+    setNewStatus(e.target.value);
+  };
+
+  const updateApplicationStatus = async () => {
+    try {
+      const response = await fetch(`${BACKENDHOST}applications/${application_id}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ...applicationInfo, status: newStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const updatedData = await response.json();
+      setApplicationInfo(updatedData);
+    } catch (error) {
+      console.error('Update error:', error);
+      navigate('/error');
+    }
+  };
+
   if (!applicationInfo) {
-    return <div>Loading...</div>; // Or any other loading state representation
+    return <div>Loading...</div>;
   }
-  
-  
+
   return (
     <main className="flex-grow-1 align-items-center">
-      
       <div className="container ms-6">
-      <h1 className="mb-4">Application Detail</h1>
-        {applicationInfo&&Object.entries(applicationInfo).map(([key, value])=>{
-          let capitalied_key = key.charAt(0).toUpperCase() + key.slice(1);
-          return (<p key={capitalied_key}> {capitalied_key}: {value}</p>)
-        })}
-        {/* Application Information and other content here */}
-        {/* Use applicationInfo to render the data */}
+        <h1 className="mb-4">Application Detail</h1>
+        {Object.entries(applicationInfo).map(([key, value]) => (
+          <p key={key}> {key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
+        ))}
+
+        {/* Dropdown for status selection */}
+        <select value={newStatus} onChange={handleStatusChange}>
+          <option value="pending">Pending</option>
+          <option value="accepted">Accepted</option>
+          <option value="withdrawn">Withdrawn</option>
+          <option value="denied">Denied</option>
+        </select>
+
+        {/* Update button */}
+        <button onClick={updateApplicationStatus}>Update Status</button>
       </div>
     </main>
   );
