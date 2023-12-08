@@ -16,6 +16,10 @@ function ShelterComponent() {
     navigate('/pet/create');
   };
 
+  const handleAllBlog = (id) => {
+    navigate(`/blog/shelter/${id}`);
+  }
+
   const handleDetailClick = (petId) => {
     navigate(`/pet/${petId}`);
   }
@@ -34,6 +38,7 @@ function ShelterComponent() {
           if (data.avatar === null) {
             data.avatar = logo;
           }
+          data.avatar = logo;
 
 
 
@@ -98,6 +103,15 @@ function ShelterComponent() {
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div className="row mt-lg-4 justify-content-center">
+        <h1 className="text-center col-12">Shelter's Blogs:</h1>
+        <hr className="my-4 col-12 border-primary" />
+        
+        <div className="col-auto">
+          <button className="btn btn-primary bg-dark" onClick={() => handleAllBlog(shelterId)}>All Blogs</button>
         </div>
       </div>
 

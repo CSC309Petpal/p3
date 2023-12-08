@@ -5,38 +5,26 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
+import Comments from '../Comment/CommentList';
 
 function SeekerComponent() {
   const seekerId = localStorage.getItem('seeker_id');
   const [seekerInfo, setseekerInfo] = useState(null); // State to store seeker information
   
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-  const handleAddClick = () => {
-    navigate('/pet/create');
-  };
 
-  const handleDetailClick = (petId) => {
-    navigate(`/pets/${petId}`);
-  }
 
-  const handleUserUpdate = () => {
-    navigate(`/seeker/update`);
-  }
+
 
   useEffect(() => {
     // Define the function to fetch seeker information
     async function fetchseekerInfo() {
       try {
-        const response = await fetch(`${BACKENDHOST}/accounts/seeker/${seekerId}`, 
-        {
-            method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          // other headers...
-        },
-
-
+        const response = await fetch(`${BACKENDHOST}accounts/seeker/${seekerId}`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
         });
         if (response.ok) {
           const data = await response.json();
@@ -44,16 +32,9 @@ function SeekerComponent() {
             data.avatar = logo;
           }
 
-
-
           setseekerInfo(data); // Update the state with seeker information
           // check if the avatar is a file or a url
-          if (seekerInfo.avatar === null) {
-            setseekerInfo({ ...seekerInfo, avatar: logo });
-          }
-          else {
-            setseekerInfo({ ...seekerInfo, avatar: data.avatar });
-          }
+      
         } else {
           // Handle HTTP errors
           console.error("HTTP Error: " + response.status);
@@ -65,7 +46,7 @@ function SeekerComponent() {
     }
 
     fetchseekerInfo(); // Call the function to fetch seeker information
-  }); // Dependency array to re-fetch data if seekerId changes
+  }, []); // Dependency array to re-fetch data if seekerId changes
 
   if (!seekerInfo) {
     return <div>Loading...</div>; // Display loading message until data is fetched
@@ -110,7 +91,16 @@ function SeekerComponent() {
         </div>
       </div>
 
-      
+
+      <div class="row mt-lg-4" id="myPets">
+                <h2 class="text-center">Pets</h2>
+                <hr class="my-4 border-primary"/>
+        </div>
+
+      <div className="row justify-content-center">
+        {/* comment list */}
+        <Comments seekerId={seekerId} />
+      </div>
     </div>
     <div className="container m-5">
       --
