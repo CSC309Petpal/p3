@@ -67,6 +67,8 @@ class Seeker(models.Model):
     phone_number = models.CharField(max_length=20, blank=True)
     birthday= models.DateField(auto_now=False, null=True, blank=True) 
     preference = models.TextField(blank=True)
+    # add check for the seeker, which should be a boolean field
+    checking = models.BooleanField(default=False)
     
 
     def __str__(self):

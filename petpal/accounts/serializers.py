@@ -60,7 +60,7 @@ class CustomUserSerializer(ModelSerializer):
 class SeekerSerializer(ModelSerializer):
     class Meta:
         model = Seeker
-        fields = ['user', 'phone_number', 'birthday', 'preference', 'id']
+        fields = ['user', 'phone_number', 'birthday', 'preference', 'id', 'checking']
     
     
 class ShelterSerializer(ModelSerializer):
@@ -84,7 +84,7 @@ class CustomUserUpdateSerializer(ModelSerializer):
 class SeekerUpdateSerializer(ModelSerializer):
     class Meta:
         model = Seeker
-        fields = ['user', 'phone_number', 'birthday', 'preference']
+        fields = ['user', 'phone_number', 'birthday', 'preference', 'checking']
 
 class SeekerDetailSerializer(ModelSerializer):
     username = serializers.SerializerMethodField()
@@ -94,7 +94,7 @@ class SeekerDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Seeker
-        fields = ['username', 'email', 'avatar', 'preference', 'id', 'location', 'user']
+        fields = ['username', 'email', 'avatar', 'preference', 'id', 'location', 'user', 'checking']
 
     def get_username(self, obj):
         return obj.user.username
