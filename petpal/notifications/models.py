@@ -24,22 +24,14 @@ class Notification(models.Model):
     url1 = models.URLField(default='')
     url2 = models.URLField(default='')
 
-    def sender_avatar(self):
-        return self.sender.avatar
-    
-    def application_avatar(self):
-        return self.application.pet.image
-    
-    def pet_avatar(self):
-        return self.pet.image
-
     def __str__(self) -> str:
         if self.sender == None:
             return str(self.pk) + " System to " + self.receiver.username + " Type: " + self.type
         else:
             return str(self.pk) + " " + self.sender.username + " to " + self.receiver.username + " Type: " + self.type
 
-def create_notification(sender, receiver, message, type, url1='', url2='', application=''):
-    notification = Notification(sender=sender, sender_name = sender.username, receiver=receiver, message=message, type=type, url1=url1, url2=url2)
+def create_notification(sender, receiver, message, type, url1='', url2='', application=None, pet=None):
+    notification = Notification(sender=sender, sender_name = sender.username, receiver=receiver, message=message, 
+                                type=type, url1=url1, url2=url2, application=application, pet=pet, )
     notification.save()
     return notification

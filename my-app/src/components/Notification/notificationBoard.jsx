@@ -147,7 +147,12 @@ function NotificationBoard() {
             <div key={notification.id} className={`card notification-card message-card ${notification.read ? 'grey-background' : ''}`}>
                 <div className="card-body d-flex flex-row justify-content-center">
                     <div className="notification-img">
-                        <img src={notification.sender_avatar} alt="Shelter" width="75px" height="75px" />
+                        {notification.type === 'message' && <img src={notification.application_image} alt="Shelter" width="75px" height="75px"/>}
+                        {notification.type === 'status_update' && <img src={notification.application_image} alt="Shelter" width="75px" height="75px"/>}
+                        {notification.type === 'new_application' && <img src={notification.application_image} alt="Shelter" width="75px" height="75px"/>}
+                        {notification.type === 'new_review' && <img src={notification.sender_avatar} alt="Shelter" width="75px" height="75px" />}
+                        {notification.type === 'new_pet_listings' && <img src={notification.pet_image} alt="Shelter" width="75px" height="75px" />}
+
                     </div>
                     <div className="message-content d-flex flex-column">
                         <p><b>Message From: </b> {notification.sender_name}</p>

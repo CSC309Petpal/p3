@@ -59,9 +59,12 @@ const nextPage = () => {
         apps.map((app) => (
           <div key={app.application_id} className="card mb-3">
             <div className="card-body">
-              <h5 className="card-title">apply to pet :{app.pet}</h5>
+              <h5 className="card-title" style={{ color: 'black' }}>apply to pet :{app.petname}</h5>
 
               <div className="d-flex justify-content-between align-items-center">
+              <span className={`mr-2` } style={{ color: 'black' }}>
+                  {app.seekername}'s apply to {app.sheltername}
+                </span>
                 <span className={`mr-2` } style={{ color: 'black' }}>
                   {app.status}
                 </span>
