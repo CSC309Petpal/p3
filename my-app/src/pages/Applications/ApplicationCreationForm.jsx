@@ -19,6 +19,7 @@ function ApplicationCreationForm(props) {
     props.onSubmit(formData); // Pass formData on submit
   };
 
+  console.log('Error received in form:', props.error);
   return (
     <div className="container mt-5 mb-auto">
       <form onSubmit={handleSubmit}>
@@ -38,6 +39,8 @@ function ApplicationCreationForm(props) {
 
         <button type="submit" className="btn btn-light" id="button">Submit</button>
       </form>
+
+      <h5>{props.error}</h5>
     </div>
   );
 }
