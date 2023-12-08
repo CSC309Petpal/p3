@@ -91,7 +91,7 @@ const Header = () => {
 
                         {/* Log Out Link */}
                         <Link className="nav-link me-lg-3" to="/shelters">Shelters</Link>
-                        <Link className="nav-link me-lg-3" to="/pet">Applications</Link>
+                        <Link className="nav-link me-lg-3" to="/applications">Applications</Link>
                         <Link className="nav-link" to="/logout">Log Out</Link>
                     </div>
                 </div>
