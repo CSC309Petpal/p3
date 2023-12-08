@@ -8,6 +8,7 @@ class Comments(models.Model):
     shelter = models.ForeignKey('accounts.Shelter', on_delete=models.CASCADE, related_name='comment_recieved')
     created = models.DateTimeField(default=datetime.now, blank=True)
     content = models.CharField(max_length=200)
+    username = models.CharField(max_length=200,null=True)
 
     class Meta:
         ordering = ['-created']

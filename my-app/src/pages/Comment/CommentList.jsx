@@ -159,7 +159,7 @@ const nextPage = () => {
           <div className="col-md-4" key={comment.comment_id}>
             <div className="card">
               <div className="card-body" >
-                <h5 className="card-title">SenderId: {comment.sender}</h5>
+                <h5 className="card-title">Sender: {comment.username}</h5>
                 <div className="d-flex justify-content-between align-items-center">
                 <span className={`mr-2`} style={{ color: 'black' }}>{comment.content}</span>
 
