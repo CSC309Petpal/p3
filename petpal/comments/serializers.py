@@ -4,8 +4,8 @@ from .models import Comments, Shelter
 class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = ['sender','shelter','content']
-        read_only_fields = ['sender','shelter']
+        fields = ['sender','shelter','content','created']
+        read_only_fields = ['sender','shelter','created']
 
 class CommentsListSerializer(serializers.ModelSerializer):
     class Meta:
