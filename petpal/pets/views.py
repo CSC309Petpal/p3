@@ -1,5 +1,7 @@
 from rest_framework import generics
 from .models import Pet
+from notifications.models import create_notification
+from accounts.models import Seeker
 from .serializers import PetSerializer
 from .permissions import IsShelter, IsOwner
 from rest_framework import viewsets, filters
@@ -39,7 +41,12 @@ class PetListCreateAPIView(generics.ListCreateAPIView):
 
         if not hasattr(user, 'shelter'):
             raise Http404("User does not have a linked shelter.")
-        serializer.save(shelter=self.request.user.shelter)
+        new_pet = serializer.save(shelter=self.request.user.shelter)
+        seekers = Seeker.objects.all()
+        for seeker in seekers:
+            if seeker.checking:
+                create_notification(self.request.user, seeker.user, "New Pet Listing", "new_pet_listings", pet=new_pet)
+
     
 
 class PetRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
