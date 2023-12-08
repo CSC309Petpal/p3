@@ -83,6 +83,9 @@ const Header = () => {
                             </ul>
                         </li>
 
+                        {/* Notification Link */}
+                        <Link className="nav-link me-lg-3" to="/notifications">Notifications</Link>
+
                         {/* Log Out Link */}
                         <Link className="nav-link" to="/logout">Log Out</Link>
                     </div>
@@ -115,6 +118,9 @@ const Header = () => {
                                 <li><Link className="dropdown-item" to={`/shelter/update`}>Edit</Link></li>
                             </ul>
                         </li>
+
+                        {/* Notification Link */}
+                        <Link className="nav-link me-lg-3" to="/notifications">Notifications</Link>
 
                         {/* Log Out Link */}
                         <Link className="nav-link" to="/logout">Log Out</Link>
