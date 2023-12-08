@@ -98,7 +98,7 @@ const nextPage = () => {
       .then((res) => {
         setComments(res.data.results);
         
-        setPages(Math.ceil(res.data.count/5));
+        setPages(Math.ceil(res.data.count/6));
         setErrorMessage('');
       })
       .catch((err) => {
@@ -120,79 +120,82 @@ const nextPage = () => {
   console.log(comments);
 
   return (
-    <div className="row justify-content-center">
-      <p>{errorMessage}</p>
-      <div className="row justify-content-left">
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Add new Comment</h5>
-              <div className="d-flex justify-content-between align-items-center">
-                <span className={`mr-2`}>
-                  <input
-                    name="comment content"
-                    id="content"
-                    value={content}
-                    type="text"
-                    onChange={(e) => setContent(e.target.value)}
-                  />
-                </span>
-                <div>
-                  <label
-                    className="is-block mb-2 ml-2"
-                    style={{ fontSize: "15px" }}
-                    id="notification"
-                  ></label>
-                </div>
-                <button
-                  className="btn btn-secondary ml-1 is-link"
-                  type="register"
-                  value="Create new comment"
-                  id="propertyLocation"
-                  onClick={() => create(content, shelterId)}
-                  readOnly
-                >
-                  comment
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        {comments.map((comment) => (
-          <div className="col-md-4" key={comment.pk}>
-            <div className="card">
-              <div className="card-body" >
-                <h5 className="card-title">Sender: {comment.username}</h5>
-                <div className="d-flex justify-content-between align-items-center">
-                <span className={`mr-2`} style={{ color: 'black' }}>{comment.content}</span>
 
-                  <div>
-                  <span style={{ color: 'black' }}>{timeAgo(comment.created)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+<div className="container mt-4">
+  <div className="row justify-content-center">
+    <p>{errorMessage}</p>
+  </div>
+
+  <div className="row justify-content-center mb-4">
+    <div className="col-md-6">
+      <div className="card">
+        <div className="card-body">
+          <h5 className="card-title">Add new Comment</h5>
+          <div className="d-flex">
+            <input
+              name="comment content"
+              id="content"
+              value={content}
+              type="text"
+              onChange={(e) => setContent(e.target.value)}
+              className="form-control mr-2"
+              placeholder="Write your comment here"
+            />
+            <button
+              className="btn btn-secondary"
+              type="button"
+              onClick={() => create(content, shelterId)}
+            >
+              Comment
+            </button>
           </div>
-        ))}
-      </div>
-      <div className="d-flex justify-content-center align-items-center">
-        <button
-          className="btn btn-primary"
-          onClick={prevPage}
-          disabled={page === 1}
-        >
-          Previous
-        </button>
-        <span>Page {page} of {pages}</span>
-        <button
-          className="btn btn-primary"
-          onClick={nextPage}
-          disabled={page === pages}
-        >
-          Next
-        </button>
+          <label
+            className="is-block mb-2 ml-2"
+            style={{ fontSize: "15px" }}
+            id="notification"
+          ></label>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div className="row">
+    {comments.map((comment) => (
+      <div className="col-md-4 mb-3" key={comment.pk}>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Sender: {comment.username}</h5>
+            <p className="card-text">{comment.content}</p>
+            <p className="blockquote-footer">
+              Posted {timeAgo(comment.created)}
+            </p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div className="d-flex justify-content-center align-items-center my-4">
+    <button
+      className="btn btn-primary mr-2"
+      onClick={prevPage}
+      disabled={page === 1}
+    >
+      Previous
+    </button>
+    <span>Page {page} of {pages}</span>
+    <button
+      className="btn btn-primary ml-2"
+      onClick={nextPage}
+      disabled={page === pages}
+    >
+      Next
+    </button>
+  </div>
+</div>
+
+
   );
 };
 

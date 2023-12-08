@@ -39,6 +39,9 @@ function ShelterComponent() {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
       try {
+        if (shelterId === null) {
+          navigate('/noaccess');
+        }
         const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`);
         if (response.ok) {
           const data = await response.json();
@@ -79,7 +82,7 @@ function ShelterComponent() {
     <Header />
     <div className="container">
       <div className="row mt-lg-4">
-        <h1 className="text-center">Basic Information</h1>
+        <h1 className="text-center">Home</h1>
         <hr className="my-4 border-primary" />
       </div>
 
@@ -136,32 +139,46 @@ function ShelterComponent() {
 
       <div className="row justify-content-left">
         {/* Add Pet Card */}
-        <div className="col-md-3">
-            <div className="card custom-card d-flex align-items-center justify-content-center" style={{ height: '90%', width: '100%' }} onClick={handleAddClick}>
-                <span className="plus-sign">+</span>
-            </div>
+        <div className="container-fluid">
+  <div className="row flex-nowrap" style={{ overflowX: 'auto' }}>
+    {/* Add Pet Card */}
+    <div className="col" style={{ minWidth: '260px', maxWidth: '18rem', padding: '0 10px' }}>
+      <div className="card custom-card h-100 d-flex align-items-center justify-content-center" onClick={handleAddClick}>
+        <div className="card-body">
+          <span className="plus-sign" style={{ fontSize: '3rem' }}>+</span>
         </div>
-
-        {/* Pet Cards */}
-        {shelterInfo.pets.map(pet => (
-          <div className="col-md-3" key={pet.id}>
-            <div className="card">
-              <img src={pet.image} className="card-img-top fixed-img" alt={pet.name} />
-              <div className="card-body">
-                <h5 className="card-title">{pet.name}</h5>
-                <p className="card-text">Status: {pet.status}</p>
-                <button onClick={() => handleUpdateClick(pet.id)} className="btn btn-primary">Update</button>
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
+    </div>
+
+    {/* Pet Cards */}
+    {shelterInfo.pets.map(pet => (
+      <div className="col" key={pet.id} style={{ minWidth: '260px', maxWidth: '18rem', padding: '0 10px' }}>
+        <div className="card h-100">
+          <img src={pet.image} className="card-img-top" alt={pet.name} style={{ height: '10rem', objectFit: 'cover' }} />
+          <div className="card-body">
+            <h5 className="card-title">{pet.name}</h5>
+            <p className="card-text">Status: {pet.status}</p>
+            <button onClick={() => handleUpdateClick(pet.id)} className="btn btn-primary">Update</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+      </div>
+
+      <div className="row mt-lg-4" id="comments">
+                <h1 className="text-center">Comments</h1>
+                <hr className="my-4 border-primary"/>
+        </div>
       <div className="row justify-content-center">
         {/* comment list */}
         <Comments shelterId={shelterId} />
       </div>
     </div>
-    <div className="container m-5">
+    <div className="container">
       --
     </div>
     <Footer />
