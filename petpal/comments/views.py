@@ -25,7 +25,7 @@ class CommentsCreationView(generics.CreateAPIView):
       
         obj=serializer.save(sender=self.request.user, shelter=to_shelter,username=self.request.user.username)
         followup_url = self.request.build_absolute_uri(reverse_lazy('comments:comment_detail', args=[obj.id]))
-        create_notification(self.request.user, to_shelter.user, followup_url, 'New Review')
+        create_notification(self.request.user, to_shelter.user, "New review on your shelter", 'new_review')
         
 
 class CommentsListView(generics.ListAPIView):
@@ -67,7 +67,7 @@ class CommentsListCreateView(generics.ListCreateAPIView):
       
         obj = serializer.save(sender=self.request.user, shelter=to_shelter,username=self.request.user.username)
         followup_url = self.request.build_absolute_uri(reverse_lazy('comments:comment_detail', args=[obj.id]))
-        create_notification(self.request.user, to_shelter.user, followup_url, 'New Review')
+        create_notification(self.request.user, to_shelter.user, "New review on your shelter", 'new_review')
 
     def post(self, request, *args, **kwargs):
         # Use the create method for POST requests
