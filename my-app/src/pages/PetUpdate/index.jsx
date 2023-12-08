@@ -223,7 +223,7 @@ const PetUpdateForm = () => {
 
             <div className="mb-3">
                     <label htmlFor="Checking" className="form-label">Preference</label>
-                    <select name="checking" onChange={handleChange} className="form-select" value={petInfo.checking.toString()}>
+                    <select name="checking" onChange={handleChange} className="form-select" value={petInfo.checking}>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>

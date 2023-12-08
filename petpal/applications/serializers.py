@@ -14,10 +14,20 @@ class ApplicationUpdateSerializer(serializers.ModelSerializer):
         fields = ['id','status']
 
 class ApplicationListSerializer(serializers.ModelSerializer):
+    petname = serializers.SerializerMethodField()
+    sheltername = serializers.SerializerMethodField()
+    seekername = serializers.SerializerMethodField()
     class Meta:
         model = Application
         fields = '__all__'
-
+    def get_petname(self, obj):
+        
+        return obj.pet.name
+    def get_sheltername(self,obj):
+            return obj.shelter.user.username
+    def get_seekername(self,obj):
+            return obj.seeker.user.username
+    
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
