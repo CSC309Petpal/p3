@@ -68,7 +68,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-lg-auto">
                         {/* Home Link */}
-                        <Link className="nav-link me-lg-3" to="/shelter/${shelter_id}">Home</Link>
+                        <Link className="nav-link me-lg-3" to="/pet">Home</Link>
 
                         {/* Profile Dropdown */}
                         <li className="nav-item dropdown me-lg-3">
@@ -87,6 +87,8 @@ const Header = () => {
                         <Link className="nav-link me-lg-3" to="/notifications">Notifications</Link>
 
                         {/* Log Out Link */}
+                        <Link className="nav-link me-lg-3" to="/shelters">Shelters</Link>
+                        <Link className="nav-link me-lg-3" to="/pet">Applications</Link>
                         <Link className="nav-link" to="/logout">Log Out</Link>
                     </div>
                 </div>
@@ -119,6 +121,7 @@ const Header = () => {
                             </ul>
                         </li>
 
+                        <Link className="nav-link me-lg-3" to="/shelters">Shelters</Link>
                         {/* Notification Link */}
                         <Link className="nav-link me-lg-3" to="/notifications">Notifications</Link>
 

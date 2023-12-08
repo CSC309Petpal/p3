@@ -22,6 +22,8 @@ const PetListing = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [pets, setPets] = useState([]);
     const [shelters, setShelters] = useState([]);
+    const [currentShelter, setCurrentShelter] = useState(1);
+    const [totalShelter, setTotalShelter] = useState(0);
 
     const query = useMemo(() => ({
         page: parseInt(searchParams.get('page') ?? 1),
@@ -37,6 +39,7 @@ const PetListing = () => {
         fetch(`${BACKENDHOST}pets/?${params}`)
             .then(response => response.json())
             .then(data => {
+
                 if (data.results.length === 0) {
                     setPets([]);
                 }else{
@@ -51,22 +54,24 @@ const PetListing = () => {
     const handleDetail = (id) => {
         navigate(`/pet/${id}`);
     };
+    
 
     useEffect(() => {
       const token = localStorage.getItem('token');
-      fetch(`${BACKENDHOST}accounts/shelter`, {
-        method: 'GET', // or 'POST', 'PUT', 'DELETE', etc.
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          // other headers...
-        },
-      })
-          .then(response => response.json())
-          .then(data => {
-              setShelters(data);
-          })
-          .catch(error => console.error('Error fetching shelters:', error));
-  }, [query]);
+      const fetchShelters = async () => {
+        const response = await fetch(`${BACKENDHOST}accounts/shelter?page=${currentShelter}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json();
+        setShelters(data.results);
+        let totalShelter = data.count / 4;
+        setTotalShelter(totalShelter);
+    };
+
+    fetchShelters();
+
+        
+  }, [currentShelter]);
 
     return (
       <>
@@ -82,15 +87,59 @@ const PetListing = () => {
               {/* Filter and Sorting Options - Left Side */}
               <div className="col-md-3">
                   <div className="side-panel mb-3">
+                  <h4>Pages</h4>
+                  <div className="pagination d-flex justify-content-center" style={{ width: '100%' }}>
+                  <div>
+                    <button 
+                        disabled={query.page <= 1} 
+                        onClick={() => setSearchParams({ ...query, page: query.page - 1 })}
+                        className="btn btn-secondary m-1"
+                    >
+                        Previous Page
+                    </button>
+                    <button 
+                        disabled={query.page >= totalPages} 
+                        onClick={() => setSearchParams({ ...query, page: query.page + 1 })}
+                        className="btn btn-secondary m-1"
+                    >
+                        Next Page
+                    </button>
+                    <p className="m-1">Page {query.page} out of {totalPages}.</p>
+                    </div>
+                </div>
+                <hr className="my-4 border-primary" />
                       {/* Filter by Shelter */}
                       <div className="filter-group">
                           <h4>Filter by Shelter:</h4>
-                          <select className="form-select" onChange={(e) => setSearchParams({ ...query, shelter: e.target.value, page: 1 })}>
-                                    <option value="">All</option>
-                                    {shelters.map((shelter) => (
-                                        <option value={shelter.id}>{shelter.username}</option>
-                                    ))}
-                          </select>
+                          <div className="container mt-3">
+                            <div className="row">
+                                <div className="col">
+                                    <select className="form-select">
+                                        {shelters.map(shelter => (
+                                            <option key={shelter.id} value={shelter.id}>{shelter.username}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="row justify-content-center mt-3">
+                                <div className="col-auto">
+                                    <button 
+                                        className="btn btn-outline-primary me-2" 
+                                        onClick={() => setCurrentShelter(prev => prev - 1)} 
+                                        disabled={currentShelter <= 1}
+                                    >
+                                        Previous
+                                    </button>
+                                    <button 
+                                        className="btn btn-outline-primary" 
+                                        onClick={() => setCurrentShelter(prev => prev + 1)} 
+                                        disabled={currentShelter >= totalShelter}
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
                       </div>
                       <hr className="my-4 border-primary" />
   
@@ -167,15 +216,6 @@ const PetListing = () => {
                       </div>
                       <hr className="my-4 border-primary" />
 
-                      <div className="pagination">
-                      <button disabled={query.page <= 1} onClick={() => setSearchParams({ ...query, page: query.page - 1 })}>
-                          Previous
-                      </button>
-                      <button disabled={query.page >= totalPages} onClick={() => setSearchParams({ ...query, page: query.page + 1 })}>
-                          Next
-                      </button>
-                      <p>Page {query.page} out of {totalPages}.</p>
-                  </div>
                   </div>
               </div>
   

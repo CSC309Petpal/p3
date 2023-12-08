@@ -14,6 +14,7 @@ from applications.models import Application
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
+from rest_framework.pagination import PageNumberPagination
 
 
 # Create your views here.
@@ -192,6 +193,7 @@ class ShelterRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class SeekerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
+
     # For Doc
     queryset = Seeker.objects.all()
 
@@ -254,8 +256,11 @@ class SeekerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
         return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+class ShelterPagination(PageNumberPagination):
+    page_size = 4  # Set the number of items per page
 
 class ShelterListCreateAPIView(generics.ListCreateAPIView):
+    pagination_class = ShelterPagination
 
     def get_permissions(self):
         if self.request.method == 'GET':
