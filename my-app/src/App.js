@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login/LoginPage';
 import ApplicationCreateForm from './pages/Applications/ApplicationCreation';
 import ApplicationDetail from "./pages/ApplicationsDetail/ApplicationDetail"
+import Apprepo from './pages/appListing/appListing';
 
 import RegisterShelter from './pages/RegisterShelter';
 import RegisterSeeker from './pages/RegisterSeeker';
@@ -77,6 +78,8 @@ function App() {
 
         <Route path="/application-create/:pet_id" element={<ApplicationCreateForm/>}/>
         <Route path="/application-detail/:application_id" element={<ApplicationDetail/>}/>
+        <Route path="/applications" element={<Apprepo/>}/>
+        
 
         <Route path="/seeker/:seekerId" element={<SeekerDetail />} />
         <Route path="/shelterHome" element={<ShelterComponent />} />
