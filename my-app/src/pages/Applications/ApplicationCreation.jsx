@@ -6,60 +6,72 @@ import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
 import { BACKENDHOST } from "../../config";
 
-async function postData(pet_id, formData, token, setError) {
-  try {
-    const response = await fetch(`${BACKENDHOST}applications/to-pet/${pet_id}/`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(formData)
-    });
 
-    if (!response.ok) {
-      const errorDetail = await response.json();
-      console.error('Error:', errorDetail);
-      
-    }
-    else{
-      const data = await response.json();
-      console.log('Success:', data);
-    }
-   
-    // Handle the success scenario
-  } catch (error) {
-    console.log("error message received from the server is : " + error.message);
-    setError(error.message);
-    
-  }
-}
 
 function ApplicationCreation() {
-  const [error, setError] = useState(null);
+
+  const [errorMessage, setErrorMessage] = useState(null);
   const { pet_id } = useParams();
   const token = localStorage.getItem('token');
   const isLogined = Boolean(token);
+  async function postData(pet_id, formData, token, setError) {
+    try {
+      setErrorMessage(null);
+      const response = await fetch(`${BACKENDHOST}applications/to-pet/${pet_id}/`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      });
+  
+      if (!response.ok) {
+        throw new Error('An error has occured');
+        
+        
+      }
+      else{
+        const data = await response.json();
+        console.log('Success:', data);
+      }
+     
+      // Handle the success scenario
+    } catch (error) {
+      console.log("error message received from the server is : " + error.message);
+      setErrorMessage(error.message);
+      
+    }
+  }
 
   const handleSubmit = async (formData) => {
 
-    await postData(pet_id, formData, token, setError);
+    await postData(pet_id, formData, token);
   };
 
-  console.log('Error in ApplicationCreation:', error);
   return (
     <>
       <Header/>
-      <div>
+      <div style={containerStyle}>
         {isLogined ? (
-          <ApplicationCreationForm onSubmit={handleSubmit} error={error} />
+          <ApplicationCreationForm onSubmit={handleSubmit} />
         ) : (
-          <p>Please log in to continue.</p>
+          <p>Please log in to continue.</p >
         )}
+        <p>{errorMessage}</p >
       </div>
       <Footer/>
     </>
   );
 }
+const containerStyle = {
+  backgroundColor: "rgba(255, 255, 255, 0.5)",
+  marginLeft: "5cm",
+  marginRight: "5cm",
+  padding: "1cm",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  overflowY: "auto",
+};
 
 export default ApplicationCreation;

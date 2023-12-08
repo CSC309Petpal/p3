@@ -6,6 +6,7 @@ function ApplicationCreationForm(props) {
     details: ''
   });
 
+
   const handleChange = (event) => {
     const { id, value } = event.target;
     setFormData(prevFormData => ({

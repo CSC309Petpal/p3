@@ -74,7 +74,7 @@ function PetDetail() {
       {petInfo.status === 'adopted' ? (
         <span className="text-success">This pet has been adopted</span>
       ) : (
-        <span>Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/pet/update/${petId}`)}>Adopt</button></span>
+        <span>Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/application-create/${petId}`)}>Adopt</button></span>
       )}
     </h2>
         </div>
@@ -90,7 +90,7 @@ function PetDetail() {
             style={{ height: '200px', width: '200px', borderRadius: '100px' }} 
           />
         </div>
-
+        
         <div className="col-md-8 d-flex justify-content-center">
           <table className="table border border-light table-bordered text-center border-dark">
             <tbody>
