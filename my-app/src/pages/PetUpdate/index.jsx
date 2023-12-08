@@ -30,7 +30,7 @@ const PetUpdateForm = () => {
     // Retrieve the petId from the URL
 
     // Fetch the current pet information
-    axios.get(`${BACKENDHOST}/pets/${petId}/`)
+    axios.get(`${BACKENDHOST}pets/${petId}/`)
       .then(response => {
         setPetInfo(response.data);
         setImagePreview(response.data.image);
