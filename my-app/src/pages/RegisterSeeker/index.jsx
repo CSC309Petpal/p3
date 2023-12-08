@@ -80,7 +80,7 @@ const RegisterShelterPage= () => {
         else (
             preference_not.innerHTML = ""
         )
-        
+
 
         if (bad) {
             return;
@@ -205,14 +205,6 @@ const RegisterShelterPage= () => {
                                         <LoginInput input_lable_value="Email"
                                         input_value={email}
                                         update={setEmail}
-                                        placeholder_value="" 
-                                        type_value="text" 
-                                        is_required={true} />
-                                </div>
-                                <div className="mb-3">
-                                        <LoginInput input_lable_value="Preference"
-                                        input_value={preference}
-                                        update={setPreference}
                                         placeholder_value="" 
                                         type_value="text" 
                                         is_required={true} />

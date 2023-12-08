@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
 const Header = () => {
-    const [userData, setUserData] = useState({ name: '', email: '', notifications: [] });
+    const [userData, setUserData] = useState({ name: '', email: '', notifications: [], preference: '' });
     const shelterId = localStorage.getItem('shelter_id');
     const seekerId = localStorage.getItem('seeker_id');
     const user_type = localStorage.getItem('user_type');
@@ -46,9 +46,11 @@ const Header = () => {
                 .then(response => response.json())
                 .then(data => {
                     // Assuming data contains name, email, and notifications
+                    console.log(data);
                     setUserData({
                         name: data.username,
                         email: data.email,
+                        preference: data.checking.toString(),
                     });
                 })
                 .catch(error => console.error('Error:', error));
@@ -79,6 +81,7 @@ const Header = () => {
                                 <li><span className="dropdown-item">User Type: Seeker</span></li>
                                 <li><span className="dropdown-item">Name: {userData.name}</span></li>
                                 <li><span className="dropdown-item">Email: {userData.email}</span></li>
+                                <li><span className="dropdown-item">Preference: {userData.preference}</span></li>
                                 <li><Link className="dropdown-item" to={`/seeker/update/${seekerId}`}>Edit</Link></li>
                             </ul>
                         </li>
