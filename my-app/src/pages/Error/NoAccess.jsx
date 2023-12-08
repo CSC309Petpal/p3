@@ -1,14 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import StartHeader from '../../components/StartHeader/startHeader';
+import Header from '../../components/Header/header';
 import Footer from '../../components/Footer/footer';
 import Wrong from '../../components/WrongButton/wrong';
 
 function NoAccessPage() {
   return (
     <>
-    <StartHeader/>
+    <Header/>
     <Container className="text-center">
       <Row>
         <Col>

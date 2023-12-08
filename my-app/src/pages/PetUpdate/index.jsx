@@ -31,6 +31,10 @@ const PetUpdateForm = () => {
   useEffect(() => {
     // Retrieve the petId from the URL
 
+    if (localStorage.getItem('user_type') !== '2') {
+        navigate('/noaccess');
+    }
+
     // Fetch the current pet information
     axios.get(`${BACKENDHOST}pets/${petId}/`)
       .then(response => {
