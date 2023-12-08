@@ -80,7 +80,7 @@ const PetUpdateForm = () => {
     });
     
     // API request to update pet information
-    fetch(`${BACKENDHOST}/pets/${petId}/`, {
+    fetch(`${BACKENDHOST}pets/${petId}/`, {
         method: 'PATCH', // or 'POST', 'PUT', 'DELETE', etc.
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -112,14 +112,13 @@ const PetUpdateForm = () => {
 
     const handleDelete = () => {
         // API request to delete pet
-        fetch(`${BACKENDHOST}/pets/${petId}/`, {
-            method: 'DELETE', // or 'POST', 'PUT', 'DELETE', etc.
+        fetch(`${BACKENDHOST}pets/${petId}/`, {
+            method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
-              // other headers...
             },
           })
-          .then(response => response.json())
+          .then(response => response.data)
             .then(data => console.log(data))
             .catch(error => {
                 console.error('Error:', error);
@@ -130,9 +129,7 @@ const PetUpdateForm = () => {
                 if (response && response.detail) {
                     alert(response.detail);
                 } else {
-                    const shelter_id = localStorage.getItem('shelter_id');
-                    // if the pet is deleted successfully, redirect to the shelter detail page
-                    navigate(`/shelter/${shelter_id}`);
+                    navigate(`/shelterHome`);
                 }
             });
     }
