@@ -97,6 +97,7 @@ const nextPage = () => {
       })
       .then((res) => {
         setComments(res.data.results);
+        
         setPages(Math.ceil(res.data.count/5));
         setErrorMessage('');
       })
@@ -115,6 +116,8 @@ const nextPage = () => {
   useEffect(() => {
     refreshList();
   }, [page]);
+
+  console.log(comments);
 
   return (
     <div className="row justify-content-center">
@@ -156,7 +159,7 @@ const nextPage = () => {
           </div>
         </div>
         {comments.map((comment) => (
-          <div className="col-md-4" key={comment.comment_id}>
+          <div className="col-md-4" key={comment.pk}>
             <div className="card">
               <div className="card-body" >
                 <h5 className="card-title">Sender: {comment.username}</h5>
