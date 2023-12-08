@@ -196,14 +196,11 @@ const PetUpdateForm = () => {
             </div>
             <div className="mb-3">
                 <label htmlFor="gender" className="form-label">Gender</label>
-                <input
-                    id="gender"
-                    type="text"
-                    name="gender"
-                    value={petInfo.gender}
-                    onChange={handleChange}
-                    className="form-control"
-                />
+                <select name="gender" onChange={handleChange} placeholder="unknown"  className="form-select" value={petInfo.gender}>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="unknown">Unknown</option>
+                </select>
             </div>
             <div className="mb-3">
                 <label htmlFor="breed" className="form-label">Breed</label>
