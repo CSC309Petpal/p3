@@ -18,7 +18,7 @@ from applications.models import update_application_updation_time
 
 
 class FollowupPagination(PageNumberPagination):
-    page_size = 10  # Set the number of items per page
+    page_size = 5  # Set the number of items per page
 
 # class FollowupCreationView(generics.CreateAPIView):
 #     queryset = Followup.objects.all()
