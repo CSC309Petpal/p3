@@ -74,7 +74,7 @@ function PetDetail() {
       {petInfo.status === 'adopted' ? (
         <span className="text-success">This pet has been adopted</span>
       ) : (
-        <span>Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/pet/update/${petId}`)}>Adopt</button></span>
+        <span>Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/application-create/${petId}`)}>Adopt</button></span>
       )}
     </h2>
         </div>
