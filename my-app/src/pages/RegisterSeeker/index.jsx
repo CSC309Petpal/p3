@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import LoginInput from "../../components/input/LoginInput";
 
-const RegisterShelterPage= () => {
+const RegisterSeekerPage= () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -235,4 +235,4 @@ const RegisterShelterPage= () => {
     );
 }
 
-export default RegisterShelterPage;
+export default RegisterSeekerPage;
