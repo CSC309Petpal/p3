@@ -98,7 +98,7 @@ const PetUpdateForm = () => {
             } else {
                 const shelter_id = localStorage.getItem('shelter_id');
                 // if the pet is updated successfully, redirect to the pet detail page
-                navigate(`/shelter/${shelter_id}`);
+                navigate(`/shelterHome`);
             }
         });
   };
