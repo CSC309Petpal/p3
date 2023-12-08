@@ -89,7 +89,7 @@ class ApplicationListView(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     filterset_fields = ['status']
     ordering_fields = ['creation_time', 'updation_time']
-    permission_classes = [IsShelter]
+    permission_classes = [IsSeekerOrShelterToUpdateApplication]
     pagination_class = ApplicationPagination
 
     def get_queryset(self):
