@@ -79,7 +79,7 @@ function ShelterComponent() {
     <Header />
     <div className="container">
       <div className="row mt-lg-4">
-        <h1 className="text-center">Basic Information</h1>
+        <h1 className="text-center">Home</h1>
         <hr className="my-4 border-primary" />
       </div>
 
@@ -156,6 +156,11 @@ function ShelterComponent() {
           </div>
         ))}
       </div>
+
+      <div className="row mt-lg-4" id="comments">
+                <h1 className="text-center">Comments</h1>
+                <hr className="my-4 border-primary"/>
+        </div>
       <div className="row justify-content-center">
         {/* comment list */}
         <Comments shelterId={shelterId} />

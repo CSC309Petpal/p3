@@ -24,6 +24,7 @@ body, html {
 .plus-sign {
     font-size: 48px;
     font-weight: bold;
+    color: #000;
 }
 
 .message-box{
