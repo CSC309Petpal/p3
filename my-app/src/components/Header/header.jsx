@@ -83,6 +83,9 @@ const Header = () => {
                             </ul>
                         </li>
 
+                        {/* Notification Link */}
+                        <Link className="nav-link me-lg-3" to="/notifications">Notifications</Link>
+
                         {/* Log Out Link */}
                         <Link className="nav-link me-lg-3" to="/shelters">Shelters</Link>
                         <Link className="nav-link me-lg-3" to="/pet">Applications</Link>
@@ -119,6 +122,8 @@ const Header = () => {
                         </li>
 
                         <Link className="nav-link me-lg-3" to="/shelters">Shelters</Link>
+                        {/* Notification Link */}
+                        <Link className="nav-link me-lg-3" to="/notifications">Notifications</Link>
 
                         {/* Log Out Link */}
                         <Link className="nav-link" to="/logout">Log Out</Link>

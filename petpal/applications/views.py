@@ -36,7 +36,7 @@ class ApplicationCreationView(generics.ListCreateAPIView):
             raise PermissionDenied({'pet_status': 'Can only create applications for a pet listing that is "available".'})
         obj = serializer.save(seeker=self.request.user.seeker, pet=pet, shelter= shelter)
         app_url = self.request.build_absolute_uri(reverse_lazy('applications:application-get-update', args=[obj.id]))
-        create_notification(self.request.user, obj.shelter.user, "new app", 'message',app_url)
+        create_notification(self.request.user, obj.shelter.user, "New Application Created", 'new_application', app_url, application=obj)
             
 
 
@@ -72,9 +72,9 @@ class ApplicationUpdateView(generics.RetrieveUpdateAPIView):
         
         
         if self.request.user.user_type == 1:
-            create_notification(self.request.user, obj.shelter.user, "app state change", 'message',app_url)
+            create_notification(self.request.user, obj.shelter.user, "app state change", 'status_update',app_url, application=application)
         elif self.request.user.user_type == 2:
-            create_notification(self.request.user, obj.seeker.user, "app state change", 'message',app_url)
+            create_notification(self.request.user, obj.seeker.user, "app state change", 'status_update',app_url, application=application)
         
 
         
@@ -89,7 +89,7 @@ class ApplicationListView(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     filterset_fields = ['status']
     ordering_fields = ['creation_time', 'updation_time']
-    permission_classes = [IsShelter]
+    permission_classes = [IsSeekerOrShelterToUpdateApplication]
     pagination_class = ApplicationPagination
 
     def get_queryset(self):

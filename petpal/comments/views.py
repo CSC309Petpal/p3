@@ -9,7 +9,7 @@ from notifications.models import create_notification
 from django.urls import reverse_lazy
 
 class CommentsPagination(PageNumberPagination):
-    page_size = 10  # Set the number of items per page
+    page_size = 5  # Set the number of items per page
 
 class CommentsCreationView(generics.CreateAPIView):
 
@@ -23,9 +23,9 @@ class CommentsCreationView(generics.CreateAPIView):
         to_shelter = get_object_or_404(Shelter, pk=shelter_id) 
         content = serializer.validated_data['content']
       
-        obj=serializer.save(sender=self.request.user, shelter=to_shelter)
+        obj=serializer.save(sender=self.request.user, shelter=to_shelter,username=self.request.user.username)
         followup_url = self.request.build_absolute_uri(reverse_lazy('comments:comment_detail', args=[obj.id]))
-        create_notification(self.request.user, to_shelter.user, followup_url, 'New Review')
+        create_notification(self.request.user, to_shelter.user, "New review on your shelter", 'new_review')
         
 
 class CommentsListView(generics.ListAPIView):
@@ -65,9 +65,9 @@ class CommentsListCreateView(generics.ListCreateAPIView):
         to_shelter = get_object_or_404(Shelter, pk=shelter_id)
         content = serializer.validated_data['content']
       
-        obj = serializer.save(sender=self.request.user, shelter=to_shelter)
+        obj = serializer.save(sender=self.request.user, shelter=to_shelter,username=self.request.user.username)
         followup_url = self.request.build_absolute_uri(reverse_lazy('comments:comment_detail', args=[obj.id]))
-        create_notification(self.request.user, to_shelter.user, followup_url, 'New Review')
+        create_notification(self.request.user, to_shelter.user, "New review on your shelter", 'new_review')
 
     def post(self, request, *args, **kwargs):
         # Use the create method for POST requests

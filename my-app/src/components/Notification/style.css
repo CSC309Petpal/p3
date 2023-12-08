@@ -105,6 +105,39 @@
     background-color: #d2d2d2;
 }
 
+.flex-column {
+    background-color: #ffffff00;
+}
+
+.pagination-bar{
+    padding-bottom: 3rem;
+}
+
+span{
+    color: white;
+}
+
+.btn{
+    margin-right: 20px;
+}
+
+.grey-background{
+    background-color: rgba(172, 172, 172, 0.646);
+}
+
+.notificaiton-text{
+    margin: 2rem;
+}
+
+.no-message-notification{
+    padding: 0px;
+    margin: 2rem;
+}
+
+.form-select{
+    margin: 20px;
+}
+
 @media screen and (max-width: 600px) {
     .flex-col-lt480{
         display: flex;
