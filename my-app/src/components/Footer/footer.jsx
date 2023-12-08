@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
-            <footer class="bg-dark text-white text-center py-3 mt-5">
-                <div class="container">
+            <footer className="bg-dark text-white text-center py-3 mt-5">
+                <div className="container">
                     <p>&copy; 2023 PetPal All rights reserved.</p>
                 </div>
             </footer>
