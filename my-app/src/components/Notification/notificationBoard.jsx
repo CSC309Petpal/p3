@@ -98,6 +98,7 @@ function NotificationBoard() {
     })
       .then(data => {
         setNotifications(data);
+        console.log(data);
     });
   }, [page, ordering, read]);
 
@@ -125,13 +126,14 @@ function NotificationBoard() {
                     </div>
                     <div className="message-content d-flex flex-column">
                         <p><b>Message From: </b> {notification.sender_name}</p>
-                        <p className="text-muted">{notification.message}.</p>
+                        <p className="text-muted">{notification.message}</p>
                         <p className="text-muted notification-time"><small>{timeAgo(notification.creation_time)}</small></p>
                         {notification.type === 'message' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to conversation</Link>}
                         {notification.type === 'status_update' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Application</Link>}
                         {notification.type === 'new_pet_listings' && <Link to={`/pet/${notification.pet}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Pet Listing</Link>}
                         {notification.type === 'new_review' && <Link to={`/shelter/${notification.receiver}#Comments`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Reviews</Link>}
                         {notification.type === 'new_application' && <Link to={`/application-detail/${notification.application}`} className="btn btn-primary" onClick={() => markAsRead(notification.id)}>Go to Application</Link>}
+                        <button className="btn btn-danger">Delete</button>
                     </div>
                 </div>
             </div> 
