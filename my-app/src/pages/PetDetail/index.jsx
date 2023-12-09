@@ -74,7 +74,7 @@ function PetDetail() {
       {petInfo.status === 'adopted' ? (
         <span className="text-success">This pet has been adopted</span>
       ) : (
-        <span>Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/application-create/${petId}`)}>Adopt</button></span>
+        <span className="text-dark">Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/application-create/${petId}`)}>Adopt</button></span>
       )}
     </h2>
         </div>
@@ -98,10 +98,7 @@ function PetDetail() {
                 <th>pet Name</th>
                 <td>{petInfo.name}</td>
               </tr>
-              <tr>
-                <th>Shelter</th>
-                <td>{petInfo.shelter}</td>
-              </tr>
+            
               <tr>
                 <th>Gender</th>
                 <td>{petInfo.gender}</td>
@@ -132,11 +129,17 @@ function PetDetail() {
         
       </div>
 
+     
       <div className="row mt-lg-4">
+        <h1 className="text-center">Shelter</h1>
+        <hr className="my-4 border-primary" />
+      </div>
+
+      <div className="row">
         <div className='col-md-5'>
           </div>
         <div className="col-md-3">
-        <button className="btn btn-primary" onClick={() => navigate(`/shelter/${petInfo.shelter}`)}>Check the Shelter</button>
+        <button className="btn btn-primary bg-black" onClick={() => navigate(`/shelter/${petInfo.shelter}`)}>Check the Shelter</button>
         </div>
     
       </div>
@@ -145,8 +148,11 @@ function PetDetail() {
 
       
     </div>
-    <div className="container m-5">
-      --
+    <div className="container">
+        <div className="row" style={{height: 4 + "rem"}}>
+            
+        </div>
+
     </div>
     <Footer />
     </>
