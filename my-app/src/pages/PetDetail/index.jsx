@@ -135,14 +135,14 @@ function PetDetail() {
         <hr className="my-4 border-primary" />
       </div>
 
-      <div className="row">
-        <div className='col-md-5'>
-          </div>
-        <div className="col-md-3">
-        <button className="btn btn-primary bg-black" onClick={() => navigate(`/shelter/${petInfo.shelter}`)}>Check the Shelter</button>
+      <div className="container">
+    <div className="row">
+        <div className="col d-flex justify-content-center">
+            <button className="btn btn-primary bg-black" onClick={() => navigate(`/shelter/${petInfo.shelter}`)}>Check the Shelter</button>
         </div>
-    
-      </div>
+    </div>
+</div>
+
       
  
 
