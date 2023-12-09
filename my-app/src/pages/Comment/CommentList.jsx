@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
-import { BACKENDHOST } from "./config";
+import { BACKENDHOST } from "../../config";
 
 
 
@@ -148,7 +148,8 @@ const nextPage = () => {
             />
             
             </div>
-            <div className="d-flex">
+            
+            <div className="d-flex mt-3">
             <label>Rating:</label>
             <select className="form-control" value={rating} onChange={(e) => setRating(e.target.value)}>
                             <option value="5">5</option>

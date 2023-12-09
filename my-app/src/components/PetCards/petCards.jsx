@@ -1,6 +1,6 @@
 // PetCards.js
 import React from 'react';
-import { BACKENDHOST } from '../../pages/Login/config';
+import { BACKENDHOST } from '../../config';
 import logo from '../../assets/logo.png';
 
 function PetCards({ pets }) {
