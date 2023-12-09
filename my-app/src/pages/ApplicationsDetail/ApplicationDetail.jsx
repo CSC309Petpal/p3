@@ -70,6 +70,7 @@ function Application() {
     return <div>Loading...</div>;
   }
 
+  console.log(applicationInfo);
   return (
     <>
     <Header />

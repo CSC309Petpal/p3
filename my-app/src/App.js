@@ -71,7 +71,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register-shelter" element={<RegisterShelter />} />
         <Route path="/register-seeker" element={<RegisterSeeker />} />
-
+        
         <Route path="/shelter/update" element={<ShelterUpdateForm />} />
         <Route path="/shelter/:shelterId" element={<ShelterDetail />} />
 
@@ -102,7 +102,7 @@ function App() {
         <Route path="/noaccess" element={<NoAccessPage/>}/>
         {/* Add more routes as needed */}
         {/* Optional: Default route */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/landing" />} />
       
       </Routes>
     </BrowserRouter>
