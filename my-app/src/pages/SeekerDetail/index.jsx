@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
-import Comments from '../Comment/CommentList';
+import { useParams } from 'react-router-dom';
 
 function SeekerComponent() {
-  const seekerId = localStorage.getItem('seeker_id');
+  const { seekerId } = useParams();
   const [seekerInfo, setseekerInfo] = useState(null); // State to store seeker information
   
   const navigate = useNavigate();

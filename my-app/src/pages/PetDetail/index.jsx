@@ -11,6 +11,7 @@ function PetDetail() {
   const [petInfo, setPetInfo] = useState(null); // State to store pet information
   const { petId } = useParams();
   const navigate = useNavigate();
+  const user_type = localStorage.getItem('user_type');
 
 
   useEffect(() => {
@@ -71,11 +72,16 @@ function PetDetail() {
       <div className="row justify-content-center mt-lg-4">
         <div className="col-md-9 d-flex justify-content-center flex-column align-items-center">
         <h2>
-      {petInfo.status === 'adopted' ? (
-        <span className="text-success">This pet has been adopted</span>
-      ) : (
-        <span className="text-dark">Adopt the pet now !<button className="btn btn-primary" onClick={() => navigate(`/application-create/${petId}`)}>Adopt</button></span>
-      )}
+        {user_type === '1' && (
+          petInfo.status === 'adopted' ? (
+            <span className="text-success">This pet has been adopted</span>
+          ) : (
+            <span className="text-dark">Adopt the pet now !
+              <button className="btn btn-primary" onClick={() => navigate(`/application-create/${petId}`)}>Adopt</button>
+            </span>
+          )
+        )}
+
     </h2>
         </div>
        

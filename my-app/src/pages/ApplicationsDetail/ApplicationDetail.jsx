@@ -39,15 +39,16 @@ function Application() {
     fetchApplicationInfo();
   }, [application_id, navigate, token]); // Dependency array to re-run the effect when application_id changes
 
-  const handleStatusChange = (e) => {
+  const handleStatusChange = async (e) => {
     setNewStatus(e.target.value);
+
   };
 
   const updateApplicationStatus = async () => {
     try {
       setErrorMessage(null);
       const response = await fetch(`${BACKENDHOST}applications/${application_id}/`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -55,7 +56,16 @@ function Application() {
         body: JSON.stringify({ ...applicationInfo, status: newStatus }),
       });
 
-      if (!response.ok) {
+      const response2 = await fetch(`${BACKENDHOST}pets/${applicationInfo.pet}/`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status: 'adopted' }),
+      });
+
+      if (!response.ok || !response2.ok) {
         throw new Error('The state change is not allowed');
       }
       const updatedData = await response.json();
@@ -64,6 +74,7 @@ function Application() {
       console.error('Update error:', error);
       setErrorMessage(error.message);
     }
+
   };
 
   if (!applicationInfo) {
