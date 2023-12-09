@@ -44,7 +44,8 @@ const SeekerUpdateform = () => {
       .then(response => {
         setUserInfo(response.data);
         if (response.data.avatar) {
-            setImagePreview(`${BACKENDHOST}${response.data.avatar}`);
+            setImagePreview(`${BACKENDHOST}${response.data.avatar.substring(1)}`);
+            console.log(response.data.avatar);
         }
       })
       .catch(error => console.error(error));

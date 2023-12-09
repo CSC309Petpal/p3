@@ -135,7 +135,7 @@ const nextPage = () => {
         <div className="card-body">
           <h5 className="card-title">Add new Comment</h5>
           <div >
-          <div className="d-flex">
+          <div className="grid">
           <label>Comment:</label>
             <input
               name="comment content"
@@ -148,8 +148,7 @@ const nextPage = () => {
             />
             
             </div>
-            
-            <div className="d-flex mt-3">
+            <div className="grid">
             <label>Rating:</label>
             <select className="form-control" value={rating} onChange={(e) => setRating(e.target.value)}>
                             <option value="5">5</option>
