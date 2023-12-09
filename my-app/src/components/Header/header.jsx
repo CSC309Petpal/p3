@@ -5,6 +5,7 @@ import { BACKENDHOST } from '../../pages/Login/config';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useNavigate } from 'react-router-dom';
 import StartHeader from '../StartHeader/startHeader';
+import Check from '../CheckButton/checkButton';
 
 
 const Header = () => {
@@ -75,7 +76,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-lg-auto">
                         {/* Home Link */}
-                        <Link className="nav-link me-lg-3" to="/pet">Home</Link>
+                        <Link className="nav-link me-lg-3" to="/pet">Pets</Link>
 
                         {/* Profile Dropdown */}
                         <li className="nav-item dropdown me-lg-3">
@@ -86,7 +87,8 @@ const Header = () => {
                                 <li><span className="dropdown-item">User Type: Seeker</span></li>
                                 <li><span className="dropdown-item">Name: {userData.name}</span></li>
                                 <li><span className="dropdown-item">Email: {userData.email}</span></li>
-                                <li><span className="dropdown-item">Preference: {userData.preference}</span></li>
+                                <li><span className="dropdown-item">Preference: <Check /></span></li>
+                                <li><Link className="dropdown-item" to={`/seeker/${seekerId}`}>Detail</Link></li>
                                 <li><Link className="dropdown-item" to={`/seeker/update/${seekerId}`}>Edit</Link></li>
                             </ul>
                         </li>
@@ -142,7 +144,7 @@ const Header = () => {
                         <Link className="nav-link me-lg-3" to="/applications">Applications</Link>
 
                         {/* Log Out Link */}
-                        <p className="nav-link btn btn-link me-lg-3" onClick={() => {
+                        <p className="nav-link me-lg-3" onClick={() => {
                             localStorage.removeItem('token');
                             localStorage.removeItem('shelter_id');
                             localStorage.removeItem('seeker_id');

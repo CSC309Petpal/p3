@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BACKENDHOST } from '../../config';
 import Header from '../../components/Header/header';
@@ -13,6 +13,14 @@ const BlogCreate = () => {
   const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState(null);
   const [img_not, setImg_not] = useState('');
+  const user = localStorage.getItem('user_type');
+
+  useEffect(() => {
+    if (user !== '2') {
+      navigate('/noaccess');
+    }
+  }, []);
+  
 
   const handleChange = (event) => {
     if (event.target.name === 'image') {

@@ -20,6 +20,7 @@ class ShelterInline(admin.StackedInline):
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = [SeekerInline, ShelterInline]
+    
 
 
 

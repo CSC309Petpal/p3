@@ -85,7 +85,7 @@ class CustomUserUpdateSerializer(ModelSerializer):
 class SeekerUpdateSerializer(ModelSerializer):
     class Meta:
         model = Seeker
-        fields = ['user', 'phone_number', 'birthday', 'preference', 'checking']
+        fields = ['user', 'checking']
 
 class SeekerDetailSerializer(ModelSerializer):
     username = serializers.SerializerMethodField()

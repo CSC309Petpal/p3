@@ -38,3 +38,27 @@ body, html {
         width: 100%;
     }
 }
+
+/* styles.css */
+@media (min-width: 992px) { /* This corresponds to the 'lg' breakpoint in Bootstrap */
+    .top-section {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+}
+
+/* For smaller screens, we'll let it be a part of the normal document flow */
+@media (max-width: 991px) {
+    .top-section {
+        position: static;
+        transform: none;
+    }
+}
+
+/* Additional responsive spacing if needed */
+.spacer {
+    height: 4rem;
+}

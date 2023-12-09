@@ -90,60 +90,55 @@ const LoginPage = () => {
         <>
         <StartHeader/>
 
-            <div className="container">
-                <div className="row" style={{height: 4 + "rem"}}>
-                    
-                </div>
+<div className="container" style={{ paddingTop: '4rem' }}>
+</div>
 
-            </div>
-
-            <div className="container-fluid">
-
-            <div className="row">
-
-                <div className="col">
-
-                </div>
-
-                <div className="col-5">
-                    <div className="card p-5" >
-                            <form>
-                                <div className="mb-3">
-                                        <LoginInput input_lable_value="Username" 
-                                        input_value={username} 
-                                        update={setUsername} 
-                                        placeholder_value="" 
-                                        type_value="text" 
-                                        is_required={true} />
-                                </div>
-                                <div className="mb-3">
-                                        <LoginInput input_lable_value="Password" 
-                                        input_value={password} 
-                                        update={setPassword} 
-                                        placeholder_value="" 
-                                        type_value="password" 
-                                        is_required={true} />
-                                </div>
-                                <div className="mb-3">
-                                    <button type="button" className="btn btn-secondary" style={{marginLeft: 0 + "px"}}
-                                    onClick={() => {
-                                        Login(username, password, navigate);
-                                    }}
-                                    >
-                                        Login
-                                    </button>
-                                </div>
-                            </form>
+<div className="container-fluid">
+    <div className="row justify-content-center">
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <div className="card p-5">
+                <form>
+                    <h1 className="mb-3 text-center">Petpal Login</h1>
+                    <div className="mb-3">
+                        <LoginInput 
+                            input_lable_value="Username" 
+                            input_value={username} 
+                            update={setUsername} 
+                            placeholder_value="" 
+                            type_value="text" 
+                            is_required={true} 
+                        />
                     </div>
-                </div>
-
-                <div className="col">
-
-                </div>
+                    <div className="mb-3">
+                        <LoginInput 
+                            input_lable_value="Password" 
+                            input_value={password} 
+                            update={setPassword} 
+                            placeholder_value="" 
+                            type_value="password" 
+                            is_required={true} 
+                        />
+                    </div>
+                    <div className="mb-3 d-flex justify-content-center">
+                        <button 
+                            type="button" 
+                            className="btn btn-primary btn-lg"
+                            onClick={() => {
+                                Login(username, password, navigate);
+                            }}
+                        >
+                            Login
+                        </button>
+                    </div>
+                </form>
             </div>
+        </div>
+    </div>
+</div>
 
-            </div>
-            <Footer/>
+<Footer/>
+
+        
         </>
     );
 }

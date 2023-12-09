@@ -5,7 +5,6 @@ import { BACKENDHOST } from "../../config";
 import logo from "../../assets/logo.png";
 import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import LoginInput from "../../components/input/LoginInput";
@@ -17,8 +16,8 @@ const RegisterSeekerPage= () => {
     const [password2, setPassword2] = useState("");
     const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
-    
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("");
 
     const Register = (username, password, password2, address, email, navigate) => {
         // check if the username and password is valid
@@ -30,7 +29,6 @@ const RegisterSeekerPage= () => {
         const email_not = document.getElementById("Email_notification");
 
 
-
         if (username === "") {
             username_not.innerHTML = "Please enter your username";
             bad = true;
@@ -38,9 +36,9 @@ const RegisterSeekerPage= () => {
         else (
             username_not.innerHTML = ""
         )
-        // check the password is longer than 8 characters
-        if (password.length < 8) {
-            pwd_not.innerHTML = "Password must be at least 8 characters";
+
+        if (password === "") {
+            pwd_not.innerHTML = "Please enter your password";
             bad = true;
         }
         else (
@@ -71,15 +69,14 @@ const RegisterSeekerPage= () => {
             email_not.innerHTML = ""
         )
 
-
-
-        if (bad) {
-            return;
-        }
-
         if (password !== password2) {
             pwd2_not.innerHTML = "Password does not match";
             bad = true;
+            return;
+        }
+
+
+        if (bad) {
             return;
         }
         
@@ -101,21 +98,30 @@ const RegisterSeekerPage= () => {
             method: "POST",
             body: data,
         })
-        .then(respones => respones.json())
-        .catch(error => console.error("Error:", error))
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.username[0] || 'Unknown error');
+                });
+            }
+            return response.json();
+        })
         .then(data => {
-    
-            console.log(data);
-            navigate("/login");
-
-        if (data && data.access) {
-            navigate("/login");
-        } else if (data && data.detail) {
-
-            // Display an error message for failed login
-            pwd_not.innerHTML = data.detail;
-        }
+            setErrorMessage("");
+            navigate('/login');
+        })
+        .catch(error => {
+            if (error instanceof Response) {
+                error.json().then(body => {
+                    setErrorMessage(body.detail || 'Unknown error');
+                });
+            } else {
+                // Handle other errors like network errors, etc.
+                console.log("Network error:", error);
+                setErrorMessage(error.message);
+            }
         });
+        
     }
 
     const handleSignUpClick = () => {
@@ -141,22 +147,20 @@ const RegisterSeekerPage= () => {
 
             </div>
 
-            <div className="container-fluid">
+            <main className="flex-grow-1 d-flex align-items-center bg-pink">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-4 mx-auto mt-sm-5">
+                            <img src={logo} className="img-fluid mb-sm-3" alt="Responsive image" style={{ borderRadius: '20px' }} />
+                            <h1 className="text-center text-dark p-sm-3" style={{ fontSize: 'xx-large', borderRadius: '20px' }}>Welcome to PetPal</h1>
+                            <h5 className="text-center text-dark p-sm-3">Find your furry match on PetPal, where forever homes begin!</h5>
+                            <h5 className="text-center">Sign up for Shelter? <button onClick={handleSignUpClick} className='btn btn-primary'> Go Shelter!</button></h5>
+                        </div>
 
-            <div className="row">
-                <div className="col"></div>
-                <div className="col-3">
-                <img src={logo} className="img-fluid mb-sm-3" alt="Responsive image" style={{ borderRadius: '20px' }} />
-                    <h1 className="text-center text-dark p-sm-3" style={{ fontSize: 'xx-large', borderRadius: '20px' }}>Welcome to PetPal</h1>
-                    <h5 className="text-center text-dark p-sm-3">Find your furry match on PetPal, where forever homes begin!</h5>
-
-                    <h5 className="text-center">Sign up for Shelter? <button onClick={handleSignUpClick} className=''> Go Shelter!</button></h5>
-
-                </div>
-
-                <div className="col-5">
+                        <div className="col-md-6">
                     <div className="card p-5" >
                             <h1 className="text-center">Sign Up (Seeker)</h1>
+                            <p className="text-center text-danger">{errorMessage}</p>
                             <form>
                                 <div className="mb-3">
                                         <LoginInput input_lable_value="Username" 
@@ -179,7 +183,7 @@ const RegisterSeekerPage= () => {
                                         input_value={password2} 
                                         update={setPassword2} 
                                         placeholder_value="" 
-                                        type_value="text" 
+                                        type_value="password" 
                                         is_required={true} />
                                 </div>
                                 <div className="mb-3">
@@ -214,9 +218,15 @@ const RegisterSeekerPage= () => {
                 <div className="col">
 
                 </div>
-            </div>
-            <div className="row" style={{height: 4 + "rem"}}>
+
+                    </div>
                 </div>
+            </main>
+
+
+
+            <div className="row" style={{height: 4 + "rem"}}>
+                Zs
 
             </div>
             <Footer />

@@ -3,6 +3,7 @@ import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import { BACKENDHOST } from "../../config";
 import Header from "../../components/Header/header";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -11,6 +12,12 @@ const Apps = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(1);
+
+  const navigate = useNavigate();
+
+  const handleDetail = (id) => {
+    navigate(`/application-detail/${id}`);
+  };
 
   const refreshList = () => {
     axios
@@ -69,10 +76,8 @@ const nextPage = () => {
                   {app.status}
                 </span>
                 <div>
-                  <button className="btn btn-secondary ml-1 mr-2">
-                    <NavLink className="nav-link" to={`/application-detail/${app.application_id}`}>
-                      Detail
-                    </NavLink>
+                  <button className="btn btn-secondary ml-1 mr-2" onClick={()=>handleDetail(app.id)}>
+                    Detail
                   </button>
                 </div>
               </div>

@@ -9,6 +9,7 @@ import Comments from '../Comment/CommentList';
 
 function ShelterComponent() {
   const shelterId = localStorage.getItem('shelter_id');
+  const user = localStorage.getItem('user_type');
 
   const [shelterInfo, setShelterInfo] = useState(null); // State to store shelter information
   
@@ -39,7 +40,7 @@ function ShelterComponent() {
     // Define the function to fetch shelter information
     async function fetchShelterInfo() {
       try {
-        if (shelterId === null) {
+        if (user !== '2') {
           navigate('/noaccess');
         }
         const response = await fetch(`${BACKENDHOST}accounts/shelter/${shelterId}`);
