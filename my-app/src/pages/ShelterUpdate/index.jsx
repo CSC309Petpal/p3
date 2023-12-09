@@ -2,10 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BACKENDHOST } from "../../config";
-import StartHeader from "../../components/StartHeader/startHeader";
 import Footer from "../../components/Footer/footer";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import Header from "../../components/Header/header";
 
 
 const ShelterUpdateForm = () => {
@@ -148,7 +147,7 @@ const ShelterUpdateForm = () => {
 
   return (
     <>
-<StartHeader/>
+<Header/>
 
     <div className="container">
         <div className="row" style={{height: 4 + "rem"}}>
@@ -232,6 +231,12 @@ const ShelterUpdateForm = () => {
 
         </div>
     </div>
+
+    </div>
+    <div className="container">
+        <div className="row" style={{height: 4 + "rem"}}>
+            
+        </div>
 
     </div>
     <Footer/>

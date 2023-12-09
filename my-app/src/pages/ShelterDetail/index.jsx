@@ -6,9 +6,10 @@ import './style.css';
 import Footer from "../../components/Footer/footer";
 import Header from "../../components/Header/header";
 import Comments from '../Comment/CommentList';
+import { useParams } from 'react-router-dom';
 
 function ShelterComponent() {
-  const shelterId = localStorage.getItem('shelter_id');
+  const { shelterId } = useParams();
   const [shelterInfo, setShelterInfo] = useState(null); // State to store shelter information
   
   const navigate = useNavigate();
@@ -123,25 +124,34 @@ function ShelterComponent() {
       <div className="row justify-content-left">
 
         {/* Pet Cards */}
-        {shelterInfo.pets.map(pet => (
-          <div className="col-md-3" key={pet.id}>
-            <div className="card">
-              <img src={pet.image} className="card-img-top fixed-img" alt={pet.name} />
-              <div className="card-body">
-                <h5 className="card-title">{pet.name}</h5>
-                <p className="card-text">Status: {pet.status}</p>
-                <button onClick={() => handleDetailClick(pet.id)} className="btn btn-primary">Detail</button>
-              </div>
-            </div>
-          </div>
-        ))}
+        <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+  {shelterInfo.pets.map(pet => (
+    <div className="col-md-3 d-inline-block" key={pet.id} style={{ width: 'auto', marginRight: '20px' }}>
+      <div className="card">
+        <img src={pet.image} className="card-img-top fixed-img" alt={pet.name} />
+        <div className="card-body">
+          <h5 className="card-title">{pet.name}</h5>
+          <p className="card-text">Status: {pet.status}</p>
+          <button onClick={() => handleDetailClick(pet.id)} className="btn btn-primary">Detail</button>
+        </div>
       </div>
+    </div>
+  ))}
+</div>
+      </div>
+
+      <div className="row mt-lg-4 justify-content-center">
+        <h1 className="text-center col-12">Comments:</h1>
+        <hr className="my-4 col-12 border-primary" />
+      </div>
+
+
       <div className="row justify-content-center">
         {/* comment list */}
         <Comments shelterId={shelterId} />
       </div>
     </div>
-    <div className="container m-5">
+    <div className="container">
       --
     </div>
     <Footer />

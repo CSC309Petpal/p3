@@ -17,11 +17,10 @@ const RegisterSeekerPage= () => {
     const [password2, setPassword2] = useState("");
     const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
-    const [preference, setPreference] = useState("");
     
     const navigate = useNavigate();
 
-    const Register = (username, password, password2, address, email, preference, navigate) => {
+    const Register = (username, password, password2, address, email, navigate) => {
         // check if the username and password is valid
         var bad = false;
         const username_not = document.getElementById("Username_notification");
@@ -29,7 +28,6 @@ const RegisterSeekerPage= () => {
         const pwd2_not = document.getElementById("PasswordConfirm_notification");
         const address_not = document.getElementById("Address_notification");
         const email_not = document.getElementById("Email_notification");
-        const preference_not = document.getElementById("Preference_notification");
 
 
 
@@ -73,13 +71,6 @@ const RegisterSeekerPage= () => {
             email_not.innerHTML = ""
         )
 
-        if (preference === "") {
-            preference_not.innerHTML = "Please enter your preference";
-            bad = true;
-        }
-        else (
-            preference_not.innerHTML = ""
-        )
 
 
         if (bad) {
@@ -97,7 +88,6 @@ const RegisterSeekerPage= () => {
         pwd2_not.innerHTML = "";
         address_not.innerHTML = "";
         email_not.innerHTML = "";
-        preference_not.innerHTML = "";
 
 
         var data = new FormData();
@@ -106,7 +96,6 @@ const RegisterSeekerPage= () => {
         data.append("password_confirm", password2);
         data.append("location", address);
         data.append("email", email);
-        data.append("preference", preference);
     
         fetch(`${BACKENDHOST}accounts/seeker/`, {
             method: "POST",

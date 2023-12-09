@@ -86,7 +86,7 @@ const PetListing = () => {
           <div className="row">
               {/* Filter and Sorting Options - Left Side */}
               <div className="col-md-3">
-                  <div className="side-panel mb-3">
+                  <div className="side-panel mb-3 form-control">
                   <h4>Pages</h4>
                   <div className="pagination d-flex justify-content-center" style={{ width: '100%' }}>
                   <div>
@@ -114,7 +114,8 @@ const PetListing = () => {
                           <div className="container mt-3">
                             <div className="row">
                                 <div className="col">
-                                    <select className="form-select">
+                                    <select className="form-control" onChange={(e) => setSearchParams({ ...query, shelter: e.target.value, page: 1 })}>
+                                        <option value="">All Shelters</option>
                                         {shelters.map(shelter => (
                                             <option key={shelter.id} value={shelter.id}>{shelter.username}</option>
                                         ))}
@@ -125,14 +126,16 @@ const PetListing = () => {
                                 <div className="col-auto">
                                     <button 
                                         className="btn btn-outline-primary me-2" 
-                                        onClick={() => setCurrentShelter(prev => prev - 1)} 
+                                        onClick={() => {setCurrentShelter(prev => prev - 1);
+                                        setSearchParams({ ...query, shelter: '', page: 1 });}} 
                                         disabled={currentShelter <= 1}
                                     >
                                         Previous
                                     </button>
                                     <button 
                                         className="btn btn-outline-primary" 
-                                        onClick={() => setCurrentShelter(prev => prev + 1)} 
+                                        onClick={() => {setCurrentShelter(prev => prev + 1);
+                                            setSearchParams({ ...query, shelter: '', page: 1 });}}  
                                         disabled={currentShelter >= totalShelter}
                                     >
                                         Next
@@ -210,7 +213,7 @@ const PetListing = () => {
                       {/* Order By */}
                       <div className="filter-group">
                           <h4>Order By:</h4>
-                          <select className="form-select" onChange={(e) => setSearchParams({ ...query, ordering: e.target.value, page: 1 })}>
+                          <select className="form-control" onChange={(e) => setSearchParams({ ...query, ordering: e.target.value, page: 1 })}>
                               <option value="size">Size: from large to small</option>
                               <option value="-size">Size: from small to large</option>
                               <option value="age">Age: from low to high</option>
