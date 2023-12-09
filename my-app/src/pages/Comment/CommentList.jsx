@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
-import { BACKENDHOST } from "./config";
+import { BACKENDHOST } from "../../config";
 
 
 
