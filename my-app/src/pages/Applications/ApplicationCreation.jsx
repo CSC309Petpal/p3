@@ -5,15 +5,17 @@ import ApplicationCreationForm from './ApplicationCreationForm'; // Adjust the p
 import Header from "../../components/Header/header";
 import Footer from "../../components/Footer/footer";
 import { BACKENDHOST } from "../../config";
+import {useNavigate } from 'react-router-dom';
 
 
 
 function ApplicationCreation() {
-
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const { pet_id } = useParams();
   const token = localStorage.getItem('token');
   const isLogined = Boolean(token);
+  
   async function postData(pet_id, formData, token, setError) {
     try {
       setErrorMessage(null);
@@ -34,6 +36,7 @@ function ApplicationCreation() {
       else{
         const data = await response.json();
         console.log('Success:', data);
+        navigate("/applications");
       }
      
       // Handle the success scenario
@@ -47,7 +50,9 @@ function ApplicationCreation() {
   const handleSubmit = async (formData) => {
 
     await postData(pet_id, formData, token);
+    
   };
+
 
   return (
     <>

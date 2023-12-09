@@ -70,6 +70,7 @@ function Application() {
     return <div>Loading...</div>;
   }
 
+  console.log(applicationInfo);
   return (
     <>
     <Header />
@@ -80,7 +81,7 @@ function Application() {
         {Object.entries(applicationInfo).map(([key, value]) => (
           <p key={key}> {key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
         ))}
-
+        
         {/* Dropdown for status selection */}
         <select value={newStatus} onChange={handleStatusChange}>
           <option value="pending">Pending</option>
@@ -94,6 +95,7 @@ function Application() {
         <h5>{errorMessage}</h5>
       </div>
       
+          
         <Followups appId={application_id}/>
       
       
