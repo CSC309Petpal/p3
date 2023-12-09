@@ -30,11 +30,13 @@ function SeekerComponent() {
           const data = await response.json();
           if (data.avatar === null) {
             data.avatar = logo;
+          }else {
+            data.avatar = `${BACKENDHOST}${data.avatar}`; 
           }
-
+        
           setseekerInfo(data); // Update the state with seeker information
           // check if the avatar is a file or a url
-      
+
         } else {
           // Handle HTTP errors
           console.error("HTTP Error: " + response.status);
@@ -92,17 +94,13 @@ function SeekerComponent() {
       </div>
 
 
-      <div class="row mt-lg-4" id="myPets">
-                <h2 class="text-center">Pets</h2>
-                <hr class="my-4 border-primary"/>
-        </div>
 
       <div className="row justify-content-center">
         {/* comment list */}
         <Comments seekerId={seekerId} />
       </div>
     </div>
-    <div className="container m-5">
+    <div className="container">
       --
     </div>
     <Footer />

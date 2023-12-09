@@ -30,7 +30,7 @@ const SeekerUpdateform = () => {
   useEffect(() => {
 
     // Fetch the current pet information
-    axios.get(`${BACKENDHOST}/accounts/seeker/${seekerId}/`,
+    axios.get(`${BACKENDHOST}accounts/seeker/${seekerId}/`,
     {
       method: 'GET',
                 headers: {
@@ -40,32 +40,39 @@ const SeekerUpdateform = () => {
     )
       .then(response => {
         setUserInfo(response.data);
-        setImagePreview(response.data.avatar);
+        if (response.data.avatar) {
+            setImagePreview(`${BACKENDHOST}${response.data.avatar}`);
+        }
       })
       .catch(error => console.error(error));
   }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'avatar') {
-        const file = event.target.files[0];
-        if (file) {
-            // Check if the file is an image
-            if (!file.type.startsWith('image/')) {
-                alert('Please select an image file.');
-                return; // Exit the function if not an image
-            }
-
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result);
-                setUserInfo({ ...userInfo, avatar: file });
-            };
-            reader.readAsDataURL(file);
-        }
+    if (name !== 'avatar') {
+      setUserInfo({ ...userInfo, [name]: value });
+      setChangedFields({ ...changedFields, [name]: value });
     }
-    setUserInfo({ ...userInfo, [name]: value });
-    setChangedFields({ ...changedFields, [name]: value });
+  
+    // Special handling for file inputs
+    if (name === 'avatar') {
+      const file = event.target.files[0];
+      if (file) {
+        // Check if the file is an image
+        if (!file.type.startsWith('image/')) {
+          alert('Please select an image file.');
+          return; // Exit the function if not an image
+        }
+  
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result);
+          setUserInfo({ ...userInfo, avatar: file });
+          setChangedFields({ ...changedFields, avatar: file }); // Store the file object instead of value
+        };
+        reader.readAsDataURL(file);
+      }
+    }
   };
 
   
@@ -80,14 +87,12 @@ const SeekerUpdateform = () => {
         setErrorMessage('Please enter a valid email.');
         return;
     }
-
+    console.log(changedFields)
     // Append all petInfo fields to formData
     Object.keys(changedFields).forEach(key => {
     if (key === 'avatar') {
         // If the key is 'image' and it's a File object, append the file
-        if (changedFields[key] instanceof File) {
-            formData.append(key, userInfo[key]);
-        }
+        formData.append(key, changedFields[key]);
     } else {
         // If the key is not 'image' and the value is not an empty string,
         // append the key-value pair to the formData
@@ -96,7 +101,7 @@ const SeekerUpdateform = () => {
     });
     
     // API request to update pet information
-    fetch(`${BACKENDHOST}/accounts/seeker/${seekerId}/`, {
+    fetch(`${BACKENDHOST}accounts/seeker/${seekerId}/`, {
         method: 'PATCH', // or 'POST', 'PUT', 'DELETE', etc.
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -127,7 +132,7 @@ const SeekerUpdateform = () => {
 
     const handleDelete = () => {
         // API request to delete pet
-        fetch(`${BACKENDHOST}/accounts/seeker/${seekerId}/`, {
+        fetch(`${BACKENDHOST}accounts/seeker/${seekerId}/`, {
             method: 'DELETE', // or 'POST', 'PUT', 'DELETE', etc.
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -182,10 +187,8 @@ const SeekerUpdateform = () => {
     <form onSubmit={handleSubmit} className="form-group">
     {/* Image Preview */}
     {imagePreview && (
-        <div className="text-center mb-3">
-            <img src={imagePreview} alt="Preview" className="img-fluid rounded" style={{ maxWidth: '200px', maxHeight: '200px' }} />
-        </div>
-    )}
+                        <img src={imagePreview} alt="User" className="img-fluid mb-3" style={{ height: '200px', width: '200px', borderRadius: '100px' }} />
+                    )}
 
     {/* Avatar Input */}
     <div className="mb-3">

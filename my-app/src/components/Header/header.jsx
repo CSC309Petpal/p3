@@ -5,6 +5,7 @@ import { BACKENDHOST } from '../../pages/Login/config';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { useNavigate } from 'react-router-dom';
 import StartHeader from '../StartHeader/startHeader';
+import Check from '../CheckButton/checkButton';
 
 
 const Header = () => {
@@ -86,7 +87,7 @@ const Header = () => {
                                 <li><span className="dropdown-item">User Type: Seeker</span></li>
                                 <li><span className="dropdown-item">Name: {userData.name}</span></li>
                                 <li><span className="dropdown-item">Email: {userData.email}</span></li>
-                                <li><span className="dropdown-item">Preference: {userData.preference}</span></li>
+                                <li><span className="dropdown-item">Preference: <Check /></span></li>
                                 <li><Link className="dropdown-item" to={`/seeker/update/${seekerId}`}>Edit</Link></li>
                             </ul>
                         </li>
