@@ -21,6 +21,7 @@ const SeekerUpdateform = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [changedFields, setChangedFields] = useState({});
   const token = localStorage.getItem('token');
+  const user = localStorage.getItem('user_type');
 
   const navigate = useNavigate();
 
@@ -28,7 +29,9 @@ const SeekerUpdateform = () => {
   const seekerId = localStorage.getItem('seeker_id');
 
   useEffect(() => {
-
+    if (user !== '1') {
+      navigate('/noaccess');
+    }
     // Fetch the current pet information
     axios.get(`${BACKENDHOST}accounts/seeker/${seekerId}/`,
     {

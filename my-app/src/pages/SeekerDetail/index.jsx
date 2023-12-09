@@ -95,10 +95,6 @@ function SeekerComponent() {
 
 
 
-      <div className="row justify-content-center">
-        {/* comment list */}
-        <Comments seekerId={seekerId} />
-      </div>
     </div>
     <div className="container">
       --

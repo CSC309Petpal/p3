@@ -12,6 +12,14 @@ import Header from "../../components/Header/header";
 
 
 const PetCreationForm = () => {
+    const navigate = useNavigate();
+    const user = localStorage.getItem('user_type');
+    useEffect(() => {
+        if (user !== '2') {
+            navigate('/noaccess');
+        }
+    }, []);
+    
   const [petInfo, setPetInfo] = useState({
     image: '',
     age: '',
@@ -31,7 +39,7 @@ const PetCreationForm = () => {
   const [img_not, setImg_not] = useState("");
   const token = localStorage.getItem('token');
 
-  const navigate = useNavigate();
+
 
   const { petId } = useParams();
 

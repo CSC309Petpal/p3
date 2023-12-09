@@ -18,6 +18,7 @@ const ShelterUpdateForm = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const token = localStorage.getItem('token');
   const shelterId = localStorage.getItem('shelter_id');
+  const user = localStorage.getItem('user_type');
 
   const navigate = useNavigate();
 
@@ -25,6 +26,9 @@ const ShelterUpdateForm = () => {
 
   useEffect(() => {
     // Retrieve the petId from the URL
+    if (user !== '2') {
+      navigate('/noaccess');
+    }
 
     // Fetch the current pet information
     axios.get(`${BACKENDHOST}accounts/shelter/${shelterId}/`)
