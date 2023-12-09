@@ -29,6 +29,7 @@ function timeAgo(dateString) {
 
 const Comments = (shelterId) => {
   const [comments, setComments] = useState([]);
+  const [rating, setRating] = useState(5);
   const [errorMessage, setErrorMessage] = useState('');
   const [pages, setPages] = useState(1);
   const [page, setPage] = useState(1);
@@ -43,6 +44,7 @@ const Comments = (shelterId) => {
     }
     notification.innerHTML = "";
     CommentData.append("content",content)
+    CommentData.append("rating",rating)
     try {
       const response = await fetch(`${BACKENDHOST}comments/to-shelter/${shelterId.shelterId}/`, {
         method: 'POST',
@@ -132,16 +134,31 @@ const nextPage = () => {
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Add new Comment</h5>
+          <div >
           <div className="d-flex">
+          <label>Comment:</label>
             <input
               name="comment content"
               id="content"
               value={content}
               type="text"
               onChange={(e) => setContent(e.target.value)}
-              className="form-control mr-2"
+              className="form-control mr-3"
               placeholder="Write your comment here"
             />
+            
+            </div>
+            <div className="d-flex">
+            <label>Rating:</label>
+            <select className="form-control" value={rating} onChange={(e) => setRating(e.target.value)}>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+            
+            </div>
             <button
               className="btn btn-secondary"
               type="button"
@@ -167,6 +184,7 @@ const nextPage = () => {
           <div className="card-body">
             <h5 className="card-title">Sender: {comment.username}</h5>
             <p className="card-text">{comment.content}</p>
+            <p className="card-text">Rates:{comment.rating}</p>
             <p className="blockquote-footer">
               Posted {timeAgo(comment.created)}
             </p>
