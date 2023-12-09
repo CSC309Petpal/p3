@@ -28,7 +28,7 @@ function Application() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-  
+        console.log(data);
         setApplicationInfo(data);
       } catch (error) {
         console.error('Fetch error:', error);
@@ -74,33 +74,65 @@ function Application() {
   return (
     <>
     <Header />
-    <main className="flex-grow-1 align-items-center" style={containerStyle}>
-      <div className="container ms-6 justify-content-between,align-items-center">
-      
-        <h1 className="mb-4">Application Detail</h1>
-        {Object.entries(applicationInfo).map(([key, value]) => (
-          <p key={key}> {key.charAt(0).toUpperCase() + key.slice(1)}: {value}</p>
-        ))}
-        
-        {/* Dropdown for status selection */}
-        <select value={newStatus} onChange={handleStatusChange}>
-          <option value="pending">Pending</option>
-          <option value="accepted">Accepted</option>
-          <option value="withdrawn">Withdrawn</option>
-          <option value="denied">Denied</option>
-        </select>
+    <main className="container">
+    <div className="container mt-4">
+    <div className="row justify-content-center">
+        <div className="col-12 col-md-8 col-lg-6">
+        <h1 className=" mb-4 text-center">Application Detail</h1>
+        <div className="row">
+    <div className="col d-flex justify-content-center">
+        <div className="mb-3">
+            <button className="btn btn-secondary" onClick={() => navigate(`/pet/${applicationInfo.pet}`)}>Pet Detail</button>
+        </div>
+    </div>
+</div>
+       
+            <div className="card">
+                <div className="card-body">
+                
+                    <button className="btn btn-secondary" onClick={() => navigate(`/seeker/${applicationInfo.seeker}`)}>Seeker Detail</button>
+                    <button className="btn btn-secondary" onClick={() => navigate(`/shelter/${applicationInfo.shelter}`)}>Shelter Detail</button>
+                    
+                    <p className="card-text mb-2">Seeker: {applicationInfo.seekername}</p>
+                    <p className="card-text mb-2">Status: {applicationInfo.status}</p>
+                    <p className="card-text mb-2">Pet: {applicationInfo.petname}</p>
+                    <p className="card-text mb-4">Details: {applicationInfo.details}</p>
 
-        {/* Update button */}
-        <button onClick={updateApplicationStatus}>Update Status</button>
-        <h5>{errorMessage}</h5>
-      </div>
+                    {/* Dropdown for status selection */}
+                    <div className="mb-3">
+                        <select className="form-control" value={newStatus} onChange={handleStatusChange}>
+                            <option value="pending">Pending</option>
+                            <option value="accepted">Accepted</option>
+                            <option value="withdrawn">Withdrawn</option>
+                            <option value="denied">Denied</option>
+                        </select>
+                    </div>
+
+                    {/* Update button */}
+                    <div className="mb-3">
+                        <button className="btn btn-primary" onClick={updateApplicationStatus}>Update Status</button>
+                    </div>
+
+                    <h5 className="text-danger">{errorMessage}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
       
-          
         <Followups appId={application_id}/>
       
       
       
     </main>
+
+    <div className="container">
+        <div className="row" style={{height: 4 + "rem"}}>
+            
+        </div>
+
+    </div>
     <Footer />
     </>
   );
