@@ -31,7 +31,7 @@ function SeekerComponent() {
           if (data.avatar === null) {
             data.avatar = logo;
           }else {
-            data.avatar = `${BACKENDHOST}${data.avatar}`; 
+            data.avatar = `${BACKENDHOST}${data.avatar.substring(1)}`; 
           }
         
           setseekerInfo(data); // Update the state with seeker information
@@ -92,12 +92,6 @@ function SeekerComponent() {
           </table>
         </div>
       </div>
-
-
-
-    </div>
-    <div className="container">
-      --
     </div>
     <Footer />
     </>
