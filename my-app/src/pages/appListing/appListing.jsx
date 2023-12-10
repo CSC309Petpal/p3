@@ -61,7 +61,7 @@ const nextPage = () => {
 
   return (
 
-    <div className="container-fluid ms-lg-5 align-items-center justify-content-center">
+    <div className="container ms-lg-5 align-items-center justify-content-center">
       <p>{errorMessage}</p>
       <div className="row d-flex flex-column align-items-center">
       {
