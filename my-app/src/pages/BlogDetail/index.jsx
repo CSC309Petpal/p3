@@ -7,7 +7,6 @@ import logo from '../../assets/logo.png';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import './style.css';
 
 const BlogCreate = () => {
   const [blog, setBlog] = useState({
