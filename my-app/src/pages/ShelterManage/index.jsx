@@ -54,13 +54,7 @@ function ShelterComponent() {
 
           setShelterInfo(data); // Update the state with shelter information
           // check if the avatar is a file or a url
-          console.log(data.avatar);
-          if (shelterInfo.avatar === null) {
-            setShelterInfo({ ...shelterInfo, avatar: logo });
-          }
-          else {
-            setShelterInfo({ ...shelterInfo, avatar: data.avatar });
-          }
+          
         } else {
           // Handle HTTP errors
           console.error("HTTP Error: " + response.status);
