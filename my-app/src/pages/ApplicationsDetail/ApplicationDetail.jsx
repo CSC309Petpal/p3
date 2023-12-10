@@ -56,16 +56,23 @@ function Application() {
         body: JSON.stringify({ ...applicationInfo, status: newStatus }),
       });
 
-      const response2 = await fetch(`${BACKENDHOST}pets/${applicationInfo.pet}/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ status: 'adopted' }),
-      });
+      if (applicationInfo.status === 'accepted') {
 
-      if (!response.ok || !response2.ok) {
+        const response2 = await fetch(`${BACKENDHOST}pets/${applicationInfo.pet}/`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: 'adopted' }),
+        });
+
+        if (!response2.ok) {
+          throw new Error('The state change is not allowed');
+        }
+    }
+
+      if (!response.ok) {
         throw new Error('The state change is not allowed');
       }
       const updatedData = await response.json();
