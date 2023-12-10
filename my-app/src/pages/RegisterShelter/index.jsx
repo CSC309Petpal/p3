@@ -60,6 +60,9 @@ const RegisterShelterPage= () => {
         else (
             address_not.innerHTML = ""
         )
+
+        // use regex to check whether the email is valid
+        const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
             
         if (email === "") {
             email_not.innerHTML = "Please enter your email";
@@ -68,6 +71,15 @@ const RegisterShelterPage= () => {
         else (
             email_not.innerHTML = ""
         )
+
+        if (!emailRegex.test(email)) {
+            email_not.innerHTML = "Please enter a valid email";
+            bad = true;
+        }
+        else (
+            email_not.innerHTML = ""
+        )
+        
 
         if (password !== password2) {
             pwd2_not.innerHTML = "Password does not match";
@@ -79,6 +91,7 @@ const RegisterShelterPage= () => {
         if (bad) {
             return;
         }
+
         
         username_not.innerHTML = "";
         pwd_not.innerHTML = "";
@@ -101,7 +114,12 @@ const RegisterShelterPage= () => {
         .then(response => {
             if (!response.ok) {
                 return response.json().then(data => {
-                    throw new Error(data.username[0] || 'Unknown error');
+                    if (data.username) {
+                        throw new Error(data.username[0]);
+                    }else if (data.non_field_errors) {
+                        throw new Error(data.non_field_errors[0]);
+                    }
+                    throw new Error(data.detail || 'Unknown error');
                 });
             }
             return response.json();

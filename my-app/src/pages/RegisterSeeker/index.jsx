@@ -60,6 +60,11 @@ const RegisterSeekerPage= () => {
         else (
             address_not.innerHTML = ""
         )
+
+        // use regex to check whether the email is valid
+        const emailRegex = /\S+@\S+\.\S+/;
+
+
             
         if (email === "") {
             email_not.innerHTML = "Please enter your email";
@@ -69,6 +74,16 @@ const RegisterSeekerPage= () => {
             email_not.innerHTML = ""
         )
 
+        if (!emailRegex.test(email)) {
+            email_not.innerHTML = "Please enter a valid email";
+            bad = true;
+        }
+        else (
+            email_not.innerHTML = ""
+        )
+
+
+
         if (password !== password2) {
             pwd2_not.innerHTML = "Password does not match";
             bad = true;
@@ -77,6 +92,7 @@ const RegisterSeekerPage= () => {
 
 
         if (bad) {
+            setErrorMessage("Please enter valid information");
             return;
         }
         
@@ -101,7 +117,12 @@ const RegisterSeekerPage= () => {
         .then(response => {
             if (!response.ok) {
                 return response.json().then(data => {
-                    throw new Error(data.username[0] || 'Unknown error');
+                    if (data.username) {
+                        throw new Error(data.username[0]);
+                    }else if (data.non_field_errors) {
+                        throw new Error(data.non_field_errors[0]);
+                    }
+                    throw new Error(data.detail || 'Unknown error');
                 });
             }
             return response.json();
@@ -225,8 +246,8 @@ const RegisterSeekerPage= () => {
 
 
 
-            <div className="row" style={{height: 4 + "rem"}}>
-                Zs
+            <div className="container" style={{height: 4 + "rem"}}>
+                
 
             </div>
             <Footer />
