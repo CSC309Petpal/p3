@@ -14,13 +14,16 @@ const BlogCreate = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [img_not, setImg_not] = useState('');
   const user = localStorage.getItem('user_type');
+  const [errorImage, setErrorImage] = useState("");
+  const [errorTitle, setErrorTitle] = useState("");
+  const [errorContent, setErrorContent] = useState("");
 
   useEffect(() => {
     if (user !== '2') {
       navigate('/noaccess');
     }
   }, []);
-  
+
 
   const handleChange = (event) => {
     if (event.target.name === 'image') {
@@ -45,6 +48,32 @@ const BlogCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var flag = false;
+    if (blog.image === '') {
+        setErrorImage('Please upload an image.');
+        flag = true;
+    }else{
+        setErrorImage("");
+    }
+
+    if (blog.title === '') {
+        setErrorTitle('Please enter a title.');
+        flag = true;
+    }else{
+        setErrorTitle("");
+    }
+
+    if (blog.content === '') {
+        setErrorContent('Please enter content.');
+        flag = true;
+    }else{
+        setErrorContent("");
+    }
+
+    if (flag) {
+        return;
+    }
+
     const data = new FormData();
     
     Object.keys(blog).forEach(key => {
@@ -102,6 +131,7 @@ const BlogCreate = () => {
                     <div className="mb-3">
                     <p id="img_not" style={{color: "red"}}> { img_not }</p>
               <label htmlFor="image" className="form-label">Blog Image</label>
+              <p id="errorImage" style={{color: "red"}}> { errorImage }</p>
               <input
                 id="image"
                 type="file"
@@ -113,6 +143,7 @@ const BlogCreate = () => {
 
     <div className="mb-3">
       <h3 htmlFor="title" className="form-label">Title</h3>
+      <p id="errorTitle" style={{color: "red"}}> { errorTitle }</p>
       <input
         type="text"
         id="title"
@@ -126,6 +157,7 @@ const BlogCreate = () => {
     </div>
     <div className="mb-3">
       <h3 htmlFor="content" className="form-label">Content</h3>
+      <p id="errorContent" style={{color: "red"}}> { errorContent }</p>
       <textarea
         id="content"
         name="content"
