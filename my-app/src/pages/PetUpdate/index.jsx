@@ -38,10 +38,21 @@ const PetUpdateForm = () => {
     // Fetch the current pet information
     axios.get(`${BACKENDHOST}pets/${petId}/`)
       .then(response => {
+        console.log(response.data.shelter);
+        let flag = false;
+        if (response.data.shelter == localStorage.getItem('shelter_id')) {
+            flag = true;
+        }
+        if (!flag) {
+            navigate('/noaccess');
+        }
         setPetInfo(response.data);
         setImagePreview(response.data.image);
+
+       
       })
-      .catch(error => console.error(error));
+      .catch(error => {console.error(error);
+        navigate('/notfound');});
   }, [petId]);
 
   const handleChange = (event) => {
