@@ -61,8 +61,9 @@ const nextPage = () => {
 
   return (
 
-    <div className="container-fluid ms-lg-5">
+    <div className="container-fluid ms-lg-5 align-items-center justify-content-center">
       <p>{errorMessage}</p>
+      <div className="row d-flex flex-column align-items-center">
       {
         apps.map((app) => (
           <div key={app.application_id} className="card mb-3">
@@ -85,6 +86,8 @@ const nextPage = () => {
             </div>
           </div>
         ))}
+        </div>
+   
          <div className="d-flex justify-content-center align-items-center">
         <button
           className="btn btn-primary"
