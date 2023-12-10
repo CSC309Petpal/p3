@@ -29,6 +29,7 @@ function Application() {
         }
         const data = await response.json();
         console.log(data);
+        setNewStatus(data.status);
         setApplicationInfo(data);
       } catch (error) {
         console.error('Fetch error:', error);
