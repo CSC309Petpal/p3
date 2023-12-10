@@ -7,6 +7,7 @@ import logo from '../../assets/logo.png';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import './style.css';
 
 const BlogCreate = () => {
   const [blog, setBlog] = useState({
@@ -50,45 +51,47 @@ const BlogCreate = () => {
   }, []); // Dependency array to re-fetch data if shelterId changes
 
   return (
-    <>
-    <Header />
+<>
+  <Header />
+  <div className="container" style={{height: 4 + "rem"}}>
+      
+
+      </div>
+
+  {/* Use Bootstrap classes for spacing instead of inline styles */}
+  <div className="container">
     
-    <div className="container">
-        <div className="row" style={{height: 4 + "rem"}}>
-            
-        </div>
-
+    {/* Image Row */}
+    <div className="row justify-content-center mb-4">
+      <div className="col-lg-6 col-md-8">
+        {/* Responsive image */}
+        <img src={blog.image} className="img-fluid" alt="Blog post"/>
+      </div>
     </div>
-    <div className="container mt-5">
-  <div className="row justify-content-center mb-4">
-    <div className="col-lg-6 col-md-8">
-      <img src={blog.image} className="img-fluid" alt="Blog post" style={{ objectFit: "cover" }}/>
-    </div>
-  </div>
 
-  <div className="row justify-content-center">
-  
-      <div className="card">
-        <div className="card-body text-center">
-          <h1 className="card-title mb-3">{blog.title}</h1>
-          <p className="card-text lead">{blog.content}</p>
-        </div>
+    {/* Content Row */}
+    <div className="row justify-content-center mb-4">
+  <div className="col-12 col-md-8 col-lg-6">
+    <div className="card" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+      <div className="card-body text-center">
+        <h1 className="card-title mb-3">{blog.title}</h1>
+        <p className="card-text lead">{blog.content}</p>
+      </div>
     </div>
   </div>
 </div>
 
+  </div>
 
+    <div className="container" style={{height: 4 + "rem"}}>
+      
 
+  </div>
+    
 
+  <Footer />
+</>
 
-<div className="container">
-        <div className="row" style={{height: 4 + "rem"}}>
-            
-        </div>
-
-    </div>
-    <Footer/>
-    </>
   );
 };
 
