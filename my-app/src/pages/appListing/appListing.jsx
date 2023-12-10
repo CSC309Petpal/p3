@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { BACKENDHOST } from "../../config";
 import Header from "../../components/Header/header";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../../components/Footer/footer";
 
 
 const Apps = () => {
@@ -60,7 +60,8 @@ const nextPage = () => {
   }, []);
 
   return (
-    <div>
+
+    <div className="container-fluid ms-lg-5">
       <p>{errorMessage}</p>
       {
         apps.map((app) => (
@@ -116,14 +117,15 @@ const AppRepo = () => {
         
         <Apps />
       </div>
+      <Footer />
     </div>
   );
 };
 
 const containerStyle = {
   backgroundColor: "rgba(255, 255, 255, 0.5)",
-  marginLeft: "5cm",
-  marginRight: "5cm",
+  marginLeft: "0cm",
+  marginRight: "0cm",
   padding: "1cm",
   alignItems: "center",
   justifyContent: "space-evenly",
